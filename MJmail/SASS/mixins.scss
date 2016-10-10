@@ -1,0 +1,8 @@
+﻿@mixin maxsize {
+    height:100%;
+}
+
+@mixin padall($rozmiar,$rozmiar2){
+    padding-bottom: $rozmiar2;
+    padding-top: $rozmiar;
+}

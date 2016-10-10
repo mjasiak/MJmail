@@ -1,12 +1,8 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-}
+﻿@import "mixins.scss";
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+html,body {
+    @include maxsize;
 }
 
 /* Override the default bootstrap behavior where horizontal description lists 
@@ -21,4 +17,58 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+.site-wrapper {
+    display: table;
+    width: 100%;
+    @include maxsize;
+    min-height: 100%;
+    /*-webkit-box-shadow: inset 0 0 100px rgba(0,0,0,.5);
+    box-shadow: inset 0 0 100px rgba(0,0,0,.5);*/
+}
+
+.site-wrapper-inner {
+    display: table-cell;
+    @include maxsize;   
+}
+
+.fit-size-toscreen {
+    @include maxsize;
+}
+
+.navigation-container {
+    color: grey;   
+}
+
+.menu-nav {
+    list-style-type:none;
+    font-size: 25px;
+    @include padall(20px,0px);
+    margin-left: -25px;
+}
+
+.element-relative{
+    position: relative;
+}
+
+#clock {
+    font-family: 'Raleway', sans-serif;
+    font-size: 46px;
+    color: white;
+    @include padall(50px,50px);
+}
+#new_button {
+    padding: 6px 35%;
+}
+
+li{
+    a{
+        text-decoration: none;
+        color: grey;
+    }
+    a:hover{
+        color: white;
+        text-decoration: none;
+    }
 }
