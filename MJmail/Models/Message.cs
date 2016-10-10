@@ -17,6 +17,6 @@ namespace MJmail.Models
 
         public string MailTo { get; set; }
 
-        public string MailDate { get; set; }
+        public DateTime MailDate { get; set; }
     }
 }
