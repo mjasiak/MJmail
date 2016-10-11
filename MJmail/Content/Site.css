@@ -1,18 +1,43 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Raleway);
+.menu-nav {
+  list-style-type: none;
+  font-size: 25px;
+  padding-bottom: 0px;
+  padding-top: 20px;
+  margin-left: -25px; }
+
+#clock {
+  font-family: "Raleway", sans-serif;
+  font-size: 46px;
+  color: white;
+  padding-bottom: 50px;
+  padding-top: 50px; }
+
+#new_button {
+  padding: 6px 35%; }
+
 html, body {
   height: 100%; }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-  white-space: normal; }
+li a {
+  text-decoration: none;
+  color: grey; }
+
+li a:hover {
+  color: white;
+  text-decoration: none; }
 
 /* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
   max-width: 280px; }
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+  white-space: normal; }
 
 .site-wrapper {
   display: table;
@@ -32,31 +57,6 @@ textarea {
 .navigation-container {
   color: grey; }
 
-.menu-nav {
-  list-style-type: none;
-  font-size: 25px;
-  padding-bottom: 0px;
-  padding-top: 20px;
-  margin-left: -25px; }
-
 .element-relative {
   position: relative; }
-
-#clock {
-  font-family: 'Raleway', sans-serif;
-  font-size: 46px;
-  color: white;
-  padding-bottom: 50px;
-  padding-top: 50px; }
-
-#new_button {
-  padding: 6px 35%; }
-
-li a {
-  text-decoration: none;
-  color: grey; }
-
-li a:hover {
-  color: white;
-  text-decoration: none; }
 

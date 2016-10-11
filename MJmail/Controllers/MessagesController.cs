@@ -17,17 +17,10 @@ namespace MJmail.Controllers
             _context = context;
         }
 
-        // GET: Messages
+
         public ActionResult Outbox()
         {         
-            return View(ReceiveMessages());
+            return View(_context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").ToList());
         }
-
-        #region Helpers
-        private List<Message> ReceiveMessages()
-        {
-            return _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").ToList();
-        }
-        #endregion
     }
 }

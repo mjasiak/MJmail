@@ -1,0 +1,16 @@
+﻿@import "mixins.scss";
+@import "variables.scss";
+
+.menu-nav{
+    list-style-type:none;
+    font-size: 25px;
+    @include padall(20px,0px);
+    margin-left: -25px;
+}
+
+#clock {
+    font-family: $zegar_czcionka;
+    font-size: 46px;
+    color: white;
+    @include padall(50px,50px);
+}

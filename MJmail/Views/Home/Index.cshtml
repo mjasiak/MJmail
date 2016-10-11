@@ -1,8 +1,35 @@
-﻿@{
+﻿@model List<MJmail.Models.Message>
+
+@{
     ViewBag.Title = "Inbox";
 }
 <div class="row fit-size-toscreen">
-    <div class="col-xs-6 col-md-6 fit-size-toscreen" style="background-color:#f0f0f0;"><h1>Inbox</h1></div>
-    <div class="col-xs-6 col-md-6 fit-size-toscreen" style="background-color:antiquewhite;"><h1>2</h1></div>
+    <div class="col-xs-6 col-md-6 fit-size-toscreen" style="background-color:#f0f0f0;">
+        <h1>Inbox</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr><th>Title</th><th>From</th><th>Date</th></tr>
+            </thead>
+            <tbody>
+                @foreach(var item in Model)
+                {
+                    <tr onclick="showMessage(@item.ID)">
+                        <td>
+                            @Html.DisplayFor(modelItem=> item.MailTitle)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem=>item.MailFrom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MailDate)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-xs-6 col-md-6 fit-size-toscreen" style="background-color:antiquewhite;">
+        <h1>Message Details</h1>
+        <div id="ajaxTarget"></div>
+    </div>
 </div>
-    

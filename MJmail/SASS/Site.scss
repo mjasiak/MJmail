@@ -1,15 +1,22 @@
 ﻿@import "mixins.scss";
+@import "menu.scss";
+@import "buttons.scss";
+@import "variables.scss";
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 
 html,body {
     @include maxsize;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+li{
+    a{
+        text-decoration: none;
+        color: grey;
+    }
+    a:hover{
+        color: white;
+        text-decoration: none;
+    }
 }
 
 /* Set width on the form input elements since they're 100% wide by default */
@@ -17,6 +24,13 @@ input,
 select,
 textarea {
     max-width: 280px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
 }
 
 .site-wrapper {
@@ -41,34 +55,6 @@ textarea {
     color: grey;   
 }
 
-.menu-nav {
-    list-style-type:none;
-    font-size: 25px;
-    @include padall(20px,0px);
-    margin-left: -25px;
-}
-
 .element-relative{
     position: relative;
-}
-
-#clock {
-    font-family: 'Raleway', sans-serif;
-    font-size: 46px;
-    color: white;
-    @include padall(50px,50px);
-}
-#new_button {
-    padding: 6px 35%;
-}
-
-li{
-    a{
-        text-decoration: none;
-        color: grey;
-    }
-    a:hover{
-        color: white;
-        text-decoration: none;
-    }
 }
