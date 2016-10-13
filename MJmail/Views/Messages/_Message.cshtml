@@ -1,0 +1,44 @@
+﻿@model MJmail.Models.Message
+
+<div>
+    <h4>@Html.DisplayFor(model => model.MailTitle)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        @{
+            if (Model.MailFrom == "mjasiak@pl.sii.eu")
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.MailTo)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MailTo)
+                </dd>
+            }
+            else
+            {
+                <dt>
+                    @Html.DisplayNameFor(model => model.MailFrom)
+                </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.MailFrom)
+                </dd>
+            }
+        }
+        
+        <dt>
+            @Html.DisplayNameFor(model => model.MailDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MailContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailContent)
+        </dd>
+    </dl>
+</div>

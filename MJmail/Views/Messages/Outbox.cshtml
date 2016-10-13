@@ -10,12 +10,12 @@
         <h1>Outbox</h1>
         <table class="table table-striped">
             <thead>
-                <tr><th>Title</th><th>From</th><th>Date</th></tr>
+                <tr><th>Title</th><th>To</th><th>Date</th></tr>
             </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr onclick="showMessage(@item.ID)">
+                    <tr id="@item.ID">
                         <td>
                             @Html.DisplayFor(modelItem => item.MailTitle)
                         </td>
@@ -30,10 +30,13 @@
             </tbody>
         </table>
     </div>
-    <div class="col-xs-6 col-md-6 fit-size-toscreen">
-        <h1>Message Details</h1>
-        <div id="ajaxTarget"></div>
+    <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen">
     </div>
 </div>
+
+<script>
+    var msg = new Messages();
+    msg.getMessage();
+</script>
 
         

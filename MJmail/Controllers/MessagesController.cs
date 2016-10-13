@@ -1,9 +1,6 @@
 ﻿using MJmail.Data;
 using MJmail.Models;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace MJmail.Controllers
@@ -18,9 +15,24 @@ namespace MJmail.Controllers
         }
 
 
+        public void New(Message msg)
+        {
+
+        }
+
         public ActionResult Outbox()
         {         
             return View(_context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").ToList());
+        }
+
+        public ActionResult Inbox()
+        {
+            return View(_context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").ToList());
+        }
+
+        public PartialViewResult Message(int id)
+        {
+            return PartialView("_Message", _context.Messages.Single(c => c.ID == id));
         }
     }
 }
