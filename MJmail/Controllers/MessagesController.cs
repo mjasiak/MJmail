@@ -26,12 +26,12 @@ namespace MJmail.Controllers
 
         public ActionResult Outbox()
         {         
-            return View(_context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").ToList());
+            return View(_context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c=>c.MailDate).ToList());
         }
 
         public ActionResult Inbox()
         {
-            return View(_context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").ToList());
+            return View(_context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList());
         }
 
         public PartialViewResult Message(int id)

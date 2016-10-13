@@ -2,27 +2,29 @@
 
 <div class="message-details">
     <div class="message-details-header">
+        <i class="fa fa-arrow-right" aria-hidden="true"></i>
         <h2>@Html.DisplayFor(model => model.MailTitle)</h2>
     </div>
     <div class="message-details-info">
-        @{
-            if (Model.MailFrom == "mjasiak@pl.sii.eu")
-            {
-                <h3>
-                    @Html.DisplayFor(model => model.MailTo)
-                </h3>
+            @{
+                if (Model.MailFrom == "mjasiak@pl.sii.eu")
+                {
+                    <h3>
+                        @Html.DisplayFor(model => model.MailTo)
+                    </h3>
+                }
+                else
+                {
+                    <h3>
+                        @Html.DisplayFor(model => model.MailFrom)
+                    </h3>
+                }
             }
-            else
-            {
-                <h3>
-                    @Html.DisplayFor(model => model.MailFrom)
-                </h3>
-            }
-        }
 
-        <p class="message-details-date">
-            @Html.DisplayFor(model => model.MailDate)
-        </p>
+            <p>
+                @Html.DisplayFor(model => model.MailDate)
+            </p>
+        
         <hr />
     </div>
     <div class="message-details-content">          

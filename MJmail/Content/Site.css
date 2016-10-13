@@ -1,13 +1,36 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Abhaya+Libre&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Arbutus+Slab&subset=latin,latin-ext);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Abhaya+Libre&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Arbutus+Slab&subset=latin,latin-ext);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Abhaya+Libre&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Arbutus+Slab&subset=latin,latin-ext);
 @import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Abhaya+Libre&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Arbutus+Slab&subset=latin,latin-ext);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(http://fonts.googleapis.com/css?family=Abhaya+Libre&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Advent+Pro&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Alegreya+Sans+SC&subset=latin,latin-ext);
+@import url(http://fonts.googleapis.com/css?family=Arbutus+Slab&subset=latin,latin-ext);
 .menu-nav {
   list-style-type: none;
   font-size: 25px;
   padding-bottom: 0px;
   padding-top: 20px;
-  margin-left: -25px; }
+  margin-left: -25px;
+  font-family: "Abhaya Libre", sans-serif;
+  font-weight: bold; }
 
 #clock {
   font-family: "Raleway", sans-serif;
@@ -71,17 +94,46 @@
 .message-details-header {
   background-color: #d9534f;
   color: white;
+  font-family: "Alegreya Sans SC", sans-serif;
+  font-weight: bold;
   padding: 8px 16px; }
+  .message-details-header h2 {
+    display: inline-block; }
+  .message-details-header .fa {
+    font-size: 200%;
+    width: 10%; }
+  .message-details-header .fa:hover {
+    color: lightgray; }
 
 .message-details-info {
-  padding: 8px 16px; }
+  padding: 8px 16px;
+  font-family: "Arbutus Slab", sans-serif; }
+  .message-details-info h3 {
+    display: inline-block;
+    width: 73%; }
+  .message-details-info p {
+    color: grey;
+    width: 26%;
+    display: inline-block; }
 
 .message-details-content {
-  padding: 8px 16px; }
+  padding: 8px 16px;
+  font-family: "Arbutus Slab", sans-serif; }
 
-.message-details-date {
-  color: grey;
-  text-align: right; }
+#ajaxTarget {
+  display: none; }
+
+.visability {
+  display: block !important; }
+
+.boxes {
+  background-color: #f0f0f0;
+  font-family: "Arbutus Slab", sans-serif;
+  font-size: 14px;
+  transition: width 0.5s; }
+  .boxes h1 {
+    font-weight: bold;
+    font-size: 50px; }
 
 html, body {
   height: 100%; }

@@ -6,6 +6,8 @@
     font-size: 25px;
     @include padall(20px,0px);
     margin-left: -25px;
+    font-family: $boxes_font;
+    font-weight: bold;
 }
 
 #clock {

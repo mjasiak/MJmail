@@ -8,19 +8,45 @@
 .message-details-header{
     background-color: $czerwony_kolor;
     color: white;
+    font-family: $boxes3_font;
+    font-weight:bold;
     @include message-details-padding;
+    h2{
+        display: inline-block;
+    }
+    .fa {
+        font-size:200%;
+        width: 10%;
+    }
+    .fa:hover   {
+        color:lightgray;
+    }   
 }
 
 .message-details-info{
     @include message-details-padding;
+    font-family: $boxes4_font;
+    h3{
+        display:inline-block;
+        width:73%;
+    }
+    p{
+        color: grey;
+        width:26%;
+        display:inline-block;
+    }
 }
 
 .message-details-content{
     //background-color: rgba(128, 128, 128,0.3);
     @include message-details-padding;
+    font-family: $boxes4_font;
 }
 
-.message-details-date{
-    color: grey;
-    text-align:right;
+#ajaxTarget {
+    display: none;
+}
+
+.visability {
+    display: block !important;
 }

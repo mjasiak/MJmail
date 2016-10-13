@@ -1,6 +1,6 @@
 ﻿var Messages = function () {
-    
-}
+
+};
 
 Messages.prototype.getMessage = function () {
     $(document).ready(function () {
@@ -10,8 +10,11 @@ Messages.prototype.getMessage = function () {
                 type: "GET",
                 url: "/Messages/Message",
                 data: { id: _id },
-                success: function (data) {
+                success: function (data) {                  
+                    $(".boxes").removeClass("col-xs-12 col-md-12");
+                    $(".boxes").addClass("col-xs-6 col-md-6");
                     $("#ajaxTarget").html(data);
+                    $("#ajaxTarget").addClass("visability");
                 },
                 error: function () {
                     alert("Błąd w kontrolerze!");
@@ -19,7 +22,7 @@ Messages.prototype.getMessage = function () {
             });
         });
     });
-}
+};
 
 Messages.prototype.sendMessage = function () {
     $(document).ready(function () {
@@ -38,4 +41,4 @@ Messages.prototype.sendMessage = function () {
             e.preventDefault();
         });
     });
-}
+};
