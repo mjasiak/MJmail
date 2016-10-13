@@ -237,6 +237,7 @@
     <Content Include="SASS\_buttons.scss" />
     <Content Include="SASS\_variables.scss" />
     <Content Include="SASS\_modal.scss" />
+    <Content Include="SASS\_messagedetails.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />

@@ -12,16 +12,18 @@
     <script src="~/Scripts/ClockJS.js"></script>
     <script>
         var clock = new Clock();
+        var msg = new Messages();
         $(document).ready(function () {
             $("#new_button").click(function () {
-                newMessage.style.display = "block";
+                Modal.style.display = "block";
             });
         });
         $(document).ready(function () {
             $(".close").click(function () {
-                newMessage.style.display = "none";
+                Modal.style.display = "none";
             });
         });
+        msg.sendMessage();
     </script>
 </head>
 <body onload="clock.startTime()">
@@ -43,23 +45,31 @@
             </div>
         </div>
     </div>
-    <div id="newMessage" class="modal">
+    <div id="Modal" class="modal">
 
         <!-- Modal content -->
         <div class="modal-content">
-            <span class="close">x</span>
-            <form onsubmit="nothingNow()">
-                <h1 class="text-center">New message</h1>
-                <div class="form-group">
-                    <label for="email">To</label>
-                    <input type="email" class="form-control" id="to" />
-                </div>
-                <div class="form-group">
-                    <label for="content">Content</label>
-                    <textarea class="form-control" rows="5" id="content"></textarea>
-                </div>
-                <button type="submit" class="btn btn-default">Send</button>
-            </form>
+            <div class="modal-header">
+                <span class="close">x</span>
+                <h2 class="text-center">New message</h2>
+            </div>
+            <div class="modal-body">
+                <form id="new_message">
+                    <div class="form-group">
+                        <label for="text">Title</label>
+                        <input type="text" class="form-control" name="MailTitle"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">To</label>
+                        <input type="email" class="form-control" name="MailTo" />
+                    </div>
+                    <div class="form-group">
+                        <label for="content">Content</label>
+                        <textarea class="form-control" rows="5" name="MailContent"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-danger">Send</button>
+                </form>
+            </div>          
         </div>
 
     </div>          

@@ -6,3 +6,7 @@
     padding-bottom: $rozmiar2;
     padding-top: $rozmiar;
 }
+
+@mixin message-details-padding(){
+    padding:8px 16px;
+}

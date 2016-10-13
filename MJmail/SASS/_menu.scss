@@ -9,7 +9,7 @@
 }
 
 #clock {
-    font-family: $zegar_czcionka;
+    font-family: $zegar_font;
     font-size: 46px;
     color: white;
     @include padall(50px,50px);

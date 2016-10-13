@@ -1,4 +1,7 @@
 ﻿@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 .menu-nav {
   list-style-type: none;
   font-size: 25px;
@@ -38,17 +41,22 @@
 
 /* Modal Content/Box */
 .modal-content {
+  position: relative;
   background-color: #fefefe;
   margin: 15% auto;
-  /* 15% from the top and centered */
-  padding: 20px;
+  padding: 0;
   border: 1px solid #888;
   width: 40%;
-  /* Could be more or less, depending on screen size */ }
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); }
+
+.modal-header {
+  padding: 8px 16px;
+  background-color: #d9534f;
+  color: white; }
 
 /* The Close Button */
 .close {
-  color: #aaa;
+  color: white;
   float: right;
   font-size: 28px;
   font-weight: bold; }
@@ -56,6 +64,24 @@
     color: black;
     text-decoration: none;
     cursor: pointer; }
+
+.message-details {
+  position: relative; }
+
+.message-details-header {
+  background-color: #d9534f;
+  color: white;
+  padding: 8px 16px; }
+
+.message-details-info {
+  padding: 8px 16px; }
+
+.message-details-content {
+  padding: 8px 16px; }
+
+.message-details-date {
+  color: grey;
+  text-align: right; }
 
 html, body {
   height: 100%; }
@@ -100,4 +126,7 @@ textarea {
 
 .element-relative {
   position: relative; }
+
+.nopadding {
+  padding: 0; }
 

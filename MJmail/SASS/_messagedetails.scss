@@ -1,0 +1,26 @@
+﻿@import "variables.scss";
+@import "mixins.scss";
+
+.message-details {
+    position:relative;
+}
+
+.message-details-header{
+    background-color: $czerwony_kolor;
+    color: white;
+    @include message-details-padding;
+}
+
+.message-details-info{
+    @include message-details-padding;
+}
+
+.message-details-content{
+    //background-color: rgba(128, 128, 128,0.3);
+    @include message-details-padding;
+}
+
+.message-details-date{
+    color: grey;
+    text-align:right;
+}

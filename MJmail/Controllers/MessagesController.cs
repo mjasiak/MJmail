@@ -1,5 +1,6 @@
 ﻿using MJmail.Data;
 using MJmail.Models;
+using System;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -17,7 +18,10 @@ namespace MJmail.Controllers
 
         public void New(Message msg)
         {
-
+            msg.MailDate = DateTime.Now;
+            msg.MailFrom = "mjasiak@pl.sii.eu";
+            _context.Messages.Add(msg);
+            _context.SaveChanges();
         }
 
         public ActionResult Outbox()

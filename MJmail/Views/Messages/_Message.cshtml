@@ -1,44 +1,33 @@
 ﻿@model MJmail.Models.Message
 
-<div>
-    <h4>@Html.DisplayFor(model => model.MailTitle)</h4>
-    <hr />
-    <dl class="dl-horizontal">
+<div class="message-details">
+    <div class="message-details-header">
+        <h2>@Html.DisplayFor(model => model.MailTitle)</h2>
+    </div>
+    <div class="message-details-info">
         @{
             if (Model.MailFrom == "mjasiak@pl.sii.eu")
             {
-                <dt>
-                    @Html.DisplayNameFor(model => model.MailTo)
-                </dt>
-
-                <dd>
+                <h3>
                     @Html.DisplayFor(model => model.MailTo)
-                </dd>
+                </h3>
             }
             else
             {
-                <dt>
-                    @Html.DisplayNameFor(model => model.MailFrom)
-                </dt>
-                <dd>
+                <h3>
                     @Html.DisplayFor(model => model.MailFrom)
-                </dd>
+                </h3>
             }
         }
-        
-        <dt>
-            @Html.DisplayNameFor(model => model.MailDate)
-        </dt>
 
-        <dd>
+        <p class="message-details-date">
             @Html.DisplayFor(model => model.MailDate)
-        </dd>
-        <dt>
-            @Html.DisplayNameFor(model => model.MailContent)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.MailContent)
-        </dd>
-    </dl>
+        </p>
+        <hr />
+    </div>
+    <div class="message-details-content">          
+            <p>
+                @Html.DisplayFor(model => model.MailContent)
+            </p>               
+    </div>   
 </div>

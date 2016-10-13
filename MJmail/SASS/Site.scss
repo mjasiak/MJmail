@@ -3,7 +3,7 @@
 @import "buttons.scss";
 @import "variables.scss";
 @import "modal.scss";
-@import url(https://fonts.googleapis.com/css?family=Raleway);
+@import "messagedetails.scss";
 
 html,body {
     @include maxsize;
@@ -58,4 +58,8 @@ textarea {
 
 .element-relative{
     position: relative;
+}
+
+.nopadding {
+    padding: 0;
 }

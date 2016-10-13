@@ -20,3 +20,22 @@ Messages.prototype.getMessage = function () {
         });
     });
 }
+
+Messages.prototype.sendMessage = function () {
+    $(document).ready(function () {
+        $("#new_message").submit(function (e) {
+            $.ajax({
+                type: "POST",
+                url: "/Messages/New",
+                data: $("#new_message").serialize(),
+                success: function () {
+                    alert("Udalo sie!");
+                },
+                error: function () {
+                    alert("Cos nie tak!");
+                }
+            });
+            e.preventDefault();
+        });
+    });
+}
