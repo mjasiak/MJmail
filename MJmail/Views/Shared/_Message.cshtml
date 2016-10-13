@@ -1,0 +1,29 @@
+﻿@model MJmail.Models.Message
+
+<div>
+    <h4>@Html.DisplayFor(model => model.MailTitle)</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.MailTo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailTo)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MailDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailDate)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.MailContent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MailContent)
+        </dd>
+    </dl>
+</div>

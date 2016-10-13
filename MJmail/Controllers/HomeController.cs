@@ -22,5 +22,10 @@ namespace MJmail.Controllers
         {
             return View(_context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").ToList());
         }
+
+        public PartialViewResult Message(int id)
+        {
+            return PartialView("_Message",_context.Messages.Single(c => c.ID == id));
+        }
     }
 }

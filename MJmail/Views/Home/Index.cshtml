@@ -13,7 +13,7 @@
             <tbody>
                 @foreach(var item in Model)
                 {
-                    <tr onclick="showMessage(@item.ID)">
+                    <tr id="@item.ID">
                         <td>
                             @Html.DisplayFor(modelItem=> item.MailTitle)
                         </td>
@@ -28,8 +28,25 @@
             </tbody>
         </table>
     </div>
-    <div class="col-xs-6 col-md-6 fit-size-toscreen" style="background-color:antiquewhite;">
-        <h1>Message Details</h1>
-        <div id="ajaxTarget"></div>
+    <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen">
     </div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $("tr").click(function () {
+            var _id = this.id;
+            $.ajax({
+                type: "GET",
+                url: "/Home/Message",
+                data: { id: _id },
+                success: function (data) {
+                    $("#ajaxTarget").html(data);
+                },
+                error: function () {
+                    alert("Nie tak!");
+                }
+            });
+        });
+    });
+</script>

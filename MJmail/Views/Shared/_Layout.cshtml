@@ -7,6 +7,7 @@
     <link href="~/Content/navbar-fixed-side.css" rel="stylesheet" />
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
     <script>
     function startTime() {
         var today = new Date();
@@ -23,6 +24,7 @@
         if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
         return i;
     }
+    
     </script>
 </head>
 <body onload="startTime()">
@@ -42,8 +44,7 @@
                 @RenderBody()
             </div>
         </div>
-    </div>       
-    @Scripts.Render("~/bundles/jquery")
+    </div>          
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
