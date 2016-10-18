@@ -3,20 +3,25 @@
 
 .message-details {
     position:relative;
+    height: 100%;
 }
 
 .message-details-header{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    height:175px;
     background-color: $czerwony_kolor;
     color: white;
-    font-family: $boxes3_font;
-    font-weight:bold;
+    @include header-font;
     @include message-details-padding;
     h2{
         display: inline-block;
+        font-size: 55px;
     }
     .fa {
         font-size:200%;
-        width: 10%;
+        padding-right: 50%;
     }
     .fa:hover   {
         color:lightgray;
@@ -25,7 +30,7 @@
 
 .message-details-info{
     @include message-details-padding;
-    font-family: $boxes4_font;
+    @include header-font;
     h3{
         display:inline-block;
         width:73%;
@@ -40,7 +45,7 @@
 .message-details-content{
     //background-color: rgba(128, 128, 128,0.3);
     @include message-details-padding;
-    font-family: $boxes4_font;
+    font-family: $body_font;
 }
 
 #ajaxTarget {
@@ -49,4 +54,11 @@
 
 .visability {
     display: block !important;
+}
+
+.nobutton {
+    padding: 0;
+    border: none;
+    background: none;
+    width: 10%;
 }

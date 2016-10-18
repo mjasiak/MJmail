@@ -15,7 +15,7 @@ namespace MJmail.Controllers
             _context = context;
         }
 
-
+        [ValidateInput(false)]
         public void New(Message msg)
         {
             msg.MailDate = DateTime.Now;

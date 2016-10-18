@@ -1,6 +1,13 @@
 ﻿[
   {
     "outputFile": "Content/Site.css",
-    "inputFile": "SASS/Site.scss"
+    "inputFile": "SASS/Site.scss",
+    "minify": {
+      "enabled": true
+    },
+    "includeInProject": true,
+    "options": {
+      "sourceMap": true
+    }
   }
 ]

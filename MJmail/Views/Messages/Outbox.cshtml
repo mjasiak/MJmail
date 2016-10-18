@@ -1,4 +1,5 @@
-﻿@model List<MJmail.Models.Message>
+﻿@using System.Globalization
+@model List<MJmail.Models.Message>
 
 @{
     ViewBag.Title = "Outbox";
@@ -9,22 +10,39 @@
     <div class="col-xs-12 col-md-12 fit-size-toscreen boxes">
         <h1>Outbox</h1>
         <table class="table table-striped">
-            <thead>
-                <tr><th>Title</th><th>To</th><th>Date</th></tr>
-            </thead>
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr id="@item.ID">
+                        
+                        @if (item.MailToName != null)
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MailToName)
+                            </td>
+                        }
+                        else
+                        {
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MailTo)
+                            </td>
+                        }  
                         <td>
                             @Html.DisplayFor(modelItem => item.MailTitle)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MailTo)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MailDate)
-                        </td>
+                        </td>                    
+
+                                @if (DateTime.Now.Date == item.MailDate.Date)
+                                {
+                                   <td class="right-align">Today,  @item.MailDate.ToShortTimeString()</td>
+                                }
+                                else if (DateTime.Now.Date.AddDays(-1) == item.MailDate.Date)
+                                {
+                                    <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
+                                }
+                                else
+                                {
+                                    <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
+                                }                           
                     </tr>
                 }
             </tbody>
@@ -34,9 +52,5 @@
     </div>
 </div>
 
-<script>
-    var msg = new Messages();
-    msg.getMessage();
-</script>
 
         

@@ -188,6 +188,14 @@
     <Compile Include="Migrations\201610101309416_Second.Designer.cs">
       <DependentUpon>201610101309416_Second.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610171043111_Third.cs" />
+    <Compile Include="Migrations\201610171043111_Third.Designer.cs">
+      <DependentUpon>201610171043111_Third.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201610171046218_Fourth.cs" />
+    <Compile Include="Migrations\201610171046218_Fourth.Designer.cs">
+      <DependentUpon>201610171046218_Fourth.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -239,6 +247,7 @@
     <Content Include="SASS\_modal.scss" />
     <Content Include="SASS\_messagedetails.scss" />
     <Content Include="SASS\_boxes.scss" />
+    <Content Include="SASS\_table.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -279,6 +288,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610101309416_Second.resx">
       <DependentUpon>201610101309416_Second.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610171043111_Third.resx">
+      <DependentUpon>201610171043111_Third.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610171046218_Fourth.resx">
+      <DependentUpon>201610171046218_Fourth.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

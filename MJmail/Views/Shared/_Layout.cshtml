@@ -8,33 +8,20 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
+    <script src="//cdn.tinymce.com/4/tinymce.min.js"></script>
+    <script>tinymce.init({ selector:'textarea' });</script>
     <script src="~/Scripts/messagescontroller.js"></script>
     <script src="~/Scripts/ClockJS.js"></script>
-    <script src="https://use.fontawesome.com/11a80ab1b5.js"></script>
-    <script>
-        var clock = new Clock();
-        var msg = new Messages();
-        $(document).ready(function () {
-            $("#new_button").click(function () {
-                Modal.style.display = "block";
-            });
-        });
-        $(document).ready(function () {
-            $(".close").click(function () {
-                Modal.style.display = "none";
-            });
-        });
-        msg.sendMessage();
-    </script>
+    <script src="https://use.fontawesome.com/11a80ab1b5.js"></script>   
 </head>
-<body onload="clock.startTime()">
+<body>
     <div class="site-wrapper">
         <div class="site-wrapper-inner">
-            <div class="col-xs-2 col-md-2 fit-size-toscreen navigation-container " style="background-color:#3b3b3b;">
+            <div class="col-xs-2 col-md-2 fit-size-toscreen navigation-container " style="background-color:#181818;">
                 <div class="text-center" id="clock"></div>
                 <div class="text-center">
                     @*@Html.ActionLink("NEW", "New", "Messages", null, new { @class = "btn btn-danger", @id = "new_button" })*@
-                    <button class="btn btn-danger" id="new_button">NEW</button>
+                    <button class="btn btn-danger" id="new_button">WRITE</button>
                 </div>
                 <ul class="menu-nav">
                     <li>@Html.ActionLink("Inbox","Inbox","Messages")</li>

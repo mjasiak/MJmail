@@ -6,13 +6,18 @@
     font-size: 25px;
     @include padall(20px,0px);
     margin-left: -25px;
-    font-family: $boxes_font;
-    font-weight: bold;
+    font-family: $header_font;
+    font-weight:400;
 }
 
 #clock {
-    font-family: $zegar_font;
-    font-size: 46px;
-    color: white;
-    @include padall(50px,50px);
+    font-family: $header_font;
+    font-size: 60px;
+    color: $header_color;
+    letter-spacing:-3px;
+    @include padall(25px,25px);
+}
+
+#nowadopicu {
+    color: none;
 }

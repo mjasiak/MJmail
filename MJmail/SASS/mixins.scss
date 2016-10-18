@@ -1,4 +1,6 @@
-﻿@mixin maxsize {
+﻿@import "variables.scss";
+
+@mixin maxsize {
     height:100%;
 }
 
@@ -8,5 +10,16 @@
 }
 
 @mixin message-details-padding(){
-    padding:8px 16px;
+    padding:8px 40px;
+}
+
+@mixin header-font {
+    font-family: $header_font;
+    font-weight: 300;
+}
+
+@mixin boxes-header($font-size) {
+    display:inline-block;
+    font-size: $font-size;
+    color: #8d8d8d;
 }

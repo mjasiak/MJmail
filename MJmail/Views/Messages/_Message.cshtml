@@ -2,7 +2,7 @@
 
 <div class="message-details">
     <div class="message-details-header">
-        <i class="fa fa-arrow-right" aria-hidden="true"></i>
+        @*<button class="nobutton"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>*@
         <h2>@Html.DisplayFor(model => model.MailTitle)</h2>
     </div>
     <div class="message-details-info">
@@ -20,7 +20,6 @@
                     </h3>
                 }
             }
-
             <p>
                 @Html.DisplayFor(model => model.MailDate)
             </p>
