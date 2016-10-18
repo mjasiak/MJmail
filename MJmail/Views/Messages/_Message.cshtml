@@ -2,8 +2,10 @@
 
 <div class="message-details">
     <div class="message-details-header">
-        @*<button class="nobutton"><i class="fa fa-arrow-right" aria-hidden="true"></i></button>*@
         <h2>@Html.DisplayFor(model => model.MailTitle)</h2>
+        <div class="message-details-nav">
+            <i class="fa fa-times" aria-hidden="true"></i>
+        </div>
     </div>
     <div class="message-details-info">
             @{
@@ -27,8 +29,6 @@
         <hr />
     </div>
     <div class="message-details-content">          
-            <p>
-                @Html.DisplayFor(model => model.MailContent)
-            </p>               
+                @Html.Raw(Model.MailContent)            
     </div>   
 </div>

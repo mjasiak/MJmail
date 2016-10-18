@@ -47,7 +47,13 @@ textarea {
 
 .site-wrapper-inner {
     display: table-cell;
-    @include maxsize;   
+    @include maxsize;
+    .col-md-2, .col-xs-2{
+        width: 10%;
+    }
+    .col-md-10, .col-xs-10{
+        width: 90%;
+    }      
 }
 
 .fit-size-toscreen {

@@ -1,2 +1,7 @@
-﻿.table-striped {
+﻿.table {
+    tr{
+        td{
+            border-top: none !important;
+        }
+    }
 }

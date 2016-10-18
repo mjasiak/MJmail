@@ -37,6 +37,11 @@
                 @foreach (var item in Model)
                 {
                     <tr id="@item.ID">
+                        <td>
+                            <div class="checkbox" id="@item.ID">
+                                <label><input type="checkbox" value=""></label>
+                            </div>
+                        </td>
 
                         @if (item.MailToName != null)
                         {

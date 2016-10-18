@@ -5,17 +5,20 @@
     list-style-type:none;
     font-size: 25px;
     @include padall(20px,0px);
-    margin-left: -25px;
+    margin-left: -40px;
     font-family: $header_font;
     font-weight:400;
 }
 
 #clock {
     font-family: $header_font;
-    font-size: 60px;
+    font-size: 50px;
     color: $header_color;
     letter-spacing:-3px;
     @include padall(25px,25px);
+    p{
+        margin:10px 0 10px !important;
+    }
 }
 
 #nowadopicu {
