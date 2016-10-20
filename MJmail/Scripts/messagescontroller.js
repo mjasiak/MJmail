@@ -48,7 +48,29 @@ Messages.prototype.sendMessage = function () {
             });
             e.preventDefault();
         });
-    };
+};
+
+Messages.prototype.deleteMessage = function () {
+    $("#remove_button").click(function () {
+        var rows = [];
+        $("input:checkbox").each(function () {
+            if ($(this).is(":checked")) {
+                rows.push($(this).val());
+            }
+        });
+        if (rows.length!=0) {
+            $.ajax({
+                type: "POST",
+                traditional: true,
+                url: "/Messages/Delete",
+                data: { rows: rows }
+            });
+        }
+        else {
+            alert("Nie wybrano wiadomości do usunięcia!");
+        }        
+    });
+};
 
 Messages.prototype.newMessageShow = function () {
     $("#new_button").click(function () {
@@ -70,5 +92,6 @@ $(document).ready(function () {
     msg.sendMessage();
     msg.getMessage();
     msg.hideMessage();
+    msg.deleteMessage();
 });
 

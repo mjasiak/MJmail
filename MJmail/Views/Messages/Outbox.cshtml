@@ -8,13 +8,48 @@
 
 <div class="row fit-size-toscreen">
     <div class="col-xs-12 col-md-12 fit-size-toscreen boxes">
-        <h1>Outbox</h1>
+        <div class="boxes-header">
+            <h1>Outbox</h1>
+            <i class="fa fa-angle-down"></i>
+        </div>
+        <div class="message-navigation">
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-angle-down fa-stack-1x notworked"></i>
+            </span>
+            <a href="@Url.Action("Outbox","Messages")">
+                <span class="fa-stack">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-refresh fa-stack-1x"></i>
+                </span>
+            </a>
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-share fa-stack-1x notworked"></i>
+            </span>
+            <a href="">
+                <span class="fa-stack" id="remove_button">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa fa-times fa-stack-1x"></i>
+                </span>
+            </a>         
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-exclamation fa-stack-1x notworked"></i>
+            </span>
+        </div>
         <table class="table table-striped">
             <tbody>
                 @foreach (var item in Model)
                 {
                     <tr id="@item.ID">
-                        
+
+                        <td>
+                            <div class="checkbox">
+                                <label><input type="checkbox" value="@item.ID"></label>
+                            </div>
+                        </td>
+
                         @if (item.MailToName != null)
                         {
                             <td>
@@ -40,7 +75,7 @@
                                     <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
                                 }
                                 else
-                                {
+                                {                                   
                                     <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
                                 }                           
                     </tr>

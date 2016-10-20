@@ -1,6 +1,7 @@
 ﻿using MJmail.Data;
 using MJmail.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 
@@ -37,6 +38,19 @@ namespace MJmail.Controllers
         public PartialViewResult Message(int id)
         {
             return PartialView("_Message", _context.Messages.Single(c => c.ID == id));
+        }
+
+        public void Delete(int[] rows)
+        {
+            if (rows != null)
+            {
+                foreach (var row in rows)
+                {
+                    var delRow = _context.Messages.First(c => c.ID == row);
+                    _context.Messages.Remove(delRow);
+                }
+                _context.SaveChanges();
+            }           
         }
     }
 }

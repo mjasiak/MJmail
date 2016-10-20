@@ -41,6 +41,10 @@
     i{
         color: $czerwony_kolor;      
     }
+
+    i.notworked{
+        color: grey !important;
+    }
 }
 
 .checkbox {
