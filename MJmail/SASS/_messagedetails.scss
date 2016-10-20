@@ -13,6 +13,7 @@
     height:175px;
     background-color: $czerwony_kolor;
     color: white;
+    position: relative;
     @include header-font;
     @include message-details-padding;
     h2{
@@ -27,6 +28,15 @@
     .fa:hover   {
         color:lightgray;
     }   
+}
+
+.message-details-nav {
+    position: relative;
+    top:0%;
+    right:-30%;
+    ul{
+        list-style-type:none;
+    }
 }
 
 .message-details-info{

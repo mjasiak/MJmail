@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using PagedList;
 
 namespace MJmail.Controllers
 {
@@ -26,31 +27,57 @@ namespace MJmail.Controllers
         }
 
         public ActionResult Outbox()
-        {         
-            return View(_context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c=>c.MailDate).ToList());
+        {
+            var messages = _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+            foreach (var msg in messages)
+            {
+                msg.EncodedID = Encode(msg.ID.ToString());
+            }
+            return View(messages);
         }
 
-        public ActionResult Inbox()
+        public ActionResult Inbox(int? page)
         {
-            return View(_context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList());
+            var messages = _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+            foreach(var msg in messages)
+            {
+                msg.EncodedID = Encode(msg.ID.ToString());
+            }
+            int pageNumber = (page ?? 1);
+            return View(messages.ToPagedList(pageNumber,3));
         }
-
-        public PartialViewResult Message(int id)
+       
+        public PartialViewResult Message(string encodeID)
         {
+            var id = Int32.Parse(Decode(encodeID));
             return PartialView("_Message", _context.Messages.Single(c => c.ID == id));
         }
 
-        public void Delete(int[] rows)
+        public void Delete(string[] rows)
         {
             if (rows != null)
             {
                 foreach (var row in rows)
                 {
-                    var delRow = _context.Messages.First(c => c.ID == row);
+                    var id = Int32.Parse(Decode(row));
+                    var delRow = _context.Messages.First(c => c.ID == id);
                     _context.Messages.Remove(delRow);
                 }
                 _context.SaveChanges();
             }           
         }
+        #region Crypt
+        public string Encode(string encodeMe)
+        {
+            byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
+            return Convert.ToBase64String(encoded);
+        }
+
+        public static string Decode(string decodeMe)
+        {
+            byte[] encoded = Convert.FromBase64String(decodeMe);
+            return System.Text.Encoding.UTF8.GetString(encoded);
+        }
+        #endregion
     }
 }

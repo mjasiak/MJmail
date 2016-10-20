@@ -8,7 +8,7 @@ Messages.prototype.getMessage = function () {
             $.ajax({
                 type: "GET",
                 url: "/Messages/Message",
-                data: { id: _id },
+                data: { encodeID: _id },
                 success: function (data) {                  
                     $(".boxes").removeClass("col-xs-12 col-md-12");
                     $(".boxes").addClass("col-xs-6 col-md-6");

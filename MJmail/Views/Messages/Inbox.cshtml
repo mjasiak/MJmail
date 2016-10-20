@@ -1,5 +1,6 @@
 ﻿@using System.Globalization
-@model List<MJmail.Models.Message>
+@using PagedList.Mvc;
+@model PagedList.IPagedList<MJmail.Models.Message>
 
 @{
     ViewBag.Title = "Inbox";
@@ -40,10 +41,10 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr id="@item.ID">
+                    <tr id="@item.EncodedID">
                         <td>
                             <div class="checkbox">
-                                <label><input type="checkbox" value="@item.ID"></label>
+                                <label><input type="checkbox" value="@item.EncodedID"></label>
                             </div>
                         </td>
 
@@ -80,6 +81,7 @@
             </tbody>
 
         </table>
+        @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
     </div>
     <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen nopadding">
     </div>
