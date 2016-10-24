@@ -83,6 +83,21 @@ Messages.prototype.newMessageClose = function () {
     });
 };
 
+Messages.prototype.searchInbox = function () {
+    $("#searchInbox").on('input', function () {
+        if ($(this).val().length >= 3) {
+            $.ajax({
+                type: "POST",
+                url: "/Messages/Inbox",
+                data: { searchString: $(this).val() },
+                success: function (data) {
+                    $("body").html(data);
+                }
+            })
+        }
+    });
+};
+
 
 $(document).ready(function () {
     var msg = new Messages();
@@ -92,5 +107,6 @@ $(document).ready(function () {
     msg.getMessage();
     msg.hideMessage();
     msg.deleteMessage();
+    msg.searchInbox();
 });
 

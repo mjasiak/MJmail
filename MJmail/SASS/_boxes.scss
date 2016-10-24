@@ -18,11 +18,13 @@
         @include boxes-header(70px);
         letter-spacing:-2px;
         padding-right:15px;
+        color: $verylightgrey !important;
     }
     i{
         @include boxes-header(35px);
         position:relative;
-        top:-5px;        
+        top:-5px;
+        color: $verylightgrey !important;        
     }
 }
 
@@ -43,7 +45,7 @@
     }
 
     i.notworked{
-        color: grey !important;
+        color: $verylightgrey !important;
     }
 }
 
@@ -65,3 +67,29 @@
 .scroll-content {
     padding-right:10px !important;
 }
+
+.searchBox {
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    border: 3px solid #e0e0e0;
+    width: 230px;
+    border-radius:5px;
+    i{
+        position:absolute;
+        top: 5px;
+        left: 5px;
+        font-size:20px;
+        color: lightgrey;
+    }
+    #searchInbox, #searchOutbox {
+        float:right;
+        border: none;
+        padding: 8px;
+        color: lightgrey;
+        font-style:italic;
+        font-family: $header_font;
+        font-size: 15px;
+}
+}
+
