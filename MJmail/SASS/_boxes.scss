@@ -48,9 +48,20 @@
 }
 
 .checkbox {
-    margin: 0 !important;
+    margin: 0;
+    label{
+        padding-left: 0;
+    }
 }
 
 .dotstyle{
     text-align: center !important;
+}
+
+.scroll-wrapper {
+    max-height: 495px;
+}
+
+.scroll-content {
+    padding-right:10px !important;
 }

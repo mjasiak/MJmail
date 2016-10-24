@@ -10,6 +10,10 @@
         <div class="boxes-header">
             <h1>Inbox</h1>
             <i class="fa fa-angle-down"></i>
+            @using (Html.BeginForm())
+            {
+                <input
+            }
         </div>      
         <div class="message-navigation">
             <span class="fa-stack">
@@ -37,51 +41,55 @@
                 <i class="fa fa-exclamation fa-stack-1x notworked"></i>
             </span>
         </div>
-        <table class="table table-striped">
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr id="@item.EncodedID">
-                        <td>
-                            <div class="checkbox">
-                                <label><input type="checkbox" value="@item.EncodedID"></label>
-                            </div>
-                        </td>
+@* Początek scrollbara *@
+            <div class="scrollbar-outer">
+                <table class="table table-striped">
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr id="@item.EncodedID">
+                                <td>
+                                    <div class="checkbox">
+                                        <input type="checkbox" value="@item.EncodedID">
+                                        <label></label>
+                                    </div>
+                                </td>
 
-                        @if (item.MailToName != null)
-                        {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MailFromName)
-                            </td>
-                        }
-                        else
-                        {
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MailFrom)
-                            </td>
-                        }
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MailTitle)
-                        </td>
+                                @if (item.MailToName != null)
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MailFromName)
+                                    </td>
+                                }
+                                else
+                                {
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.MailFrom)
+                                    </td>
+                                }
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.MailTitle)
+                                </td>
 
-                        @if (DateTime.Now.Date == item.MailDate.Date)
-                        {
-                            <td class="right-align">Today,  @item.MailDate.ToShortTimeString()</td>
+                                @if (DateTime.Now.Date == item.MailDate.Date)
+                                {
+                                    <td class="right-align">Today,  @item.MailDate.ToShortTimeString()</td>
+                                }
+                                else if (DateTime.Now.Date.AddDays(-1) == item.MailDate.Date)
+                                {
+                                    <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
+                                }
+                                else
+                                {
+                                    <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
+                                }
+                            </tr>
                         }
-                        else if (DateTime.Now.Date.AddDays(-1) == item.MailDate.Date)
-                        {
-                            <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
-                        }
-                        else
-                        {
-                            <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
-                        }   
-                    </tr>
-                }
-            </tbody>
-
-        </table>
-        @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
+                    </tbody>
+                </table>
+            </div>
+            @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })                   
+@* Koniec scrollbara *@              
     </div>
     <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen nopadding">
     </div>

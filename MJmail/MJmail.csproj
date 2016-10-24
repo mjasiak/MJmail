@@ -213,10 +213,12 @@
     <Content Include="App_Data\MAILdb_log.ldf">
       <DependentUpon>MAILdb.mdf</DependentUpon>
     </Content>
+    <Content Include="Content\awesome-bootstrap-checkbox.css" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\jquery.scrollbar.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
@@ -265,6 +267,8 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.scrollbar.js" />
+    <Content Include="Scripts\jquery.scrollbar.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

@@ -8,6 +8,20 @@
     margin-left: -40px;
     font-family: $header_font;
     font-weight:400;
+    li{
+        padding-bottom: 5px;
+        padding-left:15px;
+    }
+    li:hover{
+        padding-bottom: 5px;
+        background-color:rgba(65,65,65,0.5);
+    }
+}
+
+.menu-container {
+    position:absolute;
+    left:0;
+    width:100%;
 }
 
 #clock {

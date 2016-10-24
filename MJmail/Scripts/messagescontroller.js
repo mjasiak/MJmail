@@ -25,7 +25,6 @@ Messages.prototype.getMessage = function () {
 
 Messages.prototype.hideMessage = function () {
         $(".nobutton").click(function () {
-            //alert("No działa xD");
             $(".boxes").removeClass("col-xs-6 col-md-6");
             $("#ajaxTarget").removeClass("visability");
             $(".boxes").addClass("col-xs-12 col-md-12");           

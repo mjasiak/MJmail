@@ -26,14 +26,15 @@ namespace MJmail.Controllers
             _context.SaveChanges();
         }
 
-        public ActionResult Outbox()
+        public ActionResult Outbox(int? page)
         {
             var messages = _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
             foreach (var msg in messages)
             {
                 msg.EncodedID = Encode(msg.ID.ToString());
             }
-            return View(messages);
+            int pageNumber = (page ?? 1);
+            return View(messages.ToPagedList(pageNumber, 15));
         }
 
         public ActionResult Inbox(int? page)
@@ -44,7 +45,7 @@ namespace MJmail.Controllers
                 msg.EncodedID = Encode(msg.ID.ToString());
             }
             int pageNumber = (page ?? 1);
-            return View(messages.ToPagedList(pageNumber,3));
+            return View(messages.ToPagedList(pageNumber,15));
         }
        
         public PartialViewResult Message(string encodeID)

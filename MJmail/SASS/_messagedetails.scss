@@ -22,20 +22,27 @@
         margin: 0;
     }
     .fa {
+        color: $czerwony_kolor;
         font-size:200%;
         padding-right: 50%;
+        -webkit-text-stroke-width: 2px;
+        -webkit-text-stroke-color: white;
     }
     .fa:hover   {
-        color:lightgray;
+        color:white;
     }   
 }
 
 .message-details-nav {
-    position: relative;
-    top:0%;
-    right:-30%;
+    position: absolute;
+    top:23%;
+    right:5%;
     ul{
+        font-size: 12px;
         list-style-type:none;
+        li{
+            padding-bottom: 10px;
+        }
     }
 }
 
