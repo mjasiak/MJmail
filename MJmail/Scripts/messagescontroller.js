@@ -39,10 +39,10 @@ Messages.prototype.sendMessage = function () {
                 url: "/Messages/New",
                 data: $("#new_message").serialize(),
                 success: function () {
-                    alert("Udalo sie!");
+                    location.reload();
                 },
                 error: function () {
-                    alert("Cos nie tak!");
+                    alert("Błąd!");
                 }
             });
             e.preventDefault();
@@ -84,8 +84,20 @@ Messages.prototype.newMessageClose = function () {
 };
 
 Messages.prototype.searchInbox = function () {
-    $("#searchInbox").on('input', function () {
+    $("#searchInbox").on('change', function () {
         if ($(this).val().length >= 3) {
+            var value = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "/Messages/Inbox",
+                data: { searchString: $(this).val() },
+                success: function (data) {
+                    $("body").html(data);
+                    $("#searchInbox").val(value);
+                }
+            })
+        }
+        else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
                 url: "/Messages/Inbox",
@@ -98,6 +110,42 @@ Messages.prototype.searchInbox = function () {
     });
 };
 
+Messages.prototype.searchOutbox = function () {
+    $("#searchOutbox").on('change', function () {
+        if ($(this).val().length >= 3) {
+            var value = $(this).val();
+            $.ajax({
+                type: "POST",
+                url: "/Messages/Outbox",
+                data: { searchString: $(this).val() },
+                success: function (data) {
+                    $("body").html(data);
+                    $("#searchOutbox").val(value);
+                }
+            })
+        }
+        else if ($(this).val().length == 0) {
+            $.ajax({
+                type: "POST",
+                url: "/Messages/Outbox",
+                data: { searchString: $(this).val() },
+                success: function (data) {
+                    $("body").html(data);
+                }
+            })
+        }
+    });
+};
+
+Messages.prototype.searchCleaner = function () {
+    $("#searchInbox").click(function () {
+        if ($(this).val() == "Search...") $(this).val("");
+    });
+    $("#searchOutbox").click(function () {
+        if ($(this).val() == "Search...") $(this).val("");
+    });
+};
+
 
 $(document).ready(function () {
     var msg = new Messages();
@@ -105,8 +153,9 @@ $(document).ready(function () {
     msg.newMessageClose();
     msg.sendMessage();
     msg.getMessage();
-    msg.hideMessage();
     msg.deleteMessage();
     msg.searchInbox();
+    msg.searchOutbox();
+    msg.searchCleaner();
 });
 
