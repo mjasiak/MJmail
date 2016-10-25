@@ -1,14 +1,10 @@
-﻿.chat_button {
-    position: fixed;
-}
-
-.chat_menu {
+﻿.chat_menu {
     position: fixed;
     right:0;
     height:100%;
     width:15%;
     background-color: black;
-    z-index: 1000;
+    z-index: 100000;
 }
 
 chat_menu-nav {
