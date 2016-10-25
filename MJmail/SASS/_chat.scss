@@ -1,0 +1,20 @@
+﻿.chat_button {
+    position: fixed;
+}
+
+.chat_menu {
+    position: fixed;
+    right:0;
+    height:100%;
+    width:15%;
+    background-color: black;
+    z-index: 1000;
+}
+
+chat_menu-nav {
+    background-color: black;
+}
+
+chat_menu-people {
+    background-color: pink;
+}

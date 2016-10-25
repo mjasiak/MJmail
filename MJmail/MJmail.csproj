@@ -183,6 +183,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
     <Compile Include="Data\MaildbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -260,6 +261,7 @@
     <Content Include="SASS\_boxes.scss" />
     <Content Include="SASS\_table.scss" />
     <Content Include="SASS\_experimentalNav.scss" />
+    <Content Include="SASS\_chat.scss" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -295,6 +297,7 @@
     <Content Include="Views\Messages\Inbox.cshtml" />
     <Content Include="Views\Messages\Outbox.cshtml" />
     <Content Include="Views\Messages\_Message.cshtml" />
+    <Content Include="Views\Chat\_Chatmenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610101308108_Initial.resx">
