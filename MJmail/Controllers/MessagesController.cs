@@ -1,10 +1,11 @@
 ﻿using MJmail.Data;
-using MJmail.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using PagedList;
+using MJmail.Models;
+using MJMail.Methods.Messages;
 
 namespace MJmail.Controllers
 {
@@ -20,10 +21,7 @@ namespace MJmail.Controllers
         [ValidateInput(false)]
         public void New(Message msg)
         {
-            msg.MailDate = DateTime.Now;
-            msg.MailFrom = "mjasiak@pl.sii.eu";
-            _context.Messages.Add(msg);
-            _context.SaveChanges();
+            MessageControl.New(msg, _context);
         }
 
         public ActionResult Outbox(int? page, string searchString)

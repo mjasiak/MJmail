@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJmail.Tests", "MJmail.Test
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJMail.Data", "MJMail.Data\MJMail.Data.csproj", "{63DAD612-3E62-490F-8D3E-12C068F43115}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJMail.Methods", "MJMail.Methods\MJMail.Methods.csproj", "{C3E49A10-AB63-482E-8F29-CEE3FADD867B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{63DAD612-3E62-490F-8D3E-12C068F43115}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63DAD612-3E62-490F-8D3E-12C068F43115}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63DAD612-3E62-490F-8D3E-12C068F43115}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

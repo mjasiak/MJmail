@@ -185,28 +185,9 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
-    <Compile Include="Data\MaildbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201610101308108_Initial.cs" />
-    <Compile Include="Migrations\201610101308108_Initial.Designer.cs">
-      <DependentUpon>201610101308108_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610101309416_Second.cs" />
-    <Compile Include="Migrations\201610101309416_Second.Designer.cs">
-      <DependentUpon>201610101309416_Second.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610171043111_Third.cs" />
-    <Compile Include="Migrations\201610171043111_Third.Designer.cs">
-      <DependentUpon>201610171043111_Third.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201610171046218_Fourth.cs" />
-    <Compile Include="Migrations\201610171046218_Fourth.Designer.cs">
-      <DependentUpon>201610171046218_Fourth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -300,25 +281,20 @@
     <Content Include="Views\Chat\_Chatmenu.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201610101308108_Initial.resx">
-      <DependentUpon>201610101308108_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610101309416_Second.resx">
-      <DependentUpon>201610101309416_Second.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610171043111_Third.resx">
-      <DependentUpon>201610171043111_Third.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201610171046218_Fourth.resx">
-      <DependentUpon>201610171046218_Fourth.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\MJMail.Data\MJMail.Data.csproj">
+      <Project>{63dad612-3e62-490f-8d3e-12c068f43115}</Project>
+      <Name>MJMail.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MJMail.Methods\MJMail.Methods.csproj">
+      <Project>{C3E49A10-AB63-482E-8F29-CEE3FADD867B}</Project>
+      <Name>MJMail.Methods</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
