@@ -195,73 +195,73 @@
     <Content Include="App_Data\MAILdb_log.ldf">
       <DependentUpon>MAILdb.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\awesome-bootstrap-checkbox.css" />
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
-    <Content Include="Content\jquery.scrollbar.css" />
-    <Content Include="Content\PagedList.css" />
-    <Content Include="Content\Site.min.css">
+    <Content Include="Style\Content\awesome-bootstrap-checkbox.css" />
+    <Content Include="Style\Content\bootstrap-theme.css" />
+    <Content Include="Style\Content\bootstrap-theme.min.css" />
+    <Content Include="Style\Content\bootstrap.css" />
+    <Content Include="Style\Content\bootstrap.min.css" />
+    <Content Include="Style\Content\jquery.scrollbar.css" />
+    <Content Include="Style\Content\PagedList.css" />
+    <Content Include="Style\Content\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Style\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
-    <Content Include="SASS\Site.css">
+    <Content Include="Style\Content\Site.css" />
+    <Content Include="Style\SASS\Site.css">
       <DependentUpon>Site.scss</DependentUpon>
     </Content>
-    <Content Include="SASS\Site.min.css">
+    <Content Include="Style\SASS\Site.min.css">
       <DependentUpon>Site.css</DependentUpon>
     </Content>
-    <Content Include="Scripts\ai.0.22.19-build00125.js" />
-    <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
+    <Content Include="Style\Scripts\ai.0.22.19-build00125.js" />
+    <Content Include="Style\Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="SASS\Site.scss" />
+    <Content Include="Style\SASS\Site.scss" />
     <None Include="compilerconfig.json" />
     <None Include="compilerconfig.json.defaults">
       <DependentUpon>compilerconfig.json</DependentUpon>
     </None>
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="SASS\mixins.scss" />
-    <Content Include="SASS\_menu.scss" />
-    <Content Include="SASS\_buttons.scss" />
-    <Content Include="SASS\_variables.scss" />
-    <Content Include="SASS\_modal.scss" />
-    <Content Include="SASS\_messagedetails.scss" />
-    <Content Include="SASS\_boxes.scss" />
-    <Content Include="SASS\_table.scss" />
-    <Content Include="SASS\_experimentalNav.scss" />
-    <Content Include="SASS\_chat.scss" />
-    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\ClockJS.js" />
-    <Content Include="Scripts\jquery-1.10.2.js" />
-    <Content Include="Scripts\jquery-1.10.2.min.js" />
-    <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.scrollbar.js" />
-    <Content Include="Scripts\jquery.scrollbar.min.js" />
-    <Content Include="Scripts\jquery.validate.js" />
-    <Content Include="Scripts\jquery.validate.min.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
-    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
-    <Content Include="Scripts\messagescontroller.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
-    <Content Include="Scripts\npm.js" />
-    <Content Include="Scripts\respond.js" />
-    <Content Include="Scripts\respond.min.js" />
-    <Content Include="Scripts\_references.js" />
+    <Content Include="Style\Content\bootstrap-theme.css.map" />
+    <Content Include="Style\Content\bootstrap-theme.min.css.map" />
+    <Content Include="Style\Content\bootstrap.css.map" />
+    <Content Include="Style\Content\bootstrap.min.css.map" />
+    <Content Include="Style\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Style\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="Style\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="Style\fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="Style\SASS\mixins.scss" />
+    <Content Include="Style\SASS\_menu.scss" />
+    <Content Include="Style\SASS\_buttons.scss" />
+    <Content Include="Style\SASS\_variables.scss" />
+    <Content Include="Style\SASS\_modal.scss" />
+    <Content Include="Style\SASS\_messagedetails.scss" />
+    <Content Include="Style\SASS\_boxes.scss" />
+    <Content Include="Style\SASS\_table.scss" />
+    <Content Include="Style\SASS\_experimentalNav.scss" />
+    <Content Include="Style\SASS\_chat.scss" />
+    <None Include="Style\Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Style\Scripts\bootstrap.js" />
+    <Content Include="Style\Scripts\bootstrap.min.js" />
+    <Content Include="Style\Scripts\ClockJS.js" />
+    <Content Include="Style\Scripts\jquery-1.10.2.js" />
+    <Content Include="Style\Scripts\jquery-1.10.2.min.js" />
+    <None Include="Style\Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Style\Scripts\jquery.scrollbar.js" />
+    <Content Include="Style\Scripts\jquery.scrollbar.min.js" />
+    <Content Include="Style\Scripts\jquery.validate.js" />
+    <Content Include="Style\Scripts\jquery.validate.min.js" />
+    <Content Include="Style\Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Style\Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Style\Scripts\messagescontroller.js" />
+    <Content Include="Style\Scripts\modernizr-2.6.2.js" />
+    <Content Include="Style\Scripts\npm.js" />
+    <Content Include="Style\Scripts\respond.js" />
+    <Content Include="Style\Scripts\respond.min.js" />
+    <Content Include="Style\Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -283,7 +283,7 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Scripts\jquery-1.10.2.min.map" />
+    <Content Include="Style\Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MJMail.Data\MJMail.Data.csproj">
