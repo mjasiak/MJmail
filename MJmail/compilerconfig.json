@@ -1,7 +1,7 @@
 ﻿[
   {
-    "outputFile": "Content/Site.css",
-    "inputFile": "SASS/Site.scss",
+    "outputFile": "Style/Content/Site.css",
+    "inputFile": "Style/SASS/Site.scss",
     "minify": {
       "enabled": true
     },

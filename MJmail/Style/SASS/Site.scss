@@ -55,7 +55,10 @@ textarea {
         width: 10%;
     }
     .col-md-10, .col-xs-10{
-        width: 90%;
+        width: 75%;
+    }
+    .col-md-3, .col-xs-3{
+        width: 15%;
     }      
 }
 
@@ -72,5 +75,5 @@ textarea {
 }
 
 .nopadding {
-    padding: 0;
+    padding: 0 !important;
 }

@@ -23,3 +23,13 @@
     font-size: $font-size;
     color: #8d8d8d;
 }
+
+@mixin h3-font(){
+    margin:0 !important;
+    font-family: $header_font;
+}
+
+@mixin align-vertical(){
+    display: flex;
+    align-items: center;
+}
