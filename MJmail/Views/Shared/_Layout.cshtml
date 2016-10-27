@@ -16,10 +16,116 @@
     <script src="~/Style/Scripts/ClockJS.js"></script>
     <script src="https://use.fontawesome.com/11a80ab1b5.js"></script>
     <script src="~/Style/Scripts/jquery.scrollbar.js"></script>
+    <script src="~/Style/Scripts/jquery.signalR-2.2.1.js"></script>
+    <script src="~/signalr/hubs"></script>
     <script>
         jQuery(document).ready(function () {
             jQuery('.scrollbar-outer').scrollbar();
         });
+    </script>
+    <script>
+        $(function () {
+
+            setScreen(false);
+
+            // Declare a proxy to reference the hub. 
+            var chatHub = $.connection.chatHub;
+
+            registerClientMethods(chatHub);
+
+            // Start Hub
+            $.connection.hub.start().done(function () {
+
+                registerEvents(chatHub)
+
+            });
+
+        });
+
+        function setScreen(isLogin) {
+
+            if (!isLogin) {
+
+                $("#loggedName").hide();
+                $(".chat_menu-people").hide();
+                $(".loginDialog").show();
+            }
+            else {
+
+                $("#loggedName").show();
+                $(".chat_menu-people").show();
+                $(".loginDialog").hide();
+            }
+
+        }
+
+        function registerEvents(chatHub) {
+
+            $("#login").change(function () {
+                var name = $("#login").val();
+                if (name.length > 0) {
+                    chatHub.server.connect(name);
+                }
+                else {
+                    alert("Please enter name");
+                }
+
+            });
+        }
+
+        function registerClientMethods(chatHub) {
+            //chatHub.client.onConnected = function (id, userName, allUsers, messages) {
+            chatHub.client.onConnected = function(id,userName, allUsers){
+
+                setScreen(true);
+                
+                $('#loggedID').val(id);
+                $('#loggedName').text(userName);
+                //$('#spanUser').html(userName);
+
+                // Add All Users
+                for (i = 0; i < allUsers.length; i++) {
+
+                    AddUser(chatHub, allUsers[i].ConnectionId, allUsers[i].UserName);
+                }
+
+                //// Add Existing Messages
+                //for (i = 0; i < messages.length; i++) {
+
+                //    AddMessage(messages[i].UserName, messages[i].Message);
+                //}
+            }
+
+            chatHub.client.onNewUserConnected = function (id,userName) {
+                AddUser(chatHub, id, userName);
+            }
+        }
+
+        function AddUser(chatHub, id, name) {
+
+            var userId = $('#loggedID').val();
+
+            var code = "";
+
+            if (userId == id) {
+
+            }
+            else {
+
+                code = $('<a id="' + id + '" class="user" >' + name + '<a>');
+
+                //$(code).dblclick(function () {
+
+                //    var id = $(this).attr('id');
+
+                //    if (userId != id)
+                //        OpenPrivateChatWindow(chatHub, id, name);
+
+                //});
+            }
+
+            $(".chat_menu-peoplelist").append(code);
+        }
     </script>
 </head>
 <body>
@@ -46,12 +152,28 @@
                         <h3>Chat</h3>
                     </div>
                     <div class="chat_menu-nav">
-                        <h3>Jasiek</h3>
+                        <h3 id="loggedName"></h3>
+                        <div class="loginDialog">
+                            <form>
+                                <div class="form-group">
+                                    <label for="login">Your name:</label>
+                                    <input type="text" class="form-control" id="login">
+                                </div>
+                                @*<button type="submit" class="btn btn-default">Zaloguj</button>*@
+                            </form>
+                        </div>
+                    </div>
+                    <div class="chat_menu-people">
+                        <h3>CONTACTS</h3>
+                        <div class="chat_menu-peoplelist">
+
+                        </div>                      
                     </div>  
                 </div>                               
             </div>
         </div>
     </div>
+    <input id="loggedID" type="hidden" />
     <div id="Modal" class="modal">
         <!-- Modal content -->
         <div class="modal-content">
