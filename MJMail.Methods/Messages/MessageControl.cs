@@ -65,5 +65,17 @@ namespace MJMail.Methods.Messages
             return encodedID;
         }
         #endregion
+        #region Helpers
+        public static List<Message> GetAllReceivedMessages(MaildbContext _context)
+        {
+            return _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+        }
+
+        public static List<Message> GetAllSentMessages(MaildbContext _context)
+        {
+            return _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+        }
+        #endregion
+
     }
 }

@@ -25,14 +25,12 @@ namespace MJmail.Controllers
         }
 
         public ActionResult Outbox(int? page, string searchString)
-        {
-            var messages = _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();            
-            return View(MessageControl.ShowMessages(messages,page,searchString));
+        {                      
+            return View(MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context),page,searchString));
         }
         public ActionResult Inbox(int? page, string searchString)
-        {
-            var messages = _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();            
-            return View(MessageControl.ShowMessages(messages,page,searchString));
+        {            
+            return View(MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context),page,searchString));
         }
        
         public PartialViewResult Message(string encodeID)
