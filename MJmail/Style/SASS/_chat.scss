@@ -1,16 +1,36 @@
-﻿.chat_menu {
-    position: fixed;
-    right:0;
-    height:100%;
-    width:15%;
-    background-color: black;
-    z-index: 100000;
+﻿@import "variables.scss";
+@import "mixins.scss";
+
+.chat_menu {
+    background-color: #f6f6f6;
+    position:relative;
 }
 
-chat_menu-nav {
-    background-color: black;
+.chat_menu-header{
+    background-color: #bbbbbb;
+    height:40px;
+    @include align-vertical;
+    padding:0 15px;
+    h3{
+        @include h3-font;
+        color: white;      
+        font-size: 15px;
+        font-weight:bold;
+    }
 }
 
-chat_menu-people {
+.chat_menu-nav {
+    background-color: white;
+    height:100px;
+    border-bottom: solid 4px $yellowhr;
+    justify-content: center;
+    @include align-vertical;
+    h3{
+        @include h3-font;
+        color:$font_color;
+    }
+}
+
+.chat_menu-people {
     background-color: pink;
 }
