@@ -118,7 +118,7 @@ function CreatePrivateChatWindow(chatHub, id, divID, name) {
 
     var $messagebox = $(window);
 
-    $messagebox.find("textarea").on('keypress',function (e) {
+    $messagebox.on('keypress','textarea',function (e) {
         if (e.which == 13) {
             alert('Siemasz ' + name + ', działa!');
         }
