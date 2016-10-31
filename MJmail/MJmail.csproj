@@ -223,6 +223,7 @@
     <Content Include="App_Data\MAILdb_log.ldf">
       <DependentUpon>MAILdb.mdf</DependentUpon>
     </Content>
+    <Content Include="Style\Scripts\ChatController.js" />
     <Content Include="Style\Scripts\jquery.signalR-2.2.1.js" />
     <Content Include="Style\Scripts\jquery.signalR-2.2.1.min.js" />
     <Content Include="Style\Content\awesome-bootstrap-checkbox.css" />
@@ -273,6 +274,7 @@
     <Content Include="Style\SASS\_table.scss" />
     <Content Include="Style\SASS\_experimentalNav.scss" />
     <Content Include="Style\SASS\_chat.scss" />
+    <Content Include="Style\SASS\_chatmessage.scss" />
     <None Include="Style\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Style\Scripts\bootstrap.js" />
     <Content Include="Style\Scripts\bootstrap.min.js" />

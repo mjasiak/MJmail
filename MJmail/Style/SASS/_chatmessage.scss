@@ -1,0 +1,58 @@
+﻿@import "variables.scss";
+
+.cht_message {
+    width:250px;
+    height:350px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 1;
+    background-color: #eeeeee;
+    border-radius: 5px;
+}
+
+.cht_head {
+    background-color: $chat_maincolor;
+    margin:2px;
+    font-family: $header_font;
+    color: $font_lighter_color;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10%;
+    position:relative;
+    h2{
+        margin:0;
+        font-size:20px;
+    }
+    .cht_headnav {
+        position:absolute;
+        right:5px;
+        top:25%;
+        cursor: pointer;
+    }
+}
+
+.cht_contentout {
+    background-color: white;
+    height: 71%;
+    margin: 0 2px;
+}
+
+.cht_contentin {
+    width: 100%;
+    height:100%;
+}
+
+.cht_input {
+    background-color: white;
+    height: 15%;
+    margin:2px;
+    textarea{
+        width: 100%;
+        height:100%;
+        border: none;
+        resize: none;
+    }
+}
