@@ -36,9 +36,9 @@ namespace MJmail.Controllers
 
         public PartialViewResult Box(int wut ,int? page, string searchString)
         {
-            IPagedList messages;
+            IPagedList messages=null;
             if (wut == 1) messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
-            else messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
+            else if (wut == 2) messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
             return PartialView("_Box", messages);
         }
        

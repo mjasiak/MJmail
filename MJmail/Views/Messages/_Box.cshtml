@@ -2,6 +2,10 @@
 @using System.Globalization;
 @using PagedList.Mvc;
 
+@{ 
+    int wut=0;
+}
+
 <div class="scrollbar-outer">
     <table class="table table-striped">
         <tbody>
@@ -15,18 +19,40 @@
                         </div>
                     </td>
 
-                    @if (item.MailToName != null)
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MailFromName)
-                        </td>
-                    }
-                    else
-                    {
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MailFrom)
-                        </td>
-                    }
+@* Wyswietlanie INBOX/OUTBOX *@
+    @if (item.MailFrom != "mjasiak@pl.sii.eu")
+    {
+        wut = 1;
+        if (item.MailToName != null)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.MailFromName)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.MailFrom)
+            </td>
+        }
+    }
+    else
+    {
+        wut = 2;
+        if (item.MailToName != null)
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.MailToName)
+            </td>
+        }
+        else
+        {
+            <td>
+                @Html.DisplayFor(modelItem => item.MailTo)
+            </td>
+        }
+    }
+
                     <td>
                         @Html.DisplayFor(modelItem => item.MailTitle)
                     </td>
@@ -48,4 +74,4 @@
         </tbody>
     </table>
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Box", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
+@Html.PagedListPager(Model, page => Url.Action("Box", new { page, wut }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
