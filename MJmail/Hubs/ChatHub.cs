@@ -11,7 +11,6 @@ namespace MJmail.Hubs
     public class ChatHub : Hub
     {
         static List<UserDetails> ConnectedUsers = new List<UserDetails>();
-        static List<PrivMessage> MessageBox = new List<PrivMessage>();
 
         public void Connect(string userName)
         {
@@ -27,9 +26,14 @@ namespace MJmail.Hubs
             }
         }
 
-        public void SendMessage(string sendTo, string msgContent)
+        public void SendPrivateMessage(string sendTo, string msgContent)
         {
+            var ToUser = ConnectedUsers.FirstOrDefault(cu => cu.ConnectionId == sendTo);
+            var fromUser = ConnectedUsers.FirstOrDefault(cu => cu.ConnectionId == Context.ConnectionId);
 
+            Clients.Caller.sendMessage(ToUser.ConnectionId, fromUser.UserName, msgContent);
+
+            Clients.Client(ToUser.ConnectionId).sendMessage(fromUser.ConnectionId, fromUser.UserName, msgContent);
         }
 
         public override Task OnDisconnected(bool stopCalled)

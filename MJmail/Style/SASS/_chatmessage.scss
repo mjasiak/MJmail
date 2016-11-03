@@ -42,7 +42,12 @@
 
 .cht_contentin {
     width: 100%;
-    height:100%;
+    max-height:100%;
+    overflow:auto;
+}
+
+.cht_msg {
+
 }
 
 .cht_input {

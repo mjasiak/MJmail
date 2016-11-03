@@ -76,6 +76,22 @@ function registerClientMethods(chatHub) {
     chatHub.client.onUserDisconnected = function (id) {
         DeleteUser(id);
     }
+
+    chatHub.client.sendMessage = function (windowId, userName, msgContent) {
+        var divID = 'priv_' + windowId;
+        var message = '<div class="cht_msg"><span>' + userName + ': </span>' + msgContent + '</div>';
+
+        var $messagebox = $("#" + divID);
+
+        if ($messagebox.find(".cht_contentin").length == 0) {
+            CreatePrivateChatWindow(chatHub,windowId,divID,userName);
+        }
+
+        $messagebox.find(".cht_contentin").append(message);
+
+        var height = $messagebox.find('.cht_contentin')[0].scrollHeight;
+        $messagebox.find('.cht_contentin').scrollTop(height);
+    }
 }
 
 function DeleteUser(divID) {
@@ -120,15 +136,17 @@ function CreatePrivateChatWindow(chatHub, id, divID, name) {
 
     $messagebox.on('keypress','textarea',function (e) {
         if (e.which == 13) {
-            alert('Siemasz ' + name + ', działa!');
+            var msg = $messagebox.find('textarea').val();
+            chatHub.server.sendPrivateMessage(id, msg);
+            $(this).val('');
         }
     });
 
-    $messagebox.find(".cht_menunav").click(function () {
+    $messagebox.on('click','.cht_headnav', function () {
         $messagebox.remove();
     });
 
-    AddDivToContainer(window);
+    AddDivToContainer($messagebox);
 };
 
 function AddDivToContainer($div) {
