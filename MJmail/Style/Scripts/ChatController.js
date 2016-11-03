@@ -81,16 +81,14 @@ function registerClientMethods(chatHub) {
         var divID = 'priv_' + windowId;
         var message = '<div class="cht_msg"><span>' + userName + ': </span>' + msgContent + '</div>';
 
-        var $messagebox = $("#" + divID);
-
-        if ($messagebox.find(".cht_contentin").length == 0) {
+        if ($("#" + divID).find(".cht_contentin").length == 0) {
             CreatePrivateChatWindow(chatHub,windowId,divID,userName);
         }
 
-        $messagebox.find(".cht_contentin").append(message);
+        $("#" + divID).find(".cht_contentin").append(message);
 
-        var height = $messagebox.find('.cht_contentin')[0].scrollHeight;
-        $messagebox.find('.cht_contentin').scrollTop(height);
+        var height = $("#" + divID).find('.cht_contentin')[0].scrollHeight;
+        $("#" + divID).find('.cht_contentin').scrollTop(height);
     }
 }
 
