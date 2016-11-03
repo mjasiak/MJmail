@@ -92,7 +92,7 @@ Messages.prototype.searchInbox = function () {
                 url: "/Messages/Box",
                 data: { searchString: $(this).val(), wut: 1 },
                 success: function (data) {
-                    //$("body").html(data);
+                    $("#box").html(data);
                     $("#searchInbox").val(value);
                 }
             })
