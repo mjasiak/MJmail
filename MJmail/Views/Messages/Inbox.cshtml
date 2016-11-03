@@ -1,8 +1,4 @@
-﻿@using System.Globalization
-@using PagedList.Mvc;
-@model PagedList.IPagedList<MJmail.Models.Message>
-
-@{
+﻿@{
     ViewBag.Title = "Inbox";
 }
 <div class="row fit-size-toscreen">
@@ -20,7 +16,7 @@
                 <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
                 <i class="fa fa-angle-down fa-stack-1x notworked"></i>
             </span>
-            <a href="@Url.Action("Inbox","Messages")">
+            <a href="@Url.Action("Inbox", "Messages")">
                 <span class="fa-stack">
                     <i class="fa fa-circle-thin fa-stack-2x"></i>
                     <i class="fa fa-refresh fa-stack-1x"></i>
@@ -42,53 +38,7 @@
             </span>
         </div>
 @* Początek scrollbara *@
-            <div class="scrollbar-outer">
-                <table class="table table-striped">
-                    <tbody>
-                        @foreach (var item in Model)
-                        {
-                            <tr id="@item.EncodedID">
-                                <td>
-                                    <div class="checkbox">
-                                        <input type="checkbox" value="@item.EncodedID">
-                                        <label></label>
-                                    </div>
-                                </td>
-
-                                @if (item.MailToName != null)
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MailFromName)
-                                    </td>
-                                }
-                                else
-                                {
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.MailFrom)
-                                    </td>
-                                }
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MailTitle)
-                                </td>
-
-                                @if (DateTime.Now.Date == item.MailDate.Date)
-                                {
-                                    <td class="right-align">Today,  @item.MailDate.ToShortTimeString()</td>
-                                }
-                                else if (DateTime.Now.Date.AddDays(-1) == item.MailDate.Date)
-                                {
-                                    <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
-                                }
-                                else
-                                {
-                                    <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
-                                }
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            </div>
-            @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })                   
+                    @Html.Action("Box", "Messages", new { wut = 1 })           
 @* Koniec scrollbara *@              
     </div>
     <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen nopadding">

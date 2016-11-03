@@ -89,10 +89,10 @@ Messages.prototype.searchInbox = function () {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "/Messages/Inbox",
-                data: { searchString: $(this).val() },
+                url: "/Messages/Box",
+                data: { searchString: $(this).val(), wut: 1 },
                 success: function (data) {
-                    $("body").html(data);
+                    //$("body").html(data);
                     $("#searchInbox").val(value);
                 }
             })
@@ -101,7 +101,7 @@ Messages.prototype.searchInbox = function () {
             $.ajax({
                 type: "POST",
                 url: "/Messages/Inbox",
-                data: { searchString: $(this).val() },
+                data: { searchString: $(this).val(), wut:1 },
                 success: function (data) {
                     $("body").html(data);
                 }
@@ -116,8 +116,8 @@ Messages.prototype.searchOutbox = function () {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "/Messages/Outbox",
-                data: { searchString: $(this).val() },
+                url: "/Messages/Box",
+                data: { searchString: $(this).val(), wut:2 },
                 success: function (data) {
                     $("body").html(data);
                     $("#searchOutbox").val(value);
@@ -127,8 +127,8 @@ Messages.prototype.searchOutbox = function () {
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Outbox",
-                data: { searchString: $(this).val() },
+                url: "/Messages/Box",
+                data: { searchString: $(this).val(), wut:2 },
                 success: function (data) {
                     $("body").html(data);
                 }

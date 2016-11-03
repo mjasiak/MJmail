@@ -24,13 +24,22 @@ namespace MJmail.Controllers
             MessageControl.New(msg, _context);
         }
 
-        public ActionResult Outbox(int? page, string searchString)
+        public ActionResult Outbox()
         {                      
-            return View(MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context),page,searchString));
+            return View();
         }
-        public ActionResult Inbox(int? page, string searchString)
+
+        public ActionResult Inbox()
         {            
-            return View(MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context),page,searchString));
+            return View();
+        }
+
+        public PartialViewResult Box(int wut ,int? page, string searchString)
+        {
+            IPagedList messages;
+            if (wut == 1) messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
+            else messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
+            return PartialView("_Box", messages);
         }
        
         public PartialViewResult Message(string encodeID)

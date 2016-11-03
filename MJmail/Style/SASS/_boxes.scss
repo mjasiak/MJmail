@@ -16,7 +16,7 @@
 .boxes-header {
     position:relative;
     h1{
-        @include boxes-header(70px);
+        @include boxes-header(60px);
         letter-spacing:-2px;
         padding-right:15px;
         color: $verylightgrey !important;
