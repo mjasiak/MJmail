@@ -293,6 +293,7 @@
     <Content Include="Style\Scripts\npm.js" />
     <Content Include="Style\Scripts\respond.js" />
     <Content Include="Style\Scripts\respond.min.js" />
+    <Content Include="Style\Scripts\searchJS.js" />
     <Content Include="Style\Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>

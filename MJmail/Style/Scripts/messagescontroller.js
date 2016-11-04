@@ -3,7 +3,7 @@
 };
 
 Messages.prototype.getMessage = function () {
-        $("tbody tr").click(function () {
+        $("#box").on('click','tbody tr',function () {
             var _id = this.id;
             $.ajax({
                 type: "GET",
@@ -62,7 +62,10 @@ Messages.prototype.deleteMessage = function () {
                 type: "POST",
                 traditional: true,
                 url: "/Messages/Delete",
-                data: { rows: rows }
+                data: { rows: rows },
+                success: function () {
+                    location.reload();
+                }
             });
         }
         else {
@@ -100,10 +103,11 @@ Messages.prototype.searchInbox = function () {
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Inbox",
+                url: "/Messages/Box",
                 data: { searchString: $(this).val(), box:1 },
                 success: function (data) {
-                    $("body").html(data);
+                    $("#box").html(data);
+                    $("#searchInbox").val("Search...");
                 }
             })
         }
@@ -127,10 +131,11 @@ Messages.prototype.searchOutbox = function () {
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Outbox",
+                url: "/Messages/Box",
                 data: { searchString: $(this).val(), box:2 },
                 success: function (data) {
-                    $("body").html(data);
+                    $("#box").html(data);
+                    $("#searchOutbox").val("Search...")
                 }
             })
         }
@@ -149,10 +154,10 @@ Messages.prototype.searchCleaner = function () {
 
 $(document).ready(function () {
     var msg = new Messages();
+    msg.getMessage();
     msg.newMessageShow();
     msg.newMessageClose();
-    msg.sendMessage();
-    msg.getMessage();
+    msg.sendMessage();   
     msg.deleteMessage();
     msg.searchInbox();
     msg.searchOutbox();
