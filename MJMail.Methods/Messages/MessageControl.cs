@@ -27,14 +27,7 @@ namespace MJMail.Methods.Messages
             }
             int pageNumber = (page ?? 1);
 
-            if (!String.IsNullOrEmpty(searchString))
-            {
-                messages = messages.Where(s => s.MailTitle.Contains(searchString)
-                                        || s.MailContent.Contains(searchString)
-                                        || s.MailFrom.Contains(searchString)).ToList();
-            }
-
-            return messages.ToPagedList(pageNumber, 15);
+            return searchMethod(messages, searchString).ToPagedList(pageNumber, 15);
         }
 
         public static void Delete(MaildbContext _context, string[] rows)
@@ -57,7 +50,6 @@ namespace MJMail.Methods.Messages
             byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
             return Convert.ToBase64String(encoded);
         }
-
         public static int Decode(string decodeMe)
         {
             byte[] encoded = Convert.FromBase64String(decodeMe);
@@ -70,12 +62,26 @@ namespace MJMail.Methods.Messages
         {
             return _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
         }
-
         public static List<Message> GetAllSentMessages(MaildbContext _context)
         {
             return _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
         }
         #endregion
+        #region Search
+        private static List<Message> searchMethod(List<Message> messages, string searchString)
+        {
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                messages = messages.Where(s => s.MailTitle.Contains(searchString)
+                                        || s.MailContent.Contains(searchString)
+                                        || s.MailFrom.Contains(searchString)
+                                        || (s.MailFromName!=null && s.MailFromName.Contains(searchString))
+                                        || s.MailTo.Contains(searchString)
+                                        || (s.MailToName!=null && s.MailToName.Contains(searchString))).ToList();
+            }
 
+            return messages;
+        }
+        #endregion
     }
 }

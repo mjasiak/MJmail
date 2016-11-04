@@ -13,7 +13,10 @@
             <h1>Outbox</h1>
             <i class="fa fa-angle-down"></i>
             <div class="searchBox">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <div class="searchIcons">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-angle-down" id="advSearchButton"></i>
+                </div>
                 <input id="searchOutbox" class="fa" type="text" value="Search..." />
             </div>
         </div>
@@ -43,54 +46,11 @@
                 <i class="fa fa-exclamation fa-stack-1x notworked"></i>
             </span>
         </div>
-        <div class="scrollbar-outer">
-            <table class="table table-striped">
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr id="@item.EncodedID">
-
-                            <td>
-                                <div class="checkbox">
-                                    <input type="checkbox" value="@item.EncodedID">
-                                    <label></label>
-                                </div>
-                            </td>
-
-                            @if (item.MailToName != null)
-                            {
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MailToName)
-                                </td>
-                            }
-                            else
-                            {
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.MailTo)
-                                </td>
-                            }
-                            <td>
-                                @Html.DisplayFor(modelItem => item.MailTitle)
-                            </td>
-
-                            @if (DateTime.Now.Date == item.MailDate.Date)
-                            {
-                                <td class="right-align">Today,  @item.MailDate.ToShortTimeString()</td>
-                            }
-                            else if (DateTime.Now.Date.AddDays(-1) == item.MailDate.Date)
-                            {
-                                <td class="right-align">Yesterday,  @item.MailDate.ToShortTimeString()</td>
-                            }
-                            else
-                            {
-                                <td class="right-align">@item.MailDate.ToString("dd MMM", new CultureInfo("en-US"))</td>
-                            }
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        </div>
-        @Html.PagedListPager(Model, page => Url.Action("Outbox", new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })       
+        @* Tutaj _Partial *@
+        <div id="box">
+            @Html.Action("Box", "Messages", new { box = 2 })
+        </div> 
+        @* Koniec _Partial *@
     </div>
     <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen nopadding">
     </div>
