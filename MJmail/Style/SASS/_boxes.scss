@@ -76,12 +76,17 @@
     border: 3px solid #e0e0e0;
     width: 230px;
     border-radius:5px;
-    i{
+    .searchIcons{
         position:absolute;
-        top: 5px;
-        left: 5px;
-        font-size:20px;
+        top: 10px;
+        left: 5px;        
         color: lightgrey;
+        i{
+            font-size:20px;
+        }
+        #advSearch{
+            cursor:pointer;
+        }
     }
     #searchInbox, #searchOutbox {
         float:right;
@@ -91,6 +96,7 @@
         font-style:italic;
         font-family: $header_font;
         font-size: 15px;
+        width:190px;
 }
 }
 

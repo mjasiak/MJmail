@@ -13,7 +13,10 @@
             <h1>Outbox</h1>
             <i class="fa fa-angle-down"></i>
             <div class="searchBox">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <div class="searchIcons">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-angle-down" id="advSearch"></i>
+                </div>
                 <input id="searchOutbox" class="fa" type="text" value="Search..." />
             </div>
         </div>
@@ -45,7 +48,7 @@
         </div>
         @* Tutaj _Partial *@
         <div id="box">
-            @Html.Action("Box", "Messages", new { wut = 2 })
+            @Html.Action("Box", "Messages", new { box = 2 })
         </div> 
         @* Koniec _Partial *@
     </div>

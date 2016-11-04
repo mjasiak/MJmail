@@ -7,7 +7,10 @@
             <h1>Inbox</h1>
             <i class="fa fa-angle-down"></i>
             <div class="searchBox">
-                <i class="fa fa-search" aria-hidden="true"></i>
+                <div class="searchIcons">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-angle-down" id="advSearch"></i>
+                </div>
                 <input id="searchInbox" class="fa" type="text" value="Search..." />
             </div>                
         </div>      
@@ -39,7 +42,7 @@
         </div>
 @* Początek scrollbara *@
         <div id="box">
-            @Html.Action("Box", "Messages", new { wut = 1 })            
+            @Html.Action("Box", "Messages", new { box = 1 })            
         </div>                           
 @* Koniec scrollbara *@              
     </div>

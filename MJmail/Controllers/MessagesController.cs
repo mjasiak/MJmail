@@ -34,12 +34,9 @@ namespace MJmail.Controllers
             return View();
         }
 
-        public PartialViewResult Box(int wut ,int? page, string searchString)
-        {
-            IPagedList messages=null;
-            if (wut == 1) messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
-            else if (wut == 2) messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
-            return PartialView("_Box", messages);
+        public PartialViewResult Box(int box ,int? page, string searchString)
+        {            
+            return PartialView("_Box", getMessages(box,page,searchString));
         }
        
         public PartialViewResult Message(string encodeID)
@@ -52,5 +49,21 @@ namespace MJmail.Controllers
         {
             MessageControl.Delete(_context, rows);        
         }
+
+        #region Messages Getter
+        private IPagedList getMessages(int box, int? page, string searchString)
+        {
+            IPagedList messages = null;
+            if (box == 1) {
+                messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
+                ViewBag.Box = 1;
+            }
+            else if (box == 2) {
+                messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
+                ViewBag.Box = 2;
+            } 
+            return messages;
+        }
+        #endregion
     }
 }

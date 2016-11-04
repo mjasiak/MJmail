@@ -3,7 +3,7 @@
 @using PagedList.Mvc;
 
 @{ 
-    int wut=0;
+    int box=ViewBag.Box;
 }
 
 <div class="scrollbar-outer">
@@ -20,9 +20,8 @@
                     </td>
 
 @* Wyswietlanie INBOX/OUTBOX *@
-    @if (item.MailFrom != "mjasiak@pl.sii.eu")
+    @if (box==1)
     {
-        wut = 1;
         if (item.MailToName != null)
         {
             <td>
@@ -38,7 +37,6 @@
     }
     else
     {
-        wut = 2;
         if (item.MailToName != null)
         {
             <td>
@@ -74,4 +72,11 @@
         </tbody>
     </table>
 </div>
-@Html.PagedListPager(Model, page => Url.Action("Box", new { page, wut }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
+@if (box == 1)
+{
+    @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page, box }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
+}
+else
+{
+    @Html.PagedListPager(Model, page => Url.Action("Outbox", new { page, box }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
+}
