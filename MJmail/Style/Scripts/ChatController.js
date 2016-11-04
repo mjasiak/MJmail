@@ -88,7 +88,7 @@ function registerClientMethods(chatHub) {
         $("#" + divID).find(".cht_contentin").append(message);
 
         var height = $("#" + divID).find('.cht_contentin')[0].scrollHeight;
-        $$("#" + divID).find('.cht_contentin').scrollTop(height);
+        $("#" + divID).find('.cht_contentin').scrollTop(height);
     }
 }
 
