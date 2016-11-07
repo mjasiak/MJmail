@@ -46,28 +46,46 @@ namespace MJMail.Methods.Messages
         private static List<Message> ShowSpecificMessages(MaildbContext context, AdvancedSearchQuery query)
         {
             List<Message> message = new List<Message>();
-            if (query.MailFrom != null)
+            if (query.MailFrom != null) message.AddRange(context.Messages.Where(c => c.MailFrom.Contains(query.MailFrom)));
+            if (query.MailTo != null) message.AddRange(context.Messages.Where(c => c.MailTo.Contains(query.MailTo)));
+            if (query.MailTitle != null) message.AddRange(context.Messages.Where(c => c.MailTitle.Contains(query.MailTitle)));
+            if (query.MailHasWords != null) message = HasWords(message, context, query.MailHasWords);
+            if (query.MailDoesntHave != null)
             {
-                message.AddRange(context.Messages.Where(c => c.MailFrom.Contains(query.MailFrom)));
+                if(query.MailFrom == null && query.MailTo == null && query.MailTitle == null && query.MailHasWords == null)
+                {
+                    message = context.Messages.ToList();
+                    message = DoesntHave(message, context, query.MailDoesntHave);
+                }
+                else message = DoesntHave(message, context, query.MailDoesntHave);
             }
-            if (query.MailTo != null)
-            {
-                message.AddRange(context.Messages.Where(c => c.MailTo.Contains(query.MailTo)));
-            }
-            if (query.MailTitle != null)
-            {
-                message.AddRange(context.Messages.Where(c => c.MailTitle.Contains(query.MailTitle)));
-            }
-            //if (query.MailHasWords != null)
-            //{
-            //    message.AddRange(context.Messages.Where(c =>  == query.MailHasWords));
-            //}
-            //if (query.MailDoesntHave != null)
-            //{
-            //    message.AddRange(context.Messages.Where(c =>  == query.MailDoesntHave));
-            //}
 
             return Encoding(message);
+        }
+
+        private static List<Message> HasWords(List<Message> messages, MaildbContext context, string MailHasWords)
+        {
+            string[] hasWords = MailHasWords.Split(' ');
+
+            foreach(var word in hasWords)
+            {
+                messages.AddRange(context.Messages.Where(c => c.MailContent.Contains(word) || c.MailTitle.Contains(word)));
+            }
+
+            return messages;
+        }
+
+        private static List<Message> DoesntHave(List<Message> messages, MaildbContext context, string MailDoesntHave)
+        {
+            string[] doesntHave = MailDoesntHave.Split(' ');
+
+            foreach (var word in doesntHave)
+            {
+                Message toRemove = messages.First(c => c.MailContent.Contains(word) || c.MailTitle.Contains(word));
+                if (toRemove != null) messages.Remove(toRemove);
+            }
+
+            return messages;
         }
         #endregion
 

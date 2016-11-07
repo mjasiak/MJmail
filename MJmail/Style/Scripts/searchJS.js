@@ -30,24 +30,27 @@ Search.prototype.inputEvents = function () {
     $('.searchBox').on('keypress', '#MailTitle', function (e) {
         if (e.which == 13) {
             $('#advSearchInnerForm').submit();
+            advSearchFadeOut();
         }
     });
 
     $('.searchBox').on('keypress', '#MailHasWords', function (e) {
         if (e.which == 13) {
             $('#advSearchInnerForm').submit();
+            advSearchFadeOut();
         }
     });
 
     $('.searchBox').on('keypress', '#MailDoesntHave', function (e) {
         if (e.which == 13) {
             $('#advSearchInnerForm').submit();
+            advSearchFadeOut();
         }
     });
 
     $('.searchBox').on('click', '#advSearchSearch', function () {
         $('#advSearchInnerForm').submit();
-        $('.advSearch').advSearchFadeOut();
+        advSearchFadeOut();
     });
 
     function advSearchFadeOut() {
