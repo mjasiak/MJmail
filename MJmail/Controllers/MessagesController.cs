@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using PagedList;
 using MJmail.Models;
 using MJMail.Methods.Messages;
+using MJMail.Data.TDO;
 
 namespace MJmail.Controllers
 {
@@ -32,6 +33,11 @@ namespace MJmail.Controllers
         public ActionResult Inbox()
         {            
             return View();
+        }
+
+        public PartialViewResult AdvSearch(AdvancedSearchQuery query)
+        {
+            return PartialView("_Box");
         }
 
         public PartialViewResult Box(int box ,int? page, string searchString)
