@@ -1,0 +1,86 @@
+﻿@import "_variables.scss";
+
+.searchBox {
+    display: inline-block;
+    position: relative;
+    left: 5%;
+    border: 3px solid $searchBoxColor;
+    width: 230px;
+    border-radius:5px;
+    .searchIcons{
+        position:absolute;
+        top: 10px;
+        left: 5px;        
+        color: lightgrey;
+        i{
+            font-size:20px;
+        }
+        #advSearchExpand{
+            cursor:pointer;
+        }
+        #advSearchExpand:hover{
+            color: #888888 !important;
+        }
+    }
+    #searchInbox, #searchOutbox {
+        float:right;
+        border: none;
+        padding: 8px;
+        color: lightgrey;
+        font-style:italic;
+        font-family: $header_font;
+        font-size: 15px;
+        width:190px;
+}
+}
+
+.advSearch {
+    width:100%;
+    height:375px;
+    background-color: white;
+    position: absolute;
+    z-index:1;
+    top:107%;
+    border-bottom: $searchBorder;
+    border-left: $searchBorder;
+    border-right: $searchBorder;
+    display:none;
+    border-radius:0 0 5px 5px;
+    .form-group{
+        label{
+            margin-bottom:0;
+            font-weight:100;
+        }       
+        .form-control {
+            height:25px;
+            font-size: 10px;
+    }
+    }   
+    .advSearchInner{ 
+        padding:20px;
+        height:100%;
+        .advSearchForm{
+            i{
+                font-size:unset;
+                top:unset;
+                padding:0 20px;
+                color:white !important;
+            }
+        }
+    }
+    #advSearchCollapse {
+        font-size: 10px;
+        right:1px;
+        top:0;
+        position: absolute;
+        cursor:pointer;
+    }
+
+    #advSearchCollapse:hover {
+        color: #888888 !important;
+    }
+
+    #advSearchSearch {
+        width:100%;
+    }
+}

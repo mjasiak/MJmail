@@ -9,36 +9,38 @@
             <div class="searchBox">
                 <div class="searchIcons">
                     <i class="fa fa-search" aria-hidden="true"></i>
-                    <i class="fa fa-angle-down" id="advSearchButton"></i>
+                    <i class="fa fa-angle-down" id="advSearchExpand"></i>
                 </div>
                 @* ADV SEARCH START *@
                 <div class="advSearch">
                     <div class="advSearchInner">
                         <div class="advExit">
-                            <i class="fa fa fa-times" id="advExitButton"></i>
+                            <i class="fa fa fa-times" id="advSearchCollapse"></i>
                         </div>
                         <div class="advSearchForm">
-                            <div class="form-group">
-                                <label for="text">From:</label>
-                                <input type="text" class="form-control" id="MailFrom"/>
-                            </div>
-                            <div class="form-group">
-                                <label for="text">To:</label>
-                                <input type="text" class="form-control" id="MailTo" />
-                            </div>
-                            <div class="form-group">
-                                <label for="text">Subject:</label>
-                                <input type="text" class="form-control" id="MailTitle" />
-                            </div>
-                            <div class="form-group">
-                                <label for="text">Has words:</label>
-                                <input type="text" class="form-control" id="MailHasWords" />
-                            </div>
-                            <div class="form-group">
-                                <label for="text">Doesn't have:</label>
-                                <input type="text" class="form-control" id="MailDoesntHave" />
-                            </div>
-                            <a class="btn btn-danger redButtons"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            <form id="advSearchInnerForm">
+                                <div class="form-group">
+                                    <label for="text">From:</label>
+                                    <input type="text" class="form-control" id="MailFrom" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">To:</label>
+                                    <input type="text" class="form-control" id="MailTo" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Subject:</label>
+                                    <input type="text" class="form-control" id="MailTitle" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Has words:</label>
+                                    <input type="text" class="form-control" id="MailHasWords" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Doesn't have:</label>
+                                    <input type="text" class="form-control" id="MailDoesntHave" />
+                                </div>
+                                <a class="btn btn-danger redButtons" id="advSearchSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            </form>
                         </div>
                     </div>
                     

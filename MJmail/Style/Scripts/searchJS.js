@@ -3,13 +3,17 @@
 };
 
 Search.prototype.visibilitySearchBox = function () {
-    $("#advSearchButton").click(function () {
+    $("#advSearchExpand").click(function () {
         $(".advSearch").show();
     });
 
-    $("#advExitButton").click(function () {
+    $("#advSearchCollapse").click(function () {
         $(".advSearch").hide();
     })
+};
+
+Search.prototype.inputEvents = function () {
+
 };
 
 $(document).ready(function () {

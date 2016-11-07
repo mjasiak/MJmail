@@ -275,6 +275,7 @@
     <Content Include="Style\SASS\_experimentalNav.scss" />
     <Content Include="Style\SASS\_chat.scss" />
     <Content Include="Style\SASS\_chatmessage.scss" />
+    <Content Include="Style\SASS\_advSearch.scss" />
     <None Include="Style\Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Style\Scripts\bootstrap.js" />
     <Content Include="Style\Scripts\bootstrap.min.js" />
