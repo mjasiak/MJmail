@@ -37,7 +37,8 @@ namespace MJmail.Controllers
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
         {
-            return PartialView("_Box");
+            ViewBag.Box = 1;
+            return PartialView("_Box", AdvancedSearch.FindMessages(query,_context));
         }
 
         public PartialViewResult Box(int box ,int? page, string searchString)
