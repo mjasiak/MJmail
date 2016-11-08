@@ -49,3 +49,9 @@
 .mce-btn {
     background-color: white !important;
 }
+
+@media (max-width: 992px){
+    .modal-content{
+        width: 90%;
+    }
+}

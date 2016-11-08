@@ -25,7 +25,7 @@ namespace MJMail.Methods.Messages
                 _messages = ShowAllMessages(context);
             }
 
-            return _messages.OrderByDescending(m => m.MailDate).ToPagedList(1,15);
+            return _messages.OrderByDescending(m => m.MailDate).Distinct().ToPagedList(1,15);
         }
 
         #region Helpers

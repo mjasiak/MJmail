@@ -52,15 +52,17 @@ textarea {
 .site-wrapper-inner {
     display: table-cell;
     @include maxsize;
-    .col-md-2, .col-xs-2{
-        width: 10%;
-    }
-    .col-md-10, .col-xs-10{
-        width: 75%;
-    }
-    .col-md-3, .col-xs-3{
-        width: 15%;
-    }      
+    @media(min-width:992px){
+        .col-md-2{
+            width: 10%;
+        }
+        .col-md-10{
+            width: 75%;
+        }
+        .col-md-3{
+            width: 15%;
+        }    
+    }     
 }
 
 .fit-size-toscreen {

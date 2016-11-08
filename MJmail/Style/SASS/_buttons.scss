@@ -6,3 +6,9 @@
     font-family: $body_font;
     font-size: 16px;
 }
+
+@media(max-width:1300px){
+    .redButtons {
+        padding: 6px 20%;
+    }
+}

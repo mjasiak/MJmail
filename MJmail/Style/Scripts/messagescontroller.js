@@ -11,7 +11,7 @@ Messages.prototype.getMessage = function () {
                 data: { encodeID: _id },
                 success: function (data) {                  
                     $(".boxes").removeClass("col-xs-12 col-md-12");
-                    $(".boxes").addClass("col-xs-6 col-md-6");
+                    $(".boxes").addClass("col-xs-12 col-md-6");
                     $("#ajaxTarget").html(data);
                     $("#ajaxTarget").addClass("visability");
                 },
@@ -25,7 +25,7 @@ Messages.prototype.getMessage = function () {
 
 Messages.prototype.hideMessage = function () {
         $(".nobutton").click(function () {
-            $(".boxes").removeClass("col-xs-6 col-md-6");
+            $(".boxes").removeClass("col-xs-12 col-md-6");
             $("#ajaxTarget").removeClass("visability");
             $(".boxes").addClass("col-xs-12 col-md-12");           
         });
