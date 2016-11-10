@@ -17,7 +17,42 @@
                     <i class="fa fa-search" aria-hidden="true"></i>
                     <i class="fa fa-angle-down" id="advSearchButton"></i>
                 </div>
-                <input id="searchOutbox" class="fa" type="text" value="Search..." />
+                @* ADV SEARCH START *@
+                <div class="advSearch">
+                    <div class="advSearchInner">
+                        <div class="advExit">
+                            <i class="fa fa fa-times" id="advSearchCollapse"></i>
+                        </div>
+                        <div class="advSearchForm">
+                            <form id="advSearchInnerForm">
+                                <div class="form-group">
+                                    <label for="text">From:</label>
+                                    <input type="text" class="form-control" id="MailFrom" name="MailFrom" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">To:</label>
+                                    <input type="text" class="form-control" id="MailTo" name="MailTo" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Subject:</label>
+                                    <input type="text" class="form-control" id="MailTitle" name="MailTitle" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Has words:</label>
+                                    <input type="text" class="form-control" id="MailHasWords" name="MailHasWords" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Doesn't have:</label>
+                                    <input type="text" class="form-control" id="MailDoesntHave" name="MailDoesntHave" />
+                                </div>
+                                <a class="btn btn-danger redButtons" id="advSearchSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                @* ADV SEARCH END *@
+                <input id="searchSimple" class="fa" type="text" value="Search..." />
             </div>
         </div>
         <div class="message-navigation">

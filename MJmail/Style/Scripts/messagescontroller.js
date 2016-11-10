@@ -86,56 +86,31 @@ Messages.prototype.newMessageClose = function () {
     });
 };
 
-Messages.prototype.searchInbox = function () {
-    $("#searchInbox").on('change', function () {
+Messages.prototype.searchingMail = function () {
+    $("#searchSimple").on('change', function () {
+        var url = window.location.pathname.split("/");
+        var controller = url[1];
+        var action = url[2];
         if ($(this).val().length >= 3) {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "/Messages/Inbox",
+                url: "/"+controller+"/"+action ,
                 data: { searchString: $(this).val() },
                 success: function (data) {
-                    $("body").html(data);
-                    $("#searchInbox").val(value);
+                    $("#box").html(data);
+                    $("#searchSimple").val(value);
                 }
             })
         }
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Inbox",
-                data: { searchString: $(this).val() },
-                success: function (data) {
-                    $("body").html(data);
-                    $("#searchInbox").val("Search...");
-                }
-            })
-        }
-    });
-};
-
-Messages.prototype.searchOutbox = function () {
-    $("#searchOutbox").on('change', function () {
-        if ($(this).val().length >= 3) {
-            var value = $(this).val();
-            $.ajax({
-                type: "POST",
-                url: "/Messages/Outbox",
+                url: "/" + controller + "/" + action,
                 data: { searchString: $(this).val() },
                 success: function (data) {
                     $("#box").html(data);
-                    $("#searchOutbox").val(value);
-                }
-            })
-        }
-        else if ($(this).val().length == 0) {
-            $.ajax({
-                type: "POST",
-                url: "/Messages/Outbox",
-                data: { searchString: $(this).val() },
-                success: function (data) {
-                    $("#box").html(data);
-                    $("#searchOutbox").val("Search...")
+                    $("#searchSimple").val("Search...");
                 }
             })
         }
@@ -143,10 +118,7 @@ Messages.prototype.searchOutbox = function () {
 };
 
 Messages.prototype.searchCleaner = function () {
-    $("#searchInbox").click(function () {
-        if ($(this).val() == "Search...") $(this).val("");
-    });
-    $("#searchOutbox").click(function () {
+    $("#searchSimple").click(function () {
         if ($(this).val() == "Search...") $(this).val("");
     });
 };
@@ -159,8 +131,7 @@ $(document).ready(function () {
     msg.newMessageClose();
     msg.sendMessage();   
     msg.deleteMessage();
-    msg.searchInbox();
-    msg.searchOutbox();
+    msg.searchingMail();
     msg.searchCleaner();
 });
 

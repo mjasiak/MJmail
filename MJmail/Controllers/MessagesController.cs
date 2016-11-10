@@ -28,13 +28,15 @@ namespace MJmail.Controllers
         public ActionResult Outbox(int? page, string searchString)
         {
             IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
-            return View(messages);
+            if (searchString == null) return View(messages);
+            else return PartialView("_Box", messages);
         }
 
         public ActionResult Inbox(int? page, string searchString)
         {
             IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
-            return View(messages);
+            if (searchString == null) return View(messages);
+            else return PartialView("_Box", messages);
         }
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
