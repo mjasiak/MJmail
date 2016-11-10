@@ -1,22 +1,30 @@
-﻿$(function () {
+﻿var Chat = function () {
 
-    setScreen(false);
+};
 
-    // Declare a proxy to reference the hub. 
-    var chatHub = $.connection.chatHub;
+var chat = new Chat();
 
-    registerClientMethods(chatHub);
+Chat.prototype.onStart = function () {
+    $(function () {
 
-    // Start Hub
-    $.connection.hub.start().done(function () {
+        chat.setScreen(false);
 
-        registerEvents(chatHub)
+        // Declare a proxy to reference the hub. 
+        var chatHub = $.connection.chatHub;
+
+        chat.registerClientMethods(chatHub);
+
+        // Start Hub
+        $.connection.hub.start().done(function () {
+
+            chat.registerEvents(chatHub)
+
+        });
 
     });
+}
 
-});
-
-function setScreen(isLogin) {
+Chat.prototype.setScreen = function (isLogin) {
 
     if (!isLogin) {
 
@@ -33,7 +41,7 @@ function setScreen(isLogin) {
 
 }
 
-function registerEvents(chatHub) {
+Chat.prototype.registerEvents = function (chatHub) {
 
     $("#login").change(function () {
         var name = $("#login").val();
@@ -47,11 +55,11 @@ function registerEvents(chatHub) {
     });
 }
 
-function registerClientMethods(chatHub) {
+Chat.prototype.registerClientMethods = function (chatHub) {
     //chatHub.client.onConnected = function (id, userName, allUsers, messages) {
     chatHub.client.onConnected = function (id, userName, allUsers) {
 
-        setScreen(true);
+        chat.setScreen(true);
 
         $('#loggedID').val(id);
         $('#loggedName').text(userName);
@@ -59,22 +67,16 @@ function registerClientMethods(chatHub) {
         // Add All Users
         for (i = 0; i < allUsers.length; i++) {
 
-            AddUser(chatHub, allUsers[i].ConnectionId, allUsers[i].UserName);
+            chat.AddUser(chatHub, allUsers[i].ConnectionId, allUsers[i].UserName);
         }
-
-        //// Add Existing Messages
-        //for (i = 0; i < messages.length; i++) {
-
-        //    AddMessage(messages[i].UserName, messages[i].Message);
-        //}
     }
 
     chatHub.client.onNewUserConnected = function (id, userName) {
-        AddUser(chatHub, id, userName);
+        chat.AddUser(chatHub, id, userName);
     }
 
     chatHub.client.onUserDisconnected = function (id) {
-        DeleteUser(id);
+        chat.DeleteUser(id);
     }
 
     chatHub.client.sendMessage = function (windowId, userName, msgContent) {
@@ -82,7 +84,7 @@ function registerClientMethods(chatHub) {
         var message = '<div class="cht_msg"><span>' + userName + ': </span>' + msgContent + '</div>';
 
         if ($("#" + divID).find(".cht_contentin").length == 0) {
-            CreatePrivateChatWindow(chatHub, windowId, divID, userName);
+            chat.CreatePrivateChatWindow(chatHub, windowId, divID, userName);
         }
 
         $("#" + divID).find(".cht_contentin").append(message);
@@ -92,11 +94,11 @@ function registerClientMethods(chatHub) {
     }
 }
 
-function DeleteUser(divID) {
+Chat.prototype.DeleteUser = function (divID) {
     $('#' + divID).remove();
 }
 
-function AddUser(chatHub, id, name) {
+Chat.prototype.AddUser = function (chatHub, id, name) {
 
     var userId = $('#loggedID').val();
 
@@ -114,7 +116,7 @@ function AddUser(chatHub, id, name) {
             var id = $(this).attr('id');
 
             if (userId != id)
-                OpenPrivateChatWindow(chatHub, id, name);
+                chat.OpenPrivateChatWindow(chatHub, id, name);
 
         });
     }
@@ -122,12 +124,12 @@ function AddUser(chatHub, id, name) {
     $(".chat_menu-peoplelist").append(code);
 }
 
-function OpenPrivateChatWindow(chatHub, id, name) {
+Chat.prototype.OpenPrivateChatWindow = function (chatHub, id, name) {
     divID = 'priv_' + id;
-    CreatePrivateChatWindow(chatHub, id, divID, name);
+    chat.CreatePrivateChatWindow(chatHub, id, divID, name);
 };
 
-function CreatePrivateChatWindow(chatHub, id, divID, name) {
+Chat.prototype.CreatePrivateChatWindow = function (chatHub, id, divID, name) {
     var window = "<div class='cht_message' id=" + divID + "><div class='cht_head'><h2>" + name + "</h2><div class='cht_headnav'><i class='fa fa-times fa-lg'></i></div></div><div class='cht_contentout'><div class='cht_contentin'></div></div><div class='cht_input'><textarea></textarea></div></div>";
 
     var $messagebox = $(window);
@@ -144,9 +146,13 @@ function CreatePrivateChatWindow(chatHub, id, divID, name) {
         $messagebox.remove();
     });
 
-    AddDivToContainer($messagebox);
+    chat.AddDivToContainer($messagebox);
 };
 
-function AddDivToContainer($div) {
+Chat.prototype.AddDivToContainer = function ($div) {
     $('.chat_menu-talks').prepend($div);
 }
+
+$(document).ready(function () {
+    chat.onStart();
+});
