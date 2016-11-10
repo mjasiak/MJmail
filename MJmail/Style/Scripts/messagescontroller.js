@@ -91,6 +91,10 @@ Messages.prototype.searchingMail = function () {
         var url = window.location.pathname.split("/");
         var controller = url[1];
         var action = url[2];
+        if (controller == "" && action == null) {
+            controller = "Messages";
+            action = "Inbox"
+        }
         if ($(this).val().length >= 3) {
             var value = $(this).val();
             $.ajax({
@@ -100,6 +104,7 @@ Messages.prototype.searchingMail = function () {
                 success: function (data) {
                     $("#box").html(data);
                     $("#searchSimple").val(value);
+                    jQuery('.scrollbar-outer').scrollbar();
                 }
             })
         }
@@ -111,6 +116,7 @@ Messages.prototype.searchingMail = function () {
                 success: function (data) {
                     $("#box").html(data);
                     $("#searchSimple").val("Search...");
+                    jQuery('.scrollbar-outer').scrollbar();
                 }
             })
         }
