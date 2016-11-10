@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJMail.Data", "MJMail.Data\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJMail.Methods", "MJMail.Methods\MJMail.Methods.csproj", "{C3E49A10-AB63-482E-8F29-CEE3FADD867B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MJMail.Grid", "MJMail.Grid\MJMail.Grid.csproj", "{C04A6E18-5B07-4396-B842-9FFD8DBE909C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C3E49A10-AB63-482E-8F29-CEE3FADD867B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C04A6E18-5B07-4396-B842-9FFD8DBE909C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C04A6E18-5B07-4396-B842-9FFD8DBE909C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C04A6E18-5B07-4396-B842-9FFD8DBE909C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C04A6E18-5B07-4396-B842-9FFD8DBE909C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

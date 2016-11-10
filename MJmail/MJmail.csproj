@@ -314,6 +314,7 @@
     <Content Include="Views\Messages\_Message.cshtml" />
     <Content Include="Views\Chat\_Chatmenu.cshtml" />
     <Content Include="Views\Messages\_Box.cshtml" />
+    <Content Include="Views\Messages\Test.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -324,6 +325,10 @@
     <ProjectReference Include="..\MJMail.Data\MJMail.Data.csproj">
       <Project>{63dad612-3e62-490f-8d3e-12c068f43115}</Project>
       <Name>MJMail.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MJMail.Grid\MJMail.Grid.csproj">
+      <Project>{c04a6e18-5b07-4396-b842-9ffd8dbe909c}</Project>
+      <Name>MJMail.Grid</Name>
     </ProjectReference>
     <ProjectReference Include="..\MJMail.Methods\MJMail.Methods.csproj">
       <Project>{C3E49A10-AB63-482E-8F29-CEE3FADD867B}</Project>

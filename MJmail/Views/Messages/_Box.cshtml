@@ -1,6 +1,8 @@
 ﻿@model PagedList.IPagedList<MJmail.Models.Message>
 @using System.Globalization;
 @using PagedList.Mvc;
+@using MJMail.Grid;
+@using MJmail.Models;
 
 
 @{
@@ -26,7 +28,7 @@
                     </td>
 
 @* Wyswietlanie INBOX/OUTBOX *@
-    @if (action=="Inbox")
+    @if (action == "Inbox")
     {
         if (item.MailToName != null)
         {

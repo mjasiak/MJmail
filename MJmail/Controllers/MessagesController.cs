@@ -59,5 +59,10 @@ namespace MJmail.Controllers
         {
             MessageControl.Delete(_context, rows);
         }
+
+        public ActionResult Test()
+        {
+            return View(_context.Messages.ToList());
+        }
     }
 }
