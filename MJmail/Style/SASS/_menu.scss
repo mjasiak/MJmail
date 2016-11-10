@@ -3,7 +3,7 @@
 
 .menu-nav{
     list-style-type:none;
-    font-size: 25px;
+    font-size: 20px;
     @include padall(20px,0px);
     margin-left: -40px;
     font-family: $header_font;
@@ -27,6 +27,7 @@
 #clock {
     font-family: $header_font;
     font-size: 50px;
+    font-weight: 300;
     color: $header_color;
     letter-spacing:-3px;
     @include padall(25px,25px);
@@ -55,6 +56,7 @@
     position: absolute;
     right:0;
     z-index:1;
+    border-color: $font_lighter_color;
 }
 
 @media (max-width:992px){

@@ -69,3 +69,16 @@
     padding-right:10px !important;
 }
 
+
+@media (min-width: 992px){
+    #MailBox{
+    .col-md-6{
+        width:55%;
+    }
+    #ajaxTarget{
+        width:45%;
+    }
+}
+}
+
+
