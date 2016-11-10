@@ -25,27 +25,28 @@ namespace MJmail.Controllers
             MessageControl.New(msg, _context);
         }
 
-        public ActionResult Outbox()
-        {                      
-            return View();
+        public ActionResult Outbox(int? page, string searchString)
+        {
+            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
+            return View(messages);
         }
 
-        public ActionResult Inbox()
-        {            
-            return View();
+        public ActionResult Inbox(int? page, string searchString)
+        {
+            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
+            return View(messages);
         }
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
         {
-            ViewBag.Box = 1;
-            return PartialView("_Box", AdvancedSearch.FindMessages(query,_context));
+            return PartialView("_Box", AdvancedSearch.FindMessages(query, _context));
         }
 
-        public PartialViewResult Box(int box ,int? page, string searchString)
-        {            
-            return PartialView("_Box", getMessages(box,page,searchString));
+        public PartialViewResult Box(IPagedList messages)
+        {
+            return PartialView("_Box", messages);
         }
-       
+
         public PartialViewResult Message(string encodeID)
         {
             int id = MessageControl.Decode(encodeID);
@@ -54,23 +55,7 @@ namespace MJmail.Controllers
 
         public void Delete(string[] rows)
         {
-            MessageControl.Delete(_context, rows);        
+            MessageControl.Delete(_context, rows);
         }
-
-        #region Messages Getter
-        private IPagedList getMessages(int box, int? page, string searchString)
-        {
-            IPagedList messages = null;
-            if (box == 1) {
-                messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
-                ViewBag.Box = 1;
-            }
-            else if (box == 2) {
-                messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
-                ViewBag.Box = 2;
-            } 
-            return messages;
-        }
-        #endregion
     }
 }

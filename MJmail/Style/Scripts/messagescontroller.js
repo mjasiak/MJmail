@@ -92,10 +92,10 @@ Messages.prototype.searchInbox = function () {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "/Messages/Box",
-                data: { searchString: $(this).val(), box: 1 },
+                url: "/Messages/Inbox",
+                data: { searchString: $(this).val() },
                 success: function (data) {
-                    $("#box").html(data);
+                    $("body").html(data);
                     $("#searchInbox").val(value);
                 }
             })
@@ -103,10 +103,10 @@ Messages.prototype.searchInbox = function () {
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Box",
-                data: { searchString: $(this).val(), box:1 },
+                url: "/Messages/Inbox",
+                data: { searchString: $(this).val() },
                 success: function (data) {
-                    $("#box").html(data);
+                    $("body").html(data);
                     $("#searchInbox").val("Search...");
                 }
             })
@@ -120,8 +120,8 @@ Messages.prototype.searchOutbox = function () {
             var value = $(this).val();
             $.ajax({
                 type: "POST",
-                url: "/Messages/Box",
-                data: { searchString: $(this).val(), box:2 },
+                url: "/Messages/Outbox",
+                data: { searchString: $(this).val() },
                 success: function (data) {
                     $("#box").html(data);
                     $("#searchOutbox").val(value);
@@ -131,8 +131,8 @@ Messages.prototype.searchOutbox = function () {
         else if ($(this).val().length == 0) {
             $.ajax({
                 type: "POST",
-                url: "/Messages/Box",
-                data: { searchString: $(this).val(), box:2 },
+                url: "/Messages/Outbox",
+                data: { searchString: $(this).val() },
                 success: function (data) {
                     $("#box").html(data);
                     $("#searchOutbox").val("Search...")

@@ -2,8 +2,14 @@
 @using System.Globalization;
 @using PagedList.Mvc;
 
+
 @{
-    int box=ViewBag.Box;
+    string action = null;
+    if (ViewContext.ParentActionViewContext == null) { action = ViewContext.RouteData.GetRequiredString("action"); }
+    else { action = ViewContext.ParentActionViewContext.RouteData.GetRequiredString("action"); }
+
+    //var action = ViewContext.RouteData.GetRequiredString("action"); <-- Wyciąganie akcji z danego widoku
+    /*var action = ViewContext.ParentActionViewContext.RouteData.GetRequiredString("action");*/ // <-- Wyciaganie akcji z 'rodzica' danego parentView
 }
 
 <div class="scrollbar-outer">
@@ -20,7 +26,7 @@
                     </td>
 
 @* Wyswietlanie INBOX/OUTBOX *@
-    @if (box==1)
+    @if (action=="Inbox")
     {
         if (item.MailToName != null)
         {
@@ -72,11 +78,5 @@
         </tbody>
     </table>
 </div>
-@if (box == 1)
-{
-    @Html.PagedListPager(Model, page => Url.Action("Inbox", new { page, box }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
-}
-else
-{
-    @Html.PagedListPager(Model, page => Url.Action("Outbox", new { page, box }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
-}
+
+    @Html.PagedListPager(Model, page => Url.Action(action, new { page }), new PagedListRenderOptions { DisplayLinkToNextPage = PagedListDisplayMode.Never, DisplayLinkToPreviousPage = PagedListDisplayMode.Never, LinkToIndividualPageFormat = "", ContainerDivClasses = new[] { "dotstyle" }, UlElementClasses = new[] { "" } })
