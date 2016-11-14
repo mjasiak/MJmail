@@ -3,8 +3,89 @@
     ViewBag.Title = "Test";
 }
 
-@{ 
-    Grid.Create(Model);
-}
+<div class="row fit-size-toscreen">
+    <div class="col-xs-12 col-md-12 fit-size-toscreen boxes">
+        <div class="boxes-header">
+            <h1>Test</h1>
+            <i class="fa fa-angle-down"></i>
+            <div class="searchBox">
+                <div class="searchIcons">
+                    <i class="fa fa-search" aria-hidden="true"></i>
+                    <i class="fa fa-angle-down" id="advSearchButton"></i>
+                </div>
+                @* ADV SEARCH START *@
+                <div class="advSearch">
+                    <div class="advSearchInner">
+                        <div class="advExit">
+                            <i class="fa fa fa-times" id="advSearchCollapse"></i>
+                        </div>
+                        <div class="advSearchForm">
+                            <form id="advSearchInnerForm">
+                                <div class="form-group">
+                                    <label for="text">From:</label>
+                                    <input type="text" class="form-control" id="MailFrom" name="MailFrom" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">To:</label>
+                                    <input type="text" class="form-control" id="MailTo" name="MailTo" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Subject:</label>
+                                    <input type="text" class="form-control" id="MailTitle" name="MailTitle" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Has words:</label>
+                                    <input type="text" class="form-control" id="MailHasWords" name="MailHasWords" />
+                                </div>
+                                <div class="form-group">
+                                    <label for="text">Doesn't have:</label>
+                                    <input type="text" class="form-control" id="MailDoesntHave" name="MailDoesntHave" />
+                                </div>
+                                <a class="btn btn-danger redButtons" id="advSearchSearch"><i class="fa fa-search" aria-hidden="true"></i></a>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                @* ADV SEARCH END *@
+                <input id="searchSimple" class="fa" type="text" value="Search..." />
+            </div>
+        </div>
+        <div class="message-navigation">
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-angle-down fa-stack-1x notworked"></i>
+            </span>
+            <a href="@Url.Action("Test","Messages")">
+                <span class="fa-stack">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa-refresh fa-stack-1x"></i>
+                </span>
+            </a>
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-share fa-stack-1x notworked"></i>
+            </span>
+            <a href="">
+                <span class="fa-stack" id="remove_button">
+                    <i class="fa fa-circle-thin fa-stack-2x"></i>
+                    <i class="fa fa fa-times fa-stack-1x"></i>
+                </span>
+            </a>
+            <span class="fa-stack">
+                <i class="fa fa-circle-thin fa-stack-2x notworked"></i>
+                <i class="fa fa-exclamation fa-stack-1x notworked"></i>
+            </span>
+        </div>
+        @* Tutaj _Partial *@
+        <div id="box">
+            @Html.Raw(Grid<MJmail.Models.Message>.Create(Model, new List<string> { "MailTo", "MailTitle", "MailDate" }))
+        </div>
+        @* Koniec _Partial *@
+    </div>
+    <div id="ajaxTarget" class="col-xs-6 col-md-6 fit-size-toscreen nopadding">
+    </div>
+</div>
+    
 
 

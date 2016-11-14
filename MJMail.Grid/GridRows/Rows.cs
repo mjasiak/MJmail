@@ -4,15 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MJMail.Grid.Rows
+namespace MJMail.Grid.GridRows
 {
     public class Rows
     {
-        static List<Row> rows = new List<Row>();
-
-        public static void AddRow(Row row)
+        List<Row> rows = new List<Row>();
+        public void AddRow(Row row)
         {
             rows.Add(row);
+        }
+
+        public List<Row> GetRows()
+        {
+            return rows;
         }
     }
 }

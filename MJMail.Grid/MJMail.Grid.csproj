@@ -43,8 +43,8 @@
     <Compile Include="Cells\Cell.cs" />
     <Compile Include="Grid.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Rows\Row.cs" />
-    <Compile Include="Rows\Rows.cs" />
+    <Compile Include="GridRows\Row.cs" />
+    <Compile Include="GridRows\Rows.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MJMail.Data\MJMail.Data.csproj">

@@ -1,4 +1,6 @@
 ﻿using MJmail.Models;
+using MJMail.Grid.Cells;
+using MJMail.Grid.GridRows;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,16 +10,76 @@ using System.Threading.Tasks;
 
 namespace MJMail.Grid
 {
-    public class Grid
+    public class Grid<T>
     {
         static List<PropertyInfo> PropsList = new List<PropertyInfo>();
-        public static void Create<T>(List<T> data)
+        static Rows rows = new Rows();
+
+        public static string Create(List<T> data, List<string> columns)
         {
-            ReadProps<T>(data);
+            ReadProps(data);
+            PrepareData(data, PropsList, columns);
+            return Generate(rows.GetRows());
+        }
+        public static string Create(List<T> data)
+        {
+            ReadProps(data);
+            PrepareData(data, PropsList, null);
+            return Generate(rows.GetRows());
+        }
+
+        static void PrepareData(List<T> data, List<PropertyInfo> props, List<string> columns)
+        {
+            if (columns != null)
+            {
+                foreach(var item in data)
+                {
+                    Row row = new Row("<tr>","</tr>");
+                    foreach(var column in columns)
+                    {
+                        foreach(var prop in props)
+                        {
+                            if(prop.Name == column)
+                            {
+                                row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString()));
+                            }
+                        }
+                    }
+                    rows.AddRow(row);
+                }
+            }
+            else
+            {
+                foreach (var item in data)
+                {
+                    Row row = new Row("<tr>", "</tr>");                    
+                        foreach (var prop in props)
+                        {                           
+                                row.AddCell(new Cell("<td>", "</td>", prop.GetValue(item, null).ToString()));
+                        }
+                    rows.AddRow(row);
+                }
+            }
+        }
+
+        static string Generate(List<Row> rows)
+        {
+            string outer = "";
+            foreach(var row in rows)
+            {
+                string inner = "";
+                foreach (var cell in row.GetCells())
+                {
+                    inner += cell.Build();
+                }
+                outer += "<tr>" + inner + "</tr>";
+            }
+
+            return "<div class='scrollbar-outer'><table class='table table-striped'>" + outer + "</table></div>";
         }
 
         #region Property
-        static void ReadProps<T>(IEnumerable<T> source)
+        static void ReadProps(IEnumerable<T> source)
         {
             Type Type = null;
             foreach (var item in source)
