@@ -7,12 +7,14 @@ using PagedList;
 using MJmail.Models;
 using MJMail.Methods.Messages;
 using MJMail.Data.TDO;
+using MJMail.Grid.Paging;
 
 namespace MJmail.Controllers
 {
     public class MessagesController : Controller
     {
         private readonly MaildbContext _context;
+        private PagingInfo pageInfo = new PagingInfo();
 
         public MessagesController(MaildbContext context)
         {
@@ -25,16 +27,25 @@ namespace MJmail.Controllers
             MessageControl.New(msg, _context);
         }
 
+             //<-- DOBRA
         public ActionResult Outbox(int? page, string searchString)
         {
-            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), page, searchString);
+            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString).ToPagedList(page ?? 1, 15);
             if (searchString == null) return View(messages);
             else return PartialView("_Box", messages);
         }
 
+
+        // <-- JESZCZE NIE DZIAŁA
+        //public ActionResult Outbox(int? page, string searchString)
+        //{
+        //    List<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+        //    return View(messages);
+        //}
+
         public ActionResult Inbox(int? page, string searchString)
         {
-            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), page, searchString);
+            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), searchString).ToPagedList(page ?? 1, 15);
             if (searchString == null) return View(messages);
             else return PartialView("_Box", messages);
         }
@@ -59,10 +70,25 @@ namespace MJmail.Controllers
         {
             MessageControl.Delete(_context, rows);
         }
+            // <-- ORYGINALNA TESTOWA
+        //public ActionResult Test()
+        //{
+        //    return View(_context.Messages.ToList());
+        //}
 
-        public ActionResult Test()
-        {
-            return View(_context.Messages.ToList());
+        public ActionResult Test(int? page, string searchString)
+        {                      
+            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+
+            pageInfo.pageSize = 5;
+            pageInfo.pageNumber = page ?? 1;
+            pageInfo.getTotal(messages.Count());
+            ViewBag.PagingInfo = pageInfo;
+
+            messages = messages.Skip(pageInfo.pageSize * page ?? 0)
+                               .Take(pageInfo.pageSize);
+                       
+            return View(messages);
         }
     }
 }

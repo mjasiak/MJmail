@@ -79,7 +79,7 @@
         </div>
         @* Tutaj _Partial *@
         <div id="box">
-            @Html.Raw(Grid<MJmail.Models.Message>.Create(Model, new List<string> { "MailTo", "MailTitle", "MailDate" }))
+            @Html.Raw(Grid<MJmail.Models.Message>.Create(Model, new List<string> { "MailTo", "MailTitle", "MailDate" }, ViewBag.PagingInfo))
         </div>
         @* Koniec _Partial *@
     </div>

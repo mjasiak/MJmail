@@ -1,12 +1,9 @@
-﻿using MJmail.Models;
-using MJMail.Grid.Cells;
+﻿using MJMail.Grid.Cells;
 using MJMail.Grid.GridRows;
+using MJMail.Grid.Paging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MJMail.Grid
 {
@@ -15,20 +12,20 @@ namespace MJMail.Grid
         static List<PropertyInfo> PropsList = new List<PropertyInfo>();
         static Rows rows = new Rows();
 
-        public static string Create(List<T> data, List<string> columns)
+        public static string Create(IEnumerable<T> data, List<string> columns, PagingInfo paging)
         {
             ReadProps(data);
             PrepareData(data, PropsList, columns);
             return Generate(rows.GetRows());
         }
-        public static string Create(List<T> data)
+        public static string Create(IEnumerable<T> data, PagingInfo paging)
         {
             ReadProps(data);
             PrepareData(data, PropsList, null);
             return Generate(rows.GetRows());
         }
 
-        static void PrepareData(List<T> data, List<PropertyInfo> props, List<string> columns)
+        static void PrepareData(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
         {
             if (columns != null)
             {

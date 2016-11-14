@@ -19,15 +19,14 @@ namespace MJMail.Methods.Messages
             context.SaveChanges();
         }
 
-        public static IPagedList ShowMessages(List<Message> messages, int? page, string searchString)
+        public static List<Message> ShowMessages(List<Message> messages, string searchString)
         {
             foreach (var msg in messages)
             {
                 msg.EncodedID = Encode(msg.ID.ToString());
             }
-            int pageNumber = (page ?? 1);
 
-            return searchMethod(messages, searchString).ToPagedList(pageNumber, 15);
+            return searchMethod(messages, searchString);
         }
 
         public static void Delete(MaildbContext _context, string[] rows)
