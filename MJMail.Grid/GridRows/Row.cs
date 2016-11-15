@@ -10,8 +10,8 @@ namespace MJMail.Grid.GridRows
     public class Row
     {
         string ID { get; set; }
-        string _prefix { get; set; }
-        string _postfix { get; set; }
+        public string _prefix { get; set; }
+        public string _postfix { get; set; }
         List<Cell> cells = new List<Cell>();
 
         public Row(string prefix, string postfix)

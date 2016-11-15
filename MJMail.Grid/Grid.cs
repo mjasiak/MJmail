@@ -1,6 +1,7 @@
 ﻿using MJMail.Grid.Cells;
 using MJMail.Grid.GridRows;
 using MJMail.Grid.Paging;
+using MJMail.Methods.Messages;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -53,10 +54,8 @@ namespace MJMail.Grid
                     {
                         foreach(var prop in props)
                         {
-                            if(prop.Name == column)
-                            {
-                                row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString()));
-                            }
+                            if(prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id") row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item,null).ToString()) + "'>";
+                            if(prop.Name == column) row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString()));
                         }
                     }
                     rows.AddRow(row);
@@ -85,7 +84,7 @@ namespace MJMail.Grid
                 {
                     inner += cell.Build();
                 }
-                outer += "<tr>" + inner + "</tr>";
+                outer += row._prefix + inner + row._postfix;
             }
 
             return "<div class='scrollbar-outer'><table class='table table-striped'>" + outer + "</table></div>";

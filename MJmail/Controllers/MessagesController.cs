@@ -78,14 +78,15 @@ namespace MJmail.Controllers
 
         public ActionResult Test(int? page, string searchString)
         {
-            //IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
-            IEnumerable<Message> messages = _context.Messages.ToList();
+            IEnumerable<Message> messages = MessageControl.ShowMessages(_context.Messages.ToList(), searchString);
+            //IEnumerable<Message> messages = _context.Messages.ToList();
 
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,5,messages.Count(),"Test","Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
-                       
-            return View(messages);
+
+            if (searchString == null) return View(messages);
+            else return PartialView("_TestBox", messages);
         }
     }
 }

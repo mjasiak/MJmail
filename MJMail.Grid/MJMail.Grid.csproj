@@ -52,6 +52,10 @@
       <Project>{63dad612-3e62-490f-8d3e-12c068f43115}</Project>
       <Name>MJMail.Data</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MJMail.Methods\MJMail.Methods.csproj">
+      <Project>{C3E49A10-AB63-482E-8F29-CEE3FADD867B}</Project>
+      <Name>MJMail.Methods</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
