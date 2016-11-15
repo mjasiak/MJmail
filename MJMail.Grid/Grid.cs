@@ -93,7 +93,7 @@ namespace MJMail.Grid
         static string Pager(PagingInfo paging)
         {
             string pager = "";
-            for(int i = 1; i < paging.pageTotal; i++)
+            for(int i = 1; i <= paging.pageTotal; i++)
             {
                 if (i == paging.pageNumber) pager += "<li class='active'><a></a></li>";
                 else pager += "<li><a href='/"+paging.controller+"/"+paging.action+"?page="+i+"'></a></li>";

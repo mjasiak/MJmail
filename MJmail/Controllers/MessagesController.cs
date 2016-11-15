@@ -82,8 +82,7 @@ namespace MJmail.Controllers
             IEnumerable<Message> messages = _context.Messages.ToList();
 
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,5,messages.Count(),"Test","Messages");
-
-            messages = messages.Skip(pageInfo.pageSize * page ?? 0)
+            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
                        
             return View(messages);
