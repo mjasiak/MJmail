@@ -30,7 +30,11 @@ namespace MJmail.Controllers
              //<-- DOBRA
         public ActionResult Outbox(int? page, string searchString)
         {
-            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString).ToPagedList(page ?? 1, 15);
+            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString).ToPagedList(page ?? 1, 15);
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, 15, messages.Count(), "Outbox", "Messages");
+            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
+                               .Take(pageInfo.pageSize);
+
             if (searchString == null) return View(messages);
             else return PartialView("_Box", messages);
         }
@@ -45,7 +49,11 @@ namespace MJmail.Controllers
 
         public ActionResult Inbox(int? page, string searchString)
         {
-            IPagedList messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), searchString).ToPagedList(page ?? 1, 15);
+            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), searchString);
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, 15, messages.Count(), "Inbox", "Messages");
+            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
+                               .Take(pageInfo.pageSize);
+
             if (searchString == null) return View(messages);
             else return PartialView("_Box", messages);
         }
@@ -79,7 +87,6 @@ namespace MJmail.Controllers
         public ActionResult Test(int? page, string searchString)
         {
             IEnumerable<Message> messages = MessageControl.ShowMessages(_context.Messages.ToList(), searchString);
-            //IEnumerable<Message> messages = _context.Messages.ToList();
 
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,5,messages.Count(),"Test","Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)

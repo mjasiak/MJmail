@@ -311,9 +311,9 @@
     <Content Include="Views\Messages\Inbox.cshtml" />
     <Content Include="Views\Messages\Outbox.cshtml" />
     <Content Include="Views\Messages\_Message.cshtml" />
-    <Content Include="Views\Messages\_Box.cshtml" />
+    <Content Include="Views\Messages\_BoxOld.cshtml" />
     <Content Include="Views\Messages\Test.cshtml" />
-    <Content Include="Views\Messages\_TestBox.cshtml" />
+    <Content Include="Views\Messages\_Box.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
