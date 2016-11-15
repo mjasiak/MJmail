@@ -12,18 +12,35 @@ namespace MJMail.Grid
         static List<PropertyInfo> PropsList = new List<PropertyInfo>();
         static Rows rows = new Rows();
 
+#region GridCreate
+        static string grid, pager = "";
         public static string Create(IEnumerable<T> data, List<string> columns, PagingInfo paging)
         {
+            GridCleaner();
             ReadProps(data);
             PrepareData(data, PropsList, columns);
-            return Generate(rows.GetRows());
+            grid = Generate(rows.GetRows());
+            pager = Pager(paging);
+            return grid + pager;
         }
         public static string Create(IEnumerable<T> data, PagingInfo paging)
         {
+            GridCleaner();
             ReadProps(data);
             PrepareData(data, PropsList, null);
-            return Generate(rows.GetRows());
+            grid = Generate(rows.GetRows());
+            pager = Pager(paging);
+            return grid + pager;
         }
+        public static string Create(IEnumerable<T> data)
+        {
+            GridCleaner();
+            ReadProps(data);
+            PrepareData(data, PropsList, null);
+            grid = Generate(rows.GetRows());
+            return grid;
+        }
+#endregion
 
         static void PrepareData(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
         {
@@ -58,7 +75,6 @@ namespace MJMail.Grid
                 }
             }
         }
-
         static string Generate(List<Row> rows)
         {
             string outer = "";
@@ -74,8 +90,18 @@ namespace MJMail.Grid
 
             return "<div class='scrollbar-outer'><table class='table table-striped'>" + outer + "</table></div>";
         }
+        static string Pager(PagingInfo paging)
+        {
+            string pager = "";
+            for(int i = 1; i < paging.pageTotal; i++)
+            {
+                if (i == paging.pageNumber) pager += "<li class='active'><a></a></li>";
+                else pager += "<li><a href='/"+paging.controller+"/"+paging.action+"?page="+i+"'></a></li>";
+            }
+            return "<div class='dotstyle'><ul>"+pager+"</ul></div>";
+        }
 
-        #region Property
+#region Helpers
         static void ReadProps(IEnumerable<T> source)
         {
             Type Type = null;
@@ -91,6 +117,13 @@ namespace MJMail.Grid
                 PropsList.Add(prop);
             }
         }
-        #endregion
+        static void GridCleaner()
+        {
+            grid = "";
+            pager = "";
+            PropsList = new List<PropertyInfo>();
+            rows = new Rows();
+        }
+#endregion
     }
 }

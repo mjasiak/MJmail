@@ -77,13 +77,11 @@ namespace MJmail.Controllers
         //}
 
         public ActionResult Test(int? page, string searchString)
-        {                      
-            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+        {
+            //IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+            IEnumerable<Message> messages = _context.Messages.ToList();
 
-            pageInfo.pageSize = 5;
-            pageInfo.pageNumber = page ?? 1;
-            pageInfo.getTotal(messages.Count());
-            ViewBag.PagingInfo = pageInfo;
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,5,messages.Count(),"Test","Messages");
 
             messages = messages.Skip(pageInfo.pageSize * page ?? 0)
                                .Take(pageInfo.pageSize);
