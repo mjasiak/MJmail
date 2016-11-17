@@ -95,8 +95,7 @@ namespace MJmail.Controllers
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
-            if (searchString == null) return View(messages);
-            else return PartialView("_TestBox", messages);
+            return View(messages);
         }
     }
 }

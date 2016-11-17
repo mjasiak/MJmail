@@ -30,7 +30,7 @@ namespace MJMail.Grid
             ReadProps(data);
             PrepareData(data, PropsList, null);
             grid = Generate(rows.GetRows());
-            pager = Pager(paging);
+            if (paging != null)  pager = Pager(paging);
             return grid + pager;
         }
         public static string Create(IEnumerable<T> data)
@@ -45,6 +45,7 @@ namespace MJMail.Grid
 
         static void PrepareData(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
         {
+            if (props.Count == 0) return;
             if (columns != null)
             {
                 foreach(var item in data)
@@ -76,6 +77,10 @@ namespace MJMail.Grid
         }
         static string Generate(List<Row> rows)
         {
+            if (rows.Count == 0)
+            {
+                return "<div class='scrollbar-outer'><table class='table table-striped'><tbody><tr><td>Nie znaleziono podanej frazy</td></tr></tbody></table></div>";
+            }
             string outer = "";
             foreach(var row in rows)
             {
@@ -113,6 +118,8 @@ namespace MJMail.Grid
                 Type = item.GetType();
                 break;
             }
+
+            if (Type == null) return;
 
             var props = Type.GetProperties();
             foreach (var prop in props)
