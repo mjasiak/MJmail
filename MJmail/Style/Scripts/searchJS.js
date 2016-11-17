@@ -62,8 +62,9 @@ Search.prototype.inputEvents = function () {
             type: "POST",
             url: "/Messages/AdvSearch",
             data: $("#advSearchInnerForm").serialize(),
-            success: function(data){
+            success: function (data) {
                 $('#box').html(data);
+                //$('body').html(data);
                 jQuery('.scrollbar-outer').scrollbar();
             },
             error: function () {

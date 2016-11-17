@@ -102,7 +102,8 @@ Messages.prototype.searchingMail = function () {
                 url: "/"+controller+"/"+action ,
                 data: { searchString: $(this).val() },
                 success: function (data) {
-                    $("#box").html(data);
+                    //$("#box").html(data);
+                    $("body").html(data);
                     $("#searchSimple").val(value);
                     jQuery('.scrollbar-outer').scrollbar();
                 }
@@ -110,11 +111,11 @@ Messages.prototype.searchingMail = function () {
         }
         else if ($(this).val().length == 0) {
             $.ajax({
-                type: "POST",
+                type: "GET",
                 url: "/" + controller + "/" + action,
                 data: { searchString: $(this).val() },
                 success: function (data) {
-                    $("#box").html(data);
+                    $("body").html(data);
                     $("#searchSimple").val("Search...");
                     jQuery('.scrollbar-outer').scrollbar();
                 }

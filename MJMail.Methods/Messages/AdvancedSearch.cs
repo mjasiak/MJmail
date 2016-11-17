@@ -12,7 +12,7 @@ namespace MJMail.Methods.Messages
 {
     public class AdvancedSearch
     {
-        public static IPagedList<Message> FindMessages(AdvancedSearchQuery query, MaildbContext context)
+        public static List<Message> FindMessages(AdvancedSearchQuery query, MaildbContext context)
         {
             query = SetQueryNull(query);
             List<Message> _messages = null;
@@ -25,7 +25,7 @@ namespace MJMail.Methods.Messages
                 _messages = ShowAllMessages(context);
             }
 
-            return _messages.OrderByDescending(m => m.MailDate).Distinct().ToPagedList(1,15);
+            return _messages.OrderByDescending(m => m.MailDate).Distinct().ToList();
         }
 
         #region Helpers

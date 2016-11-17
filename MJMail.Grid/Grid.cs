@@ -21,7 +21,7 @@ namespace MJMail.Grid
             ReadProps(data);
             PrepareData(data, PropsList, columns);
             grid = Generate(rows.GetRows());
-            pager = Pager(paging);
+            if (paging != null) pager = Pager(paging);
             return grid + pager;
         }
         public static string Create(IEnumerable<T> data, PagingInfo paging)
@@ -95,7 +95,11 @@ namespace MJMail.Grid
             for(int i = 1; i <= paging.pageTotal; i++)
             {
                 if (i == paging.pageNumber) pager += "<li class='active'><a></a></li>";
-                else pager += "<li><a href='/"+paging.controller+"/"+paging.action+"?page="+i+"'></a></li>";
+                else
+                {
+                    if (paging.searchString == null) pager += "<li><a href='/" + paging.controller + "/" + paging.action + "?page=" + i + "'></a></li>";
+                    else pager += "<li><a href='/" + paging.controller + "/" + paging.action + "?page=" + i + "&searchString="+paging.searchString+"'></a></li>";
+                }
             }
             return "<div class='dotstyle'><ul>"+pager+"</ul></div>";
         }

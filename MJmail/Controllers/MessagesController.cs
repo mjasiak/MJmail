@@ -27,20 +27,21 @@ namespace MJmail.Controllers
             MessageControl.New(msg, _context);
         }
 
-             //<-- DOBRA
+        //<-- DZIAŁA
         public ActionResult Outbox(int? page, string searchString)
         {
-            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString).ToPagedList(page ?? 1, 15);
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, 15, messages.Count(), "Outbox", "Messages");
+            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 5, messages.Count(), "Outbox", "Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
-            if (searchString == null) return View(messages);
-            else return PartialView("_Box", messages);
+            //if (searchString == null) 
+            return View(messages);
+            //else return PartialView("_Box", messages);
         }
 
 
-        // <-- JESZCZE NIE DZIAŁA
+        // <-- JESZCZE NIE DZIAŁA [OUTBOX]
         //public ActionResult Outbox(int? page, string searchString)
         //{
         //    List<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
@@ -50,17 +51,19 @@ namespace MJmail.Controllers
         public ActionResult Inbox(int? page, string searchString)
         {
             IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), searchString);
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, 15, messages.Count(), "Inbox", "Messages");
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
-            if (searchString == null) return View(messages);
-            else return PartialView("_Box", messages);
+            //if (searchString == null) 
+            return View(messages);
+            //else return PartialView("_Box", messages);
         }
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
         {
-            return PartialView("_Box", AdvancedSearch.FindMessages(query, _context));
+            IEnumerable<Message> messages = AdvancedSearch.FindMessages(query, _context);            
+            return PartialView("_Box", messages);
         }
 
         public PartialViewResult Box(IPagedList messages)
@@ -88,7 +91,7 @@ namespace MJmail.Controllers
         {
             IEnumerable<Message> messages = MessageControl.ShowMessages(_context.Messages.ToList(), searchString);
 
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,5,messages.Count(),"Test","Messages");
+            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
