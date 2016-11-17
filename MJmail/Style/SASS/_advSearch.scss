@@ -3,9 +3,9 @@
 .searchBox {
     display: inline-block;
     position: relative;
-    left: 5%;
-    border: 3px solid $searchBoxColor;
-    width: 230px;
+    left: 4%;
+    border: 2px solid $searchBoxColor;
+    width: 200px;
     border-radius:5px;
     .searchIcons{
         position:absolute;
@@ -26,11 +26,11 @@
         float:right;
         border: none;
         padding: 8px;
-        color: lightgrey;
+        color: #aaaaaa;
         font-style:italic;
         font-family: $header_font;
-        font-size: 15px;
-        width:190px;
+        font-size: 13px;
+        width:160px;
 }
 }
 

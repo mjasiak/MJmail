@@ -55,7 +55,11 @@ namespace MJMail.Grid
                     {
                         foreach(var prop in props)
                         {
-                            if(prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id") row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item,null).ToString()) + "'>";
+                            if (prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id")
+                            {
+                                row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item, null).ToString()) + "'>";
+                                row.ID = MessageControl.Encode(prop.GetValue(item, null).ToString());
+                            }
                             if(prop.Name == column) row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString()));
                         }
                     }
@@ -89,7 +93,7 @@ namespace MJMail.Grid
                 {
                     inner += cell.Build();
                 }
-                outer += row._prefix + inner + row._postfix;
+                outer += row._prefix + CheckboxCreator(row) + inner + row._postfix;
             }
 
             return "<div class='scrollbar-outer'><table class='table table-striped'>" + outer + "</table></div>";
@@ -133,6 +137,10 @@ namespace MJMail.Grid
             pager = "";
             PropsList = new List<PropertyInfo>();
             rows = new Rows();
+        }
+        static string CheckboxCreator(Row row)
+        {
+            return "<td><div class='checkbox'><input type='checkbox' value='"+row.ID+"'><label></label></div></td>";
         }
 #endregion
     }
