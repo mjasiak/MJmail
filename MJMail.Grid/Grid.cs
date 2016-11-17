@@ -4,6 +4,7 @@ using MJMail.Grid.Paging;
 using MJMail.Methods.Messages;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 
 namespace MJMail.Grid
@@ -60,7 +61,7 @@ namespace MJMail.Grid
                                 row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item, null).ToString()) + "'>";
                                 row.ID = MessageControl.Encode(prop.GetValue(item, null).ToString());
                             }
-                            if(prop.Name == column) row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString()));
+                            if(prop.Name == column) row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString(), prop.PropertyType.Name));
                         }
                     }
                     rows.AddRow(row);
@@ -72,8 +73,13 @@ namespace MJMail.Grid
                 {
                     Row row = new Row("<tr>", "</tr>");                    
                         foreach (var prop in props)
-                        {                           
-                                row.AddCell(new Cell("<td>", "</td>", prop.GetValue(item, null).ToString()));
+                        {
+                            if (prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id")
+                            {
+                                row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item, null).ToString()) + "'>";
+                                row.ID = MessageControl.Encode(prop.GetValue(item, null).ToString());
+                            }
+                            row.AddCell(new Cell("<td>", "</td>", prop.GetValue(item, null).ToString(), prop.PropertyType.Name));
                         }
                     rows.AddRow(row);
                 }
@@ -91,6 +97,7 @@ namespace MJMail.Grid
                 string inner = "";
                 foreach (var cell in row.GetCells())
                 {
+                    if (cell._type == "DateTime") cell.Content = SetDateTime(cell.Content);
                     inner += cell.Build();
                 }
                 outer += row._prefix + CheckboxCreator(row) + inner + row._postfix;
@@ -141,6 +148,22 @@ namespace MJMail.Grid
         static string CheckboxCreator(Row row)
         {
             return "<td><div class='checkbox'><input type='checkbox' value='"+row.ID+"'><label></label></div></td>";
+        }
+        static string SetDateTime(string cellContent)
+        {
+                DateTime dataCzas = DateTime.Parse(cellContent);
+                if (DateTime.Now.Date == dataCzas.Date)
+                {
+                    return "Today,  " + dataCzas.ToShortTimeString();
+                }
+                else if (DateTime.Now.Date.AddDays(-1) == dataCzas.Date)
+                {
+                    return "Yesterday,  " + dataCzas.ToShortTimeString();
+                }
+                else
+                {
+                    return dataCzas.ToString("dd MMM", new CultureInfo("en-US"));
+                }            
         }
 #endregion
     }
