@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Messages\AdvancedSearch.cs" />
+    <Compile Include="Messages\IAdvancedSearch.cs" />
+    <Compile Include="Messages\IMessageControl.cs" />
     <Compile Include="Messages\MessageControl.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

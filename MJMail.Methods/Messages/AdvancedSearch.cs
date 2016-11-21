@@ -10,9 +10,16 @@ using System.Threading.Tasks;
 
 namespace MJMail.Methods.Messages
 {
-    public class AdvancedSearch
+    public class AdvancedSearch : IAdvancedSearch
     {
-        public static List<Message> FindMessages(AdvancedSearchQuery query, MaildbContext context)
+        private IMessageControl _msgCntrl;
+
+        public AdvancedSearch(IMessageControl msgCntrl)
+        {
+            _msgCntrl = msgCntrl;
+        }
+
+        public List<Message> FindMessages(AdvancedSearchQuery query, MaildbContext context)
         {
             query = SetQueryNull(query);
             List<Message> _messages = null;
@@ -29,21 +36,19 @@ namespace MJMail.Methods.Messages
         }
 
         #region Helpers
-        private static AdvancedSearchQuery SetQueryNull(AdvancedSearchQuery query)
+        private AdvancedSearchQuery SetQueryNull(AdvancedSearchQuery query)
         {
             if (query.MailTo == null && query.MailFrom == null && query.MailTitle == null && query.MailHasWords == null && query.MailDoesntHave == null) query = null;
             return query;
         }
-
-        private static List<Message> ShowAllMessages(MaildbContext context)
+        private List<Message> ShowAllMessages(MaildbContext context)
         {
             List<Message> messages = new List<Message>();
             messages = context.Messages.ToList();
             
             return Encoding(messages);
         }
-
-        private static List<Message> ShowSpecificMessages(MaildbContext context, AdvancedSearchQuery query)
+        private List<Message> ShowSpecificMessages(MaildbContext context, AdvancedSearchQuery query)
         {
             List<Message> message = new List<Message>();
             if (query.MailFrom != null) message.AddRange(context.Messages.Where(c => c.MailFrom.Contains(query.MailFrom)));
@@ -62,8 +67,7 @@ namespace MJMail.Methods.Messages
 
             return Encoding(message);
         }
-
-        private static List<Message> HasWords(List<Message> messages, MaildbContext context, string MailHasWords)
+        private List<Message> HasWords(List<Message> messages, MaildbContext context, string MailHasWords)
         {
             string[] hasWords = MailHasWords.Split(' ');
 
@@ -74,8 +78,7 @@ namespace MJMail.Methods.Messages
 
             return messages;
         }
-
-        private static List<Message> DoesntHave(List<Message> messages, MaildbContext context, string MailDoesntHave)
+        private List<Message> DoesntHave(List<Message> messages, MaildbContext context, string MailDoesntHave)
         {
             string[] doesntHave = MailDoesntHave.Split(' ');
 
@@ -90,11 +93,11 @@ namespace MJMail.Methods.Messages
         #endregion
 
         #region Crypting
-        private static List<Message> Encoding(List<Message> messages)
+        private List<Message> Encoding(List<Message> messages)
         {
             foreach (var msg in messages)
             {
-                msg.EncodedID = MessageControl.Encode(msg.ID.ToString());
+                msg.EncodedID = _msgCntrl.Encode(msg.ID.ToString());
             }
 
             return messages;

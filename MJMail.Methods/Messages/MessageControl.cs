@@ -9,17 +9,16 @@ using System.Threading.Tasks;
 
 namespace MJMail.Methods.Messages
 {
-    public class MessageControl
+    public class MessageControl : IMessageControl
     {
-        public static void New(Message msg, MaildbContext context)
+        public void New(Message msg, MaildbContext context)
         {
             msg.MailDate = DateTime.Now;
             msg.MailFrom = "mjasiak@pl.sii.eu";
             context.Messages.Add(msg);
             context.SaveChanges();
         }
-
-        public static List<Message> ShowMessages(List<Message> messages, string searchString)
+        public List<Message> ShowMessages(List<Message> messages, string searchString)
         {
             foreach (var msg in messages)
             {
@@ -28,8 +27,7 @@ namespace MJMail.Methods.Messages
 
             return searchMethod(messages, searchString);
         }
-
-        public static void Delete(MaildbContext _context, string[] rows)
+        public void Delete(MaildbContext _context, string[] rows)
         {
             if (rows != null)
             {
@@ -44,12 +42,12 @@ namespace MJMail.Methods.Messages
         }
 
         #region Crypt
-        public static string Encode(string encodeMe)
+        public string Encode(string encodeMe)
         {
             byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
             return Convert.ToBase64String(encoded);
         }
-        public static int Decode(string decodeMe)
+        public int Decode(string decodeMe)
         {
             byte[] encoded = Convert.FromBase64String(decodeMe);
             int encodedID = Int32.Parse(System.Text.Encoding.UTF8.GetString(encoded));
@@ -57,17 +55,17 @@ namespace MJMail.Methods.Messages
         }
         #endregion
         #region Helpers
-        public static List<Message> GetAllReceivedMessages(MaildbContext _context)
+        public List<Message> GetAllReceivedMessages(MaildbContext _context)
         {
             return _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
         }
-        public static List<Message> GetAllSentMessages(MaildbContext _context)
+        public List<Message> GetAllSentMessages(MaildbContext _context)
         {
             return _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
         }
         #endregion
         #region Search
-        private static List<Message> searchMethod(List<Message> messages, string searchString)
+        private List<Message> searchMethod(List<Message> messages, string searchString)
         {
             if (!String.IsNullOrEmpty(searchString))
             {

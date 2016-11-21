@@ -15,22 +15,26 @@ namespace MJmail.Controllers
     {
         private readonly MaildbContext _context;
         private PagingInfo pageInfo = new PagingInfo();
+        private IMessageControl _msgCntrl;
+        private IAdvancedSearch _advSearch;
 
-        public MessagesController(MaildbContext context)
+        public MessagesController(MaildbContext context, IMessageControl msgCntrl, IAdvancedSearch advSearch)
         {
             _context = context;
+            _msgCntrl = msgCntrl;
+            _advSearch = advSearch;
         }
 
         [ValidateInput(false)]
         public void New(Message msg)
         {
-            MessageControl.New(msg, _context);
+            _msgCntrl.New(msg, _context);
         }
 
         //<-- DZIAŁA
         public ActionResult Outbox(int? page, string searchString)
         {
-            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
+            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllSentMessages(_context), searchString);
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 5, messages.Count(), "Outbox", "Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
@@ -47,7 +51,7 @@ namespace MJmail.Controllers
 
         public ActionResult Inbox(int? page, string searchString)
         {
-            IEnumerable<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllReceivedMessages(_context), searchString);
+            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllReceivedMessages(_context), searchString);
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
@@ -57,7 +61,7 @@ namespace MJmail.Controllers
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
         {
-            IEnumerable<Message> messages = AdvancedSearch.FindMessages(query, _context);            
+            IEnumerable<Message> messages = _advSearch.FindMessages(query, _context);            
             return PartialView("_Box", messages);
         }
 
@@ -68,13 +72,13 @@ namespace MJmail.Controllers
 
         public PartialViewResult Message(string encodeID)
         {
-            int id = MessageControl.Decode(encodeID);
+            int id = _msgCntrl.Decode(encodeID);
             return PartialView("_Message", _context.Messages.Single(c => c.ID == id));
         }
 
         public void Delete(string[] rows)
         {
-            MessageControl.Delete(_context, rows);
+            _msgCntrl.Delete(_context, rows);
         }
             // <-- ORYGINALNA TESTOWA
         //public ActionResult Test()
@@ -84,7 +88,7 @@ namespace MJmail.Controllers
 
         public ActionResult Test(int? page, string searchString)
         {
-            IEnumerable<Message> messages = MessageControl.ShowMessages(_context.Messages.ToList(), searchString);
+            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_context.Messages.ToList(), searchString);
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);

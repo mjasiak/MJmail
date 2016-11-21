@@ -14,7 +14,7 @@ namespace MJMail.Grid
         static List<PropertyInfo> PropsList = new List<PropertyInfo>();
         static Rows rows = new Rows();
 
-#region GridCreate
+#region GridStartOptions
         static string grid, pager = "";
         public static string Create(IEnumerable<T> data, List<string> columns, PagingInfo paging)
         {
@@ -44,6 +44,7 @@ namespace MJMail.Grid
         }
 #endregion
 
+#region GridPrepareZone
         static void PrepareData(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
         {
             if (props.Count == 0) return;
@@ -58,8 +59,8 @@ namespace MJMail.Grid
                         {
                             if (prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id")
                             {
-                                row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item, null).ToString()) + "'>";
-                                row.ID = MessageControl.Encode(prop.GetValue(item, null).ToString());
+                                row._prefix = "<tr id='" + Encode(prop.GetValue(item, null).ToString()) + "'>";
+                                row.ID = Encode(prop.GetValue(item, null).ToString());
                             }
                             if(prop.Name == column) row.AddCell(new Cell("<td>","</td>", prop.GetValue(item,null).ToString(), prop.PropertyType.Name));
                         }
@@ -76,8 +77,8 @@ namespace MJMail.Grid
                         {
                             if (prop.Name == "id" || prop.Name == "ID" || prop.Name == "Id")
                             {
-                                row._prefix = "<tr id='" + MessageControl.Encode(prop.GetValue(item, null).ToString()) + "'>";
-                                row.ID = MessageControl.Encode(prop.GetValue(item, null).ToString());
+                                row._prefix = "<tr id='" + Encode(prop.GetValue(item, null).ToString()) + "'>";
+                                row.ID = Encode(prop.GetValue(item, null).ToString());
                             }
                             row.AddCell(new Cell("<td>", "</td>", prop.GetValue(item, null).ToString(), prop.PropertyType.Name));
                         }
@@ -123,6 +124,7 @@ namespace MJMail.Grid
             }
             return "<div class='dotstyle'><ul>"+pager+"</ul></div>";
         }
+#endregion
 
 #region Helpers
         static void ReadProps(IEnumerable<T> source)
@@ -168,6 +170,11 @@ namespace MJMail.Grid
                 {
                     return dataCzas.ToString("dd MMM", new CultureInfo("en-US"));
                 }            
+        }
+        static string Encode(string encodeMe)
+        {
+            byte[] encoded = System.Text.Encoding.UTF8.GetBytes(encodeMe);
+            return Convert.ToBase64String(encoded);
         }
 #endregion
     }
