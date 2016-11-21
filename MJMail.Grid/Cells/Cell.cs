@@ -33,6 +33,17 @@
                 _content = value;
             }
         }
+        public string Prefix
+        {
+            get
+            {
+                return _prefix;
+            }
+            set
+            {
+                _prefix = value;
+            }
+        }
         #endregion
     }
 

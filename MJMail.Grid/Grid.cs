@@ -97,7 +97,11 @@ namespace MJMail.Grid
                 string inner = "";
                 foreach (var cell in row.GetCells())
                 {
-                    if (cell._type == "DateTime") cell.Content = SetDateTime(cell.Content);
+                    if (cell._type == "DateTime")
+                    {
+                        cell.Content = SetDateTime(cell.Content);
+                        cell.Prefix = "<td class='right-align'>";
+                    }
                     inner += cell.Build();
                 }
                 outer += row._prefix + CheckboxCreator(row) + inner + row._postfix;
