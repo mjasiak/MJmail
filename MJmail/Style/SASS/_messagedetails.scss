@@ -18,8 +18,11 @@
     @include message-details-padding;
     h2{
         display: inline-block;
-        font-size: 55px;
+        font-size: 50px;
         margin: 0;
+        position:relative;
+        left: -25px;
+        letter-spacing: -2px;
     }
     .fa {
         color: $czerwony_kolor;

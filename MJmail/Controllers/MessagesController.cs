@@ -35,11 +35,8 @@ namespace MJmail.Controllers
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
-            //if (searchString == null) 
             return View(messages);
-            //else return PartialView("_Box", messages);
         }
-
 
         // <-- JESZCZE NIE DZIAŁA [OUTBOX]
         //public ActionResult Outbox(int? page, string searchString)
@@ -55,9 +52,7 @@ namespace MJmail.Controllers
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
 
-            //if (searchString == null) 
             return View(messages);
-            //else return PartialView("_Box", messages);
         }
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
@@ -90,7 +85,6 @@ namespace MJmail.Controllers
         public ActionResult Test(int? page, string searchString)
         {
             IEnumerable<Message> messages = MessageControl.ShowMessages(_context.Messages.ToList(), searchString);
-
             ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
             messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(pageInfo.pageSize);
