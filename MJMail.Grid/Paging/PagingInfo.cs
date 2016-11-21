@@ -1,6 +1,6 @@
 ﻿namespace MJMail.Grid.Paging
 {
-    public class PagingInfo
+    public class PagingInfo : IPagingInfo 
     {
         public int pageNumber { get; set; }
         public int pageTotal { get; set; }
@@ -41,5 +41,16 @@
             controller = controllerName;
             return this;
         }
+
+        #region Properties
+        //public int getPageSize()
+        //{
+        //    return pageSize;
+        //}
+        public void setPageSize(int pS)
+        {
+            pageSize = pS;
+        }
+        #endregion
     }
 }

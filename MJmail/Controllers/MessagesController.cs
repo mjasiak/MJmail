@@ -14,15 +14,16 @@ namespace MJmail.Controllers
     public class MessagesController : Controller
     {
         private readonly MaildbContext _context;
-        private PagingInfo pageInfo = new PagingInfo();
         private IMessageControl _msgCntrl;
         private IAdvancedSearch _advSearch;
+        private IPagingInfo _pageInfo;
 
-        public MessagesController(MaildbContext context, IMessageControl msgCntrl, IAdvancedSearch advSearch)
+        public MessagesController(MaildbContext context, IMessageControl msgCntrl, IAdvancedSearch advSearch, IPagingInfo pageInfo)
         {
             _context = context;
             _msgCntrl = msgCntrl;
             _advSearch = advSearch;
+            _pageInfo = pageInfo;
         }
 
         [ValidateInput(false)]
@@ -35,9 +36,9 @@ namespace MJmail.Controllers
         public ActionResult Outbox(int? page, string searchString)
         {
             IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllSentMessages(_context), searchString);
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 5, messages.Count(), "Outbox", "Messages");
-            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
-                               .Take(pageInfo.pageSize);
+            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page, searchString, 5, messages.Count(), "Outbox", "Messages");
+            messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
+                               .Take(_pageInfo.pageSize);
 
             return View(messages);
         }
@@ -52,9 +53,9 @@ namespace MJmail.Controllers
         public ActionResult Inbox(int? page, string searchString)
         {
             IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllReceivedMessages(_context), searchString);
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
-            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
-                               .Take(pageInfo.pageSize);
+            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
+            messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
+                               .Take(_pageInfo.pageSize);
 
             return View(messages);
         }
@@ -89,9 +90,9 @@ namespace MJmail.Controllers
         public ActionResult Test(int? page, string searchString)
         {
             IEnumerable<Message> messages = _msgCntrl.ShowMessages(_context.Messages.ToList(), searchString);
-            ViewBag.PagingInfo = pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
-            messages = messages.Skip(pageInfo.pageSize * (page - 1) ?? 0)
-                               .Take(pageInfo.pageSize);
+            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
+            messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
+                               .Take(_pageInfo.pageSize);
 
             return View(messages);
         }

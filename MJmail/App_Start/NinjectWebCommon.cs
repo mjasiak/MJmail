@@ -11,6 +11,7 @@ namespace MJmail.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using MJMail.Methods.Messages;
+    using MJMail.Grid.Paging;
 
     public static class NinjectWebCommon 
     {
@@ -64,6 +65,7 @@ namespace MJmail.App_Start
         {
             kernel.Bind<IMessageControl>().To<MessageControl>();
             kernel.Bind<IAdvancedSearch>().To<AdvancedSearch>();
+            kernel.Bind<IPagingInfo>().To<PagingInfo>();
         }        
     }
 }

@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Cells\Cell.cs" />
     <Compile Include="Grid.cs" />
+    <Compile Include="Paging\IPagingInfo.cs" />
     <Compile Include="Paging\PagingInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="GridRows\Row.cs" />
