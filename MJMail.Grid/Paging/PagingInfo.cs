@@ -13,7 +13,9 @@
         {
             if (dataSize % pageSize == 0) pageTotal = dataSize / pageSize;
             else pageTotal = dataSize / pageSize + 1;
-        }       
+        }
+
+        #region SetPagingInfoOverrides
         public PagingInfo SetPagingInfo(int? currentPage, string schString, int itemOnPage, int dataSize, string actionName, string controllerName)
         {
             pageNumber = currentPage ?? 1;
@@ -41,12 +43,9 @@
             controller = controllerName;
             return this;
         }
+        #endregion
 
         #region Properties
-        //public int getPageSize()
-        //{
-        //    return pageSize;
-        //}
         public void setPageSize(int pS)
         {
             pageSize = pS;
