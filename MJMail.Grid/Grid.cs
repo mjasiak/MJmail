@@ -9,14 +9,14 @@ using System.Reflection;
 
 namespace MJMail.Grid
 {
-    public class Grid<T>
+    public class Grid
     {
         static List<PropertyInfo> PropsList = new List<PropertyInfo>();
         static Rows rows = new Rows();
 
 #region GridStartOptions
         static string grid, pager = "";
-        public static string Create(IEnumerable<T> data, List<string> columns, PagingInfo paging)
+        public static string Create<T>(IEnumerable<T> data, List<string> columns, PagingInfo paging)
         {
             GridCleaner();
             ReadProps(data);
@@ -25,7 +25,7 @@ namespace MJMail.Grid
             if (paging != null) pager = Pager(paging);
             return grid + pager;
         }
-        public static string Create(IEnumerable<T> data, PagingInfo paging)
+        public static string Create<T>(IEnumerable<T> data, PagingInfo paging)
         {
             GridCleaner();
             ReadProps(data);
@@ -34,7 +34,7 @@ namespace MJMail.Grid
             if (paging != null)  pager = Pager(paging);
             return grid + pager;
         }
-        public static string Create(IEnumerable<T> data)
+        public static string Create<T>(IEnumerable<T> data)
         {
             GridCleaner();
             ReadProps(data);
@@ -45,7 +45,7 @@ namespace MJMail.Grid
 #endregion
 
 #region GridPrepareZone
-        static void PrepareData(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
+        static void PrepareData<T>(IEnumerable<T> data, List<PropertyInfo> props, List<string> columns)
         {
             if (props.Count == 0) return;
             if (columns != null)
@@ -127,7 +127,7 @@ namespace MJMail.Grid
 #endregion
 
 #region Helpers
-        static void ReadProps(IEnumerable<T> source)
+        static void ReadProps<T>(IEnumerable<T> source)
         {
             Type Type = null;
             foreach (var item in source)

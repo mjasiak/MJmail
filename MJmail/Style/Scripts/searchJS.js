@@ -64,6 +64,7 @@ Search.prototype.inputEvents = function () {
             data: $("#advSearchInnerForm").serialize(),
             success: function (data) {
                 $('#box').html(data);
+                $('.boxes-header h1').text('Result');
                 //$('body').html(data);
                 jQuery('.scrollbar-outer').scrollbar();
             },
