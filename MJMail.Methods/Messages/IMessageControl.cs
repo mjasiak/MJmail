@@ -1,22 +1,19 @@
 ﻿using MJmail.Data;
 using MJmail.Models;
-using System;
+using MJMail.Data.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MJMail.Methods.Messages
 {
     public interface IMessageControl
     {
-        void New(Message msg, MaildbContext context);
+        void New(Message msg, MaildbContext context,ApplicationUser appUser);
         List<Message> ShowMessages(List<Message> messages, string searchString);
         void Delete(MaildbContext _context, string[] rows);
         string Encode(string encodeMe);
         int Decode(string decodeMe);
-        List<Message> GetAllSentMessages(MaildbContext _context);
-        List<Message> GetAllReceivedMessages(MaildbContext _context);
-        List<Message> GetAllMessages(MaildbContext _context);
+        List<Message> GetAllSentMessages(MaildbContext _context, ApplicationUser appUser);
+        List<Message> GetAllReceivedMessages(MaildbContext _context, ApplicationUser appUser);
+        List<Message> GetAllMessages(MaildbContext _context, ApplicationUser appUser);
     }
 }

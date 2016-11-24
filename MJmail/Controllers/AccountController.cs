@@ -29,7 +29,9 @@ namespace MJmail.Controllers
                 var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
 
-                ApplicationUser user = userManager.Find(login.Email, login.Password);
+                ApplicationUser user = userManager.FindByEmail(login.Email);
+                user = userManager.Find(user.UserName,login.Password);
+
                 if (user != null) //Tutaj co się dzieje po logowaniu
                 {
                     var ident = userManager.CreateIdentity(user,

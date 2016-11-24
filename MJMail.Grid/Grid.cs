@@ -21,7 +21,7 @@ namespace MJMail.Grid
             GridCleaner();
             ReadProps(data);
             PrepareData(data, PropsList, columns);
-            grid = Generate(rows.GetRows());
+            grid = Generate(rows.GetRows(),paging);
             if (paging != null) pager = Pager(paging);
             return grid + pager;
         }
@@ -30,17 +30,9 @@ namespace MJMail.Grid
             GridCleaner();
             ReadProps(data);
             PrepareData(data, PropsList, null);
-            grid = Generate(rows.GetRows());
+            grid = Generate(rows.GetRows(),paging);
             if (paging != null)  pager = Pager(paging);
             return grid + pager;
-        }
-        public static string Create<T>(IEnumerable<T> data)
-        {
-            GridCleaner();
-            ReadProps(data);
-            PrepareData(data, PropsList, null);
-            grid = Generate(rows.GetRows());
-            return grid;
         }
 #endregion
 
@@ -86,12 +78,11 @@ namespace MJMail.Grid
                 }
             }
         }
-        static string Generate(List<Row> rows)
+        static string Generate(List<Row> rows,PagingInfo paging)
         {
-            if (rows.Count == 0)
-            {
-                return "<div class='scrollbar-outer'><table class='table table-striped'><tbody><tr><td>Nie znaleziono podanej frazy</td></tr></tbody></table></div>";
-            }
+            if (rows.Count == 0 && paging.searchString == null) return "<div class='scrollbar-outer'><table class='table table-striped'><tbody><tr><td>Nie ma żadnych wiadomości</td></tr></tbody></table></div>";
+                else if (rows.Count == 0) return "<div class='scrollbar-outer'><table class='table table-striped'><tbody><tr><td>Nie znaleziono podanej frazy</td></tr></tbody></table></div>";
+            
             string outer = "";
             foreach(var row in rows)
             {

@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MJMail.Data.Models;
 
 namespace MJMail.Methods.Messages
 {
     public class MessageControl : IMessageControl
     {
-        public void New(Message msg, MaildbContext context)
+        public void New(Message msg, MaildbContext context, ApplicationUser appUser)
         {
             msg.MailDate = DateTime.Now;
-            msg.MailFrom = "mjasiak@pl.sii.eu";
+            msg.MailFrom = appUser.Email;
             context.Messages.Add(msg);
         }
         public List<Message> ShowMessages(List<Message> messages, string searchString)
@@ -53,15 +54,15 @@ namespace MJMail.Methods.Messages
         }
         #endregion
         #region Helpers
-        public List<Message> GetAllReceivedMessages(MaildbContext _context)
+        public List<Message> GetAllReceivedMessages(MaildbContext _context, ApplicationUser appUser)
         {
-            return _context.Messages.Where(c => c.MailTo == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+            return _context.Messages.Where(c => c.MailTo == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
         }
-        public List<Message> GetAllSentMessages(MaildbContext _context)
+        public List<Message> GetAllSentMessages(MaildbContext _context, ApplicationUser appUser)
         {
-            return _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+            return _context.Messages.Where(c => c.MailFrom == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
         }
-        public List<Message> GetAllMessages(MaildbContext _context)
+        public List<Message> GetAllMessages(MaildbContext _context, ApplicationUser appUser)
         {
             return _context.Messages.ToList();
         }
