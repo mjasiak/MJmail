@@ -32,11 +32,13 @@ namespace MJmail.Controllers
             _msgCntrl.New(msg, _context);
         }
 
+        [Authorize]
         public ActionResult Outbox(int? page, string searchString)
         {            
             return View(getMessages(getAction(), page,searchString));
         }
 
+        [Authorize]
         public ActionResult Inbox(int? page, string searchString)
         {           
             return View(getMessages(getAction(), page,searchString));

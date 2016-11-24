@@ -7,6 +7,7 @@ using MJMail.Data.Models.AccountHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
@@ -29,13 +30,13 @@ namespace MJmail.Controllers
                 var authManager = HttpContext.GetOwinContext().Authentication;
 
                 ApplicationUser user = userManager.Find(login.Email, login.Password);
-                if (user != null)
+                if (user != null) //Tutaj co się dzieje po logowaniu
                 {
                     var ident = userManager.CreateIdentity(user,
                         DefaultAuthenticationTypes.ApplicationCookie);
                     authManager.SignIn(
                         new AuthenticationProperties { IsPersistent = false }, ident);
-                    return View("Inbox", "Messages");
+                    return RedirectToAction("Inbox", "Messages");
                 }
             }
             ModelState.AddModelError("", "Invalid username or password");
@@ -49,9 +50,27 @@ namespace MJmail.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            var userManager = HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            if(string.IsNullOrEmpty(model.UserName))
+            {
+                model.UserName = model.Email;
+            }
+            var user = new ApplicationUser { UserName = model.UserName, Email = model.Email };
+            var result = await userManager.CreateAsync(user, model.Password);
+
+            if (result.Succeeded) //Tutaj co sie dzieje po zarejestrowaniu
+            {
+                return RedirectToAction("Login", "Account");
+            }
             return View();
+        }
+
+        public ActionResult LogOff()
+        {
+            HttpContext.GetOwinContext().Authentication.SignOut();
+            return RedirectToAction("Login", "Account");
         }
     }
 }

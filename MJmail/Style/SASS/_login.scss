@@ -15,7 +15,56 @@
     padding: 40px 0;
     box-shadow: rgba(0,0,0,0.1) 2px 2px;
     button{
+        margin-top: 15px;
         background-color: $czerwony_kolor;
         color: white;
+        position: relative;
+        left:50px;
     }
+}
+
+.registerLink{
+    text-align:right;
+}
+
+.registerForm{
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: #181818;
+    border-radius: 10px;
+    padding: 40px 0;
+    box-shadow: rgba(0,0,0,0.1) 2px 2px;
+    button{
+        margin-top: 15px;
+        position: relative;
+        left:45px;
+    }
+    .regUsername{
+        display: none;
+        position: relative;
+    }
+
+    #chgRegUsername{
+        color: grey;
+        cursor: pointer;
+        font-size:13px;
+    }
+    #chgRegUsername:hover{
+        color: white;
+    }
+    #usernameCancel{
+        color: grey;
+        cursor: pointer;
+        position:absolute;
+        right:0;
+    }
+    #usernameCancel:hover{
+        color:white;
+    }
+}
+
+.cancelLink{
+    text-align:right;
 }
