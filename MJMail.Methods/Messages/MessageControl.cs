@@ -16,7 +16,6 @@ namespace MJMail.Methods.Messages
             msg.MailDate = DateTime.Now;
             msg.MailFrom = "mjasiak@pl.sii.eu";
             context.Messages.Add(msg);
-            context.SaveChanges();
         }
         public List<Message> ShowMessages(List<Message> messages, string searchString)
         {
@@ -37,7 +36,6 @@ namespace MJMail.Methods.Messages
                     var delRow = _context.Messages.First(c => c.ID == id);
                     _context.Messages.Remove(delRow);
                 }
-                _context.SaveChanges();
             }
         }
 
@@ -62,6 +60,10 @@ namespace MJMail.Methods.Messages
         public List<Message> GetAllSentMessages(MaildbContext _context)
         {
             return _context.Messages.Where(c => c.MailFrom == "mjasiak@pl.sii.eu").OrderByDescending(c => c.MailDate).ToList();
+        }
+        public List<Message> GetAllMessages(MaildbContext _context)
+        {
+            return _context.Messages.ToList();
         }
         #endregion
         #region Search

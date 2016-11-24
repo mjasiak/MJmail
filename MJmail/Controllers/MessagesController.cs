@@ -32,32 +32,14 @@ namespace MJmail.Controllers
             _msgCntrl.New(msg, _context);
         }
 
-        //<-- DZIAŁA
         public ActionResult Outbox(int? page, string searchString)
-        {
-            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllSentMessages(_context), searchString);
-            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page, searchString, 5, messages.Count(), "Outbox", "Messages");
-            messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
-                               .Take(_pageInfo.pageSize);
-
-            return View(messages);
+        {            
+            return View(getMessages(getAction(), page,searchString));
         }
 
-        // <-- JESZCZE NIE DZIAŁA [OUTBOX]
-        //public ActionResult Outbox(int? page, string searchString)
-        //{
-        //    List<Message> messages = MessageControl.ShowMessages(MessageControl.GetAllSentMessages(_context), searchString);
-        //    return View(messages);
-        //}
-
         public ActionResult Inbox(int? page, string searchString)
-        {
-            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_msgCntrl.GetAllReceivedMessages(_context), searchString);
-            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
-            messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
-                               .Take(_pageInfo.pageSize);
-
-            return View(messages);
+        {           
+            return View(getMessages(getAction(), page,searchString));
         }
 
         public PartialViewResult AdvSearch(AdvancedSearchQuery query)
@@ -66,6 +48,7 @@ namespace MJmail.Controllers
             return PartialView("_Box", messages);
         }
 
+        //currently unused
         public PartialViewResult Box(IPagedList messages)
         {
             return PartialView("_Box", messages);
@@ -81,20 +64,42 @@ namespace MJmail.Controllers
         {
             _msgCntrl.Delete(_context, rows);
         }
-            // <-- ORYGINALNA TESTOWA
-        //public ActionResult Test()
-        //{
-        //    return View(_context.Messages.ToList());
-        //}
 
         public ActionResult Test(int? page, string searchString)
         {
-            IEnumerable<Message> messages = _msgCntrl.ShowMessages(_context.Messages.ToList(), searchString);
-            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page,searchString,5,messages.Count(),"Test","Messages");
+            return View(getMessages(getAction(),page,searchString));
+        }
+
+        #region FuncT
+        private IEnumerable<Message> getMessages(string action, int?page, string searchString)
+        {
+            return pagingControl(action, page, searchString);
+        }
+        private IEnumerable<Message> pagingControl(string action, int? page, string searchString)
+        {
+            IEnumerable<Message> messages = prepareMessages(action, searchString);
+            ViewBag.PagingInfo = _pageInfo.SetPagingInfo(page, searchString, 15, messages.Count(), "Inbox", "Messages");
             messages = messages.Skip(_pageInfo.pageSize * (page - 1) ?? 0)
                                .Take(_pageInfo.pageSize);
 
-            return View(messages);
+            return messages;
         }
+        private IEnumerable<Message> prepareMessages(string action, string searchString)
+        {
+            Func<MaildbContext,List<Message>> box;
+            if (action.Equals("Inbox")) box = _msgCntrl.GetAllReceivedMessages;
+            else if (action.Equals("Outbox")) box = _msgCntrl.GetAllSentMessages;
+            else box = _msgCntrl.GetAllMessages;
+
+            return _msgCntrl.ShowMessages(box(_context), searchString);
+        }
+        #endregion
+
+        #region Helpers
+        private string getAction()
+        {
+            return ControllerContext.RouteData.Values["action"].ToString();
+        }
+        #endregion
     }
 }

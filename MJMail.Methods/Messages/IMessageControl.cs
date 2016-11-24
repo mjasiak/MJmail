@@ -17,5 +17,6 @@ namespace MJMail.Methods.Messages
         int Decode(string decodeMe);
         List<Message> GetAllSentMessages(MaildbContext _context);
         List<Message> GetAllReceivedMessages(MaildbContext _context);
+        List<Message> GetAllMessages(MaildbContext _context);
     }
 }

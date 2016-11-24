@@ -1,0 +1,21 @@
+﻿@import "_variables.scss";
+.pageContainer{
+    width: 500px;
+    margin: 0 auto;
+    position: relative;
+    top: 25%;
+}
+
+.loginForm{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    background-color: $chat_maincolor;
+    border-radius: 10px;
+    padding: 40px 0;
+    box-shadow: rgba(0,0,0,0.1) 2px 2px;
+    button{
+        background-color: $czerwony_kolor;
+        color: white;
+    }
+}

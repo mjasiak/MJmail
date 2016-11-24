@@ -1,0 +1,36 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    @Styles.Render("~/Content/css")
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+</head>
+<body>
+    <div class="pageContainer">
+        <div class="loginForm">
+            <div class="loginInner">
+                @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+                {
+                    <div class="form-group">
+                        <label for="email">Email address:</label>
+                        <input type="email" class="form-control" id="Email" name="Email">
+                    </div>
+                    <div class="form-group">
+                        <label for="pwd">Password:</label>
+                        <input type="password" class="form-control" id="Password" name="Password">
+                    </div>
+                    <button type="submit" class="btn btn-default">Zaloguj</button>
+                }                  
+            </div>
+        </div>
+        <div class="registerForm">
+            @Html.ActionLink("Zarejestruj", "Register", "Account")
+        </div>
+    </div>    
+</body>
+</html>
