@@ -59,6 +59,14 @@
     border-color: $font_lighter_color;
 }
 
+.hr {
+    border-bottom: 1px solid rgba(150,150,150,0.1);
+}
+
+.logoff {
+    margin-top:20px;
+}
+
 @media (max-width:992px){
     .menu-container{
         position: relative;
