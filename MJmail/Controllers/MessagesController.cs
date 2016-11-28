@@ -8,10 +8,6 @@ using MJmail.Models;
 using MJMail.Methods.Messages;
 using MJMail.Data.TDO;
 using MJMail.Grid.Paging;
-using Microsoft.Owin.Security;
-using System.Web;
-using Microsoft.AspNet.Identity.Owin;
-using MJmail.App_Start;
 using MJMail.Data.Models;
 
 namespace MJmail.Controllers

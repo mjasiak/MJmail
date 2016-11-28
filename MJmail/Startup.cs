@@ -1,8 +1,7 @@
 ﻿using Owin;
 using Microsoft.Owin;
-using MJmail.App_Start;
 
-[assembly: OwinStartup("Startup",typeof(MJmail.Startup))]
+[assembly: OwinStartup("Startup", typeof(MJmail.Startup))]
 namespace MJmail
 {
     public partial class Startup

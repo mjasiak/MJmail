@@ -2,9 +2,7 @@
 
 };
 
-var chat = new Chat();
-
-Chat.prototype.onStart = function () {
+Chat.prototype.onStart = function (name) {
     $(function () {
 
         chat.setScreen(false);
@@ -17,9 +15,8 @@ Chat.prototype.onStart = function () {
         // Start Hub
         $.connection.hub.start().done(function () {
 
-            chat.registerEvents(chatHub)
-
-        });
+            chat.registerEvents(chatHub,name)
+        });      
     });
 }
 
@@ -40,18 +37,17 @@ Chat.prototype.setScreen = function (isLogin) {
 
 }
 
-Chat.prototype.registerEvents = function (chatHub) {
+Chat.prototype.registerEvents = function (chatHub, name) {
 
-    $("#login").change(function () {
-        var name = $("#login").val();
-        if (name.length > 0) {
+    //$("#login").change(function () {
+    //    var name = $("#login").val();
+    //    if (name.length > 0) {
             chatHub.server.connect(name);
-        }
-        else {
-            alert("Please enter name");
-        }
-
-    });
+        //}
+        //else {
+        //    alert("Please enter name");
+        //}
+    //});
 }
 
 Chat.prototype.registerClientMethods = function (chatHub) {
@@ -152,6 +148,3 @@ Chat.prototype.AddDivToContainer = function ($div) {
     $('.chat_menu-talks').prepend($div);
 }
 
-$(document).ready(function () {
-    chat.onStart();
-});
