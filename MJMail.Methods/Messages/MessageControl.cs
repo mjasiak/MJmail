@@ -57,14 +57,22 @@ namespace MJMail.Methods.Messages
         public List<Message> GetAllReceivedMessages(MaildbContext _context, ApplicationUser appUser)
         {
             return _context.Messages.Where(c => c.MailTo == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
+            //return rtnMsg();
         }
         public List<Message> GetAllSentMessages(MaildbContext _context, ApplicationUser appUser)
         {
             return _context.Messages.Where(c => c.MailFrom == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
+            //return rtnMsg();
         }
         public List<Message> GetAllMessages(MaildbContext _context, ApplicationUser appUser)
         {
             return _context.Messages.ToList();
+            //return rtnMsg();
+        }
+
+        private List<Message> rtnMsg()
+        {
+            return new List<Message>();
         }
         #endregion
         #region Search

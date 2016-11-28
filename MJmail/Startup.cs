@@ -1,15 +1,16 @@
 ﻿using Owin;
 using Microsoft.Owin;
+using MJmail.App_Start;
 
-[assembly: OwinStartup(typeof(SignalRChat.Startup))]
-namespace SignalRChat
+[assembly: OwinStartup("Startup",typeof(MJmail.Startup))]
+namespace MJmail
 {
-    public class Startup
+    public partial class Startup
     {
         public void Configuration(IAppBuilder app)
         {
-            // Any connection or hub wire up and configuration should go here
-            app.MapSignalR();
+           ConfigureIdentity(app);
+           ConfigureSignalR(app);
         }
     }
 }

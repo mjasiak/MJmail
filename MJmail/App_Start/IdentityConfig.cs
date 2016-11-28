@@ -7,11 +7,11 @@ using MJmail.Data;
 using MJMail.Data.Models;
 using Owin;
 
-namespace MJmail.App_Start
+namespace MJmail
 {
-    public class IdentityConfig
+    public partial class Startup
     {
-        public void Configuration(IAppBuilder app)
+        public void ConfigureIdentity(IAppBuilder app)
         {
             app.CreatePerOwinContext(() => new MaildbContext());
             app.CreatePerOwinContext<ApplicationUserManager>(ApplicationUserManager.Create);

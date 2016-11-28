@@ -5,11 +5,13 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using MJmail.Helpers;
 using System.Threading.Tasks;
+using Microsoft.AspNet.SignalR.Hubs;
 
 namespace MJmail.Hubs
 {
+    [HubName("chatHub")]
     public class ChatHub : Hub
-    {
+    {       
         static List<UserDetails> ConnectedUsers = new List<UserDetails>();
 
         public void Connect(string userName)

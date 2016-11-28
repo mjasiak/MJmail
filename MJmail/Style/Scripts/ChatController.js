@@ -20,7 +20,6 @@ Chat.prototype.onStart = function () {
             chat.registerEvents(chatHub)
 
         });
-
     });
 }
 
