@@ -48,11 +48,15 @@ Chat.prototype.registerEvents = function (chatHub, name) {
         //    alert("Please enter name");
         //}
     //});
+            $('#addButton').click(function () {
+                var friendName = $('#friendName').val();
+                chatHub.server.addFriend(friendName);
+            });
 }
 
 Chat.prototype.registerClientMethods = function (chatHub) {
     //chatHub.client.onConnected = function (id, userName, allUsers, messages) {
-    chatHub.client.onConnected = function (id, userName, allUsers) {
+    chatHub.client.onConnected = function (id, userName, allUsers, friends) {
 
         chat.setScreen(true);
 
@@ -63,6 +67,11 @@ Chat.prototype.registerClientMethods = function (chatHub) {
         for (i = 0; i < allUsers.length; i++) {
 
             chat.AddUser(chatHub, allUsers[i].ConnectionId, allUsers[i].UserName);
+        }
+
+        // Add Friends to List
+        for (i = 0; i < friends.length; i++) {
+            chat.ListFriend(chatHub, 1, friends[i].Friend);
         }
     }
 
@@ -119,6 +128,18 @@ Chat.prototype.AddUser = function (chatHub, id, name) {
     $(".chat_menu-peoplelist").append(code);
 }
 
+Chat.prototype.ListFriend = function(chatHub,id,name){
+    code = $('<a id="' + id + '" class="user" >' + name + '</a>');
+
+    //$(code).dblclick(function () {
+
+    //    var id = $(this).attr('id');
+    //        chat.OpenPrivateChatWindow(chatHub, id, name);
+
+    //});
+    (".chat_menu-friendslist").append(code);
+}
+
 Chat.prototype.OpenPrivateChatWindow = function (chatHub, id, name) {
     divID = 'priv_' + id;
     chat.CreatePrivateChatWindow(chatHub, id, divID, name);
@@ -148,3 +169,18 @@ Chat.prototype.AddDivToContainer = function ($div) {
     $('.chat_menu-talks').prepend($div);
 }
 
+Chat.prototype.chatFriendHandling = function () {
+    $('.chat_menu-people i.fa-plus-square').click(function () {
+        $('.addFriend').show();
+    });
+
+    $('.chat_menu-people i.fa-times').click(function () {
+        $('.addFriend').hide();
+    });
+}
+
+$(document).ready(function () {
+    var chatController = new Chat();
+
+    chatController.chatFriendHandling();
+});

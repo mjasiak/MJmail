@@ -12,5 +12,6 @@ namespace MJmail.Data
         }
 
         public DbSet<Message> Messages { get; set; }
+        public DbSet<ChatFriend> ChatFriends { get; set; }
     }
 }

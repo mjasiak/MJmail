@@ -138,11 +138,20 @@
     <Compile Include="Migrations\201611241100075_Fifth.Designer.cs">
       <DependentUpon>201611241100075_Fifth.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611281217217_Sixth.cs" />
+    <Compile Include="Migrations\201611281217217_Sixth.Designer.cs">
+      <DependentUpon>201611281217217_Sixth.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201611281218411_SixthCorrection.cs" />
+    <Compile Include="Migrations\201611281218411_SixthCorrection.Designer.cs">
+      <DependentUpon>201611281218411_SixthCorrection.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountHelpers\LoginViewModel.cs" />
     <Compile Include="Models\AccountHelpers\RegisterViewModel.cs" />
     <Compile Include="Models\ApplicationRole.cs" />
     <Compile Include="Models\ApplicationUser.cs" />
+    <Compile Include="Models\ChatFriend.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TDO\AdvancedSearchQuery.cs" />
@@ -166,6 +175,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611241100075_Fifth.resx">
       <DependentUpon>201611241100075_Fifth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281217217_Sixth.resx">
+      <DependentUpon>201611281217217_Sixth.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611281218411_SixthCorrection.resx">
+      <DependentUpon>201611281218411_SixthCorrection.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
