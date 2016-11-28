@@ -104,8 +104,11 @@
             </div>          
         </div>
 
-    </div>        
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+    </div>      
+@section Scripts{
+            @Scripts.Render("~/bundles/bootstrap")
+            @RenderSection("scripts", required: false)            
+ }
+        
 </body>
 </html>
