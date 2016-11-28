@@ -1,6 +1,5 @@
 ﻿using Owin;
 using Microsoft.Owin;
-using Microsoft.Extensions.DependencyInjection;
 
 [assembly: OwinStartup(typeof(SignalRChat.Startup))]
 namespace SignalRChat
