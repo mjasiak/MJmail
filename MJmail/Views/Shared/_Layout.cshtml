@@ -21,6 +21,12 @@
     <script src="~/Style/Scripts/ChatController.js"></script>
     <script>jQuery(document).ready(function () { jQuery('.scrollbar-outer').scrollbar(); });</script>
     <script src="~/Style/Scripts/searchJS.js"></script>
+    <script>
+        var chat = new Chat();
+        $(document).ready(function () {
+            chat.onStart(@Html.Raw(Json.Encode(Context.User.Identity.Name)));
+        });
+    </script>
 </head>
 <body>
     <div class="site-wrapper">
@@ -68,7 +74,7 @@
                         </div>
                     </div>
                     <div class="chat_menu-people">
-                        <h3>CONTACTS</h3>
+                        <h3>CONTACTS</h3><i class="fa fa-plus-square" aria-hidden="true"></i>
                         <div class="chat_menu-peoplelist">
                         </div>                      
                     </div>
