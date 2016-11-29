@@ -14,16 +14,23 @@ namespace MJmail.Hubs
 {
     [HubName("chatHub")]
     public class ChatHub : Hub
-    {      
+    {
         static List<UserDetails> ConnectedUsers = new List<UserDetails>();
 
         public void Connect(string userName)
         {
-            string id = Context.ConnectionId;          
+            string id = Context.ConnectionId;
             using (var _context = new MaildbContext())
             {
                 List<ChatFriend> ChatFriends = new List<ChatFriend>();
                 ChatFriends = _context.ChatFriends.Include(c=>c.ApplicationUser).Where(c => c.ApplicationUser.Email == userName && c.ApplicationUser.UserName == userName).ToList();
+                foreach (var friend in ChatFriends)
+                {
+                    foreach (var user in ConnectedUsers)
+                    {
+                        if (user.UserName == friend.Friend) friend.ConnectionID = user.ConnectionId;
+                    }
+                }
                 if (ConnectedUsers.Count(x => x.ConnectionId == id) == 0)
                 {
                     ConnectedUsers.Add(new UserDetails { ConnectionId = id, UserName = userName });

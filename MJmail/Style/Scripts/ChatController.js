@@ -2,6 +2,8 @@
 
 };
 
+var chat = new Chat();
+
 Chat.prototype.onStart = function (name) {
     $(function () {
 
@@ -71,12 +73,13 @@ Chat.prototype.registerClientMethods = function (chatHub) {
 
         // Add Friends to List
         for (i = 0; i < friends.length; i++) {
-            chat.ListFriend(chatHub, 1, friends[i].Friend);
+            chat.ListFriend(chatHub, friends[i].ConnectionID, friends[i].Friend);
         }
     }
 
     chatHub.client.onNewUserConnected = function (id, userName) {
         chat.AddUser(chatHub, id, userName);
+        chat.ChangeFriendsStatus(chatHub, id, userName);
     }
 
     chatHub.client.onUserDisconnected = function (id) {
@@ -114,30 +117,67 @@ Chat.prototype.AddUser = function (chatHub, id, name) {
     else {
 
         code = $('<a id="' + id + '" class="user" >' + name + '</a>');
-
         $(code).dblclick(function () {
 
             var id = $(this).attr('id');
-
-            if (userId != id)
-                chat.OpenPrivateChatWindow(chatHub, id, name);
-
+            if (userId != id) chat.OpenPrivateChatWindow(chatHub, id, name);
         });
     }
-
     $(".chat_menu-peoplelist").append(code);
 }
 
+Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName) {
+    var codesFriends = $(".chat_menu-friendslist").find("div.user");
+    for (i = 0; i < codesFriends.length; i++) {
+        var codeFriends = $(codesFriends[i]).find('a');
+        var friendAccesibility = $(codesFriends[i]).find('div');
+        if(codeFriends.text() == userName)
+        {
+            if (friendAccesibility.hasClass("user-inactive")) {
+                friendAccesibility.removeClass("user-inactive");
+                friendAccesibility.addClass("user-active");
+                $(codeFriends).attr('id', id);
+                chat.openChatEventCreate(chatHub, id, userName, codesFriends[i]);
+
+            }
+            else {
+                friendAccesibility.removeClass("user-active");
+                friendAccesibility.addClass("user-inactive");
+                $(codeFriends).attr('id', null);
+                chat.openChatEventCreate(chatHub, null, userName, codesFriends[i]);
+            }         
+        }
+    }
+}
+
 Chat.prototype.ListFriend = function(chatHub,id,name){
-    code = $('<a id="' + id + '" class="user" >' + name + '</a>');
+    code = "";
+    if (id != null) {
+        code = $('<div class="user"><div class="user-active"></div><a id="' + id + '">' + name + '</a></div>');
+        chat.openChatEventCreate(chatHub, id, name, code);
+    }
+    else {
+        code = $('<div class="user"><div class="user-inactive"></div><a id="' + id + '">' + name + '</a></div>');
+        chat.openChatEventCreate(chatHub, id, name, code);
+    }   
+    $(".chat_menu-friendslist").append(code);
+}
 
-    //$(code).dblclick(function () {
+Chat.prototype.openChatEventCreate = function (chatHub, id, name, code) {
+    $(code).off();
+    if (id != null) {
+        $(code).dblclick(function () {
 
-    //    var id = $(this).attr('id');
-    //        chat.OpenPrivateChatWindow(chatHub, id, name);
+            var id = $(this).find('a').attr('id');
+            chat.OpenPrivateChatWindow(chatHub, id, name);
+        });
+    }
+    else {
+        $(code).dblclick(function () {
 
-    //});
-    (".chat_menu-friendslist").append(code);
+            alert("Użytkownik " + name + " nie jest zalogowany!");
+        });
+    }
 }
 
 Chat.prototype.OpenPrivateChatWindow = function (chatHub, id, name) {

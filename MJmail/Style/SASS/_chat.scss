@@ -59,10 +59,10 @@
     }
 }
 
-.chat_menu-peoplelist {
+.chat_menu-peoplelist, .chat_menu-friendslist {
     padding-top:20px;
     a{
-        display:block;
+        display:inline-block;
         color:$font_lighter_color;
         font-family:$header_font;
         font-weight:600;
@@ -74,8 +74,18 @@
     }
 }
 
+
 .chat_menu-talks {
     position:absolute;
     bottom:0;
     left:0;
+}
+
+.user-active {
+    background-color: lightgreen;
+    @include chat_accesibilityBoxes();
+}
+.user-inactive {
+    background-color: rgba(150,150,150,0.3);
+    @include chat_accesibilityBoxes();
 }
