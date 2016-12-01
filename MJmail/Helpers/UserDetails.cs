@@ -9,5 +9,6 @@ namespace MJmail.Helpers
     {
         public string ConnectionId { get; set; }
         public string UserName { get; set; }
+        public string UserEmail { get; set; }
     }
 }

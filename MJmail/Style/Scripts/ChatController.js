@@ -53,6 +53,8 @@ Chat.prototype.registerEvents = function (chatHub, name) {
             $('#addButton').click(function () {
                 var friendName = $('#friendName').val();
                 chatHub.server.addFriend(friendName);
+                $('.addFriend').hide();
+                $('.addFriendCourtain').hide();
             });
 }
 
@@ -72,18 +74,17 @@ Chat.prototype.registerClientMethods = function (chatHub) {
         }
 
         // Add Friends to List
-        for (i = 0; i < friends.length; i++) {
-            chat.ListFriend(chatHub, friends[i].ConnectionID, friends[i].Friend);
-        }
+        chat.ListFriends(chatHub,friends);
     }
 
-    chatHub.client.onNewUserConnected = function (id, userName) {
+    chatHub.client.onNewUserConnected = function (id, userName, userEmail) {
         chat.AddUser(chatHub, id, userName);
-        chat.ChangeFriendsStatus(chatHub, id, userName);
+        chat.ChangeFriendsStatus(chatHub, id, userName, userEmail);
     }
 
-    chatHub.client.onUserDisconnected = function (id) {
+    chatHub.client.onUserDisconnected = function (id, userName, userEmail) {
         chat.DeleteUser(id);
+        chat.ChangeFriendsStatus(chatHub, id, userName, userEmail);
     }
 
     chatHub.client.sendMessage = function (windowId, userName, msgContent) {
@@ -98,6 +99,20 @@ Chat.prototype.registerClientMethods = function (chatHub) {
 
         var height = $("#" + divID).find('.cht_contentin')[0].scrollHeight;
         $("#" + divID).find('.cht_contentin').scrollTop(height);
+    }
+    
+    chatHub.client.friendsToList = function (friends) {
+        chat.ListFriends(chatHub,friends);
+    }
+}
+
+Chat.prototype.ListFriends = function (chatHub, friends) {
+    chat.CleanElementChildren('.chat_menu-friendslist');
+    for (i = 0; i < friends.length; i++) {
+        var friend = "";
+        if (friends[i].Friend == friends[i].FriendUserName) friend = friends[i].Friend;
+        else friend = friends[i].FriendUserName;
+        chat.AddListedFriend(chatHub, friends[i].ConnectionID, friend);
     }
 }
 
@@ -126,12 +141,12 @@ Chat.prototype.AddUser = function (chatHub, id, name) {
     $(".chat_menu-peoplelist").append(code);
 }
 
-Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName) {
+Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName, userEmail) {
     var codesFriends = $(".chat_menu-friendslist").find("div.user");
     for (i = 0; i < codesFriends.length; i++) {
         var codeFriends = $(codesFriends[i]).find('a');
         var friendAccesibility = $(codesFriends[i]).find('div');
-        if(codeFriends.text() == userName)
+        if(codeFriends.text() == userName || codeFriends.text() == userEmail)
         {
             if (friendAccesibility.hasClass("user-inactive")) {
                 friendAccesibility.removeClass("user-inactive");
@@ -150,7 +165,7 @@ Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName) {
     }
 }
 
-Chat.prototype.ListFriend = function(chatHub,id,name){
+Chat.prototype.AddListedFriend = function(chatHub,id,name){
     code = "";
     if (id != null) {
         code = $('<div class="user"><div class="user-active"></div><a id="' + id + '">' + name + '</a></div>');
@@ -212,11 +227,17 @@ Chat.prototype.AddDivToContainer = function ($div) {
 Chat.prototype.chatFriendHandling = function () {
     $('.chat_menu-people i.fa-plus-square').click(function () {
         $('.addFriend').show();
+        $('.addFriendCourtain').show();
     });
 
     $('.chat_menu-people i.fa-times').click(function () {
         $('.addFriend').hide();
+        $('.addFriendCourtain').hide();
     });
+}
+
+Chat.prototype.CleanElementChildren = function (element) {
+    $(element).empty();
 }
 
 $(document).ready(function () {

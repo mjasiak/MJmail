@@ -21,25 +21,17 @@ namespace MJmail.Hubs
         {
             string id = Context.ConnectionId;
             using (var _context = new MaildbContext())
-            {
-                List<ChatFriend> ChatFriends = new List<ChatFriend>();
-                ChatFriends = _context.ChatFriends.Include(c=>c.ApplicationUser).Where(c => c.ApplicationUser.Email == userName && c.ApplicationUser.UserName == userName).ToList();
-                foreach (var friend in ChatFriends)
-                {
-                    foreach (var user in ConnectedUsers)
-                    {
-                        if (user.UserName == friend.Friend) friend.ConnectionID = user.ConnectionId;
-                    }
-                }
+            {              
+                string userEmail = _context.Users.Single(c => c.UserName == userName).Email;            
                 if (ConnectedUsers.Count(x => x.ConnectionId == id) == 0)
-                {
-                    ConnectedUsers.Add(new UserDetails { ConnectionId = id, UserName = userName });
+                    {
+                        ConnectedUsers.Add(new UserDetails { ConnectionId = id, UserName = userName, UserEmail = userEmail });
 
-                    Clients.Caller.onConnected(id, userName, ConnectedUsers, ChatFriends);
+                        Clients.Caller.onConnected(id, userName, ConnectedUsers, CreateFriendsList(userName, _context));
 
-                    Clients.AllExcept(id).onNewUserConnected(id, userName);
-                }
-            }                     
+                        Clients.AllExcept(id).onNewUserConnected(id, userName, userEmail);
+                    }
+            }
         }
 
         public void SendPrivateMessage(string sendTo, string msgContent)
@@ -59,13 +51,16 @@ namespace MJmail.Hubs
             ApplicationUser friend = new ApplicationUser();
             using (var _context = new MaildbContext())
             {
-                var appUser = _context.Users.First(c => c.Email == me && c.UserName == me);
-                friend = _context.Users.First(c => c.Email == friendName && c.UserName == friendName);
+                var appUser = _context.Users.First(c => c.Email == me || c.UserName == me);
+                friend = _context.Users.First(c => c.Email == friendName || c.UserName == friendName);
                 chtFr.ApplicationUser = appUser;
                 chtFr.Friend = friend.Email;
+                chtFr.FriendUserName = friend.UserName;
                 _context.ChatFriends.Add(chtFr);
                 _context.SaveChanges();
+                Clients.Caller.friendsToList(CreateFriendsList(me, _context));
             }
+            
         }
 
         public override Task OnDisconnected(bool stopCalled)
@@ -76,12 +71,26 @@ namespace MJmail.Hubs
                 if (obiekt != null)
                 {
                     ConnectedUsers.Remove(obiekt);
-                    Clients.All.onUserDisconnected(obiekt.ConnectionId);
+                    Clients.All.onUserDisconnected(obiekt.ConnectionId, obiekt.UserName, obiekt.UserEmail);
                 }
             }
             catch { }
         
             return base.OnDisconnected(stopCalled);
+        }
+
+        private List<ChatFriend> CreateFriendsList(string userName, MaildbContext _context)
+        {
+                List<ChatFriend> ChatFriends = new List<ChatFriend>();
+                ChatFriends = _context.ChatFriends.Include(c => c.ApplicationUser).Where(c => c.ApplicationUser.Email == userName || c.ApplicationUser.UserName == userName).ToList();
+                foreach (var friend in ChatFriends)
+                {
+                    foreach (var user in ConnectedUsers)
+                    {
+                        if (user.UserName == friend.Friend) friend.ConnectionID = user.ConnectionId;
+                    }
+                }
+                return ChatFriends;
         }
     }
 }

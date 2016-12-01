@@ -12,6 +12,7 @@ namespace MJMail.Data.Models
     {
         public int ID { get; set; }
         public string Friend { get; set; }
+        public string FriendUserName { get; set; }
 
         [NotMapped]
         public string ConnectionID { get; set; }

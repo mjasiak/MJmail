@@ -78,10 +78,13 @@
                         <div class="chat_menu-peoplelist"></div>
                         <h3>FRIENDS</h3>
                         <i class="fa fa-plus-square" aria-hidden="true"></i>
-                        <div class="addFriend">
-                            <input type="text" id="friendName" />
-                            <button id="addButton">Add</button>
-                            <i class="fa fa fa-times" aria-hidden="true"></i>
+                        <div class="addFriendOuter">
+                            <div class="addFriendCourtain"></div>
+                            <div class="addFriend">
+                                <input type="text" id="friendName" value="add friend" onfocus="if (this.value == 'add friend') { this.value = '' }"/>
+                                <input type="button" id="addButton" class="btn-default" value="Add" />
+                                <i class="fa fa fa-times" aria-hidden="true"></i>
+                            </div>
                         </div>
                         <div class="chat_menu-friendslist"></div>                    
                     </div>

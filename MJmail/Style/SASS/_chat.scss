@@ -31,9 +31,6 @@
         color:$font_color;
         display:none;
     }
-    .loginDialog{
-        
-    }
 }
 
 .chat_menu-people {
@@ -54,24 +51,72 @@
         color:grey;
     }
 
-    .addFriend{
-        display:none;
+    .addFriendOuter {
+        position: absolute;
+        top: 50%;
+        left:15%;
+        .addFriend{
+            display:none;
+            position: absolute;
+            width: 175px;
+            height: 50px;
+            input#friendName{
+                margin-bottom: 8px;
+                border-radius: 3px;
+                border:none;
+                color: gray;
+            }     
+            i{
+                position: absolute;
+                top: -25px;
+                right: 0;
+                color: white;               
+            }
+            i:hover{
+                color: black;
+            }
+            #addButton{
+                position: relative;
+                right: -113px;
+                border: none;
+                border-radius: 3px;
+                font-family: $header_font;
+                color: gray;
+            }
+            #addButton:hover{
+                background-color: black;
+                color:white;
+            }        
+        }
+        .addFriendCourtain{
+            display: none;
+            position:absolute;
+            top:-30px;
+            left:-20px;
+            width: 200px;
+            height: 100px;
+            background-color: rgba(150,150,150,0.2);
+            border-radius: 5px;
+        }
+    }
+
+    
+}
+
+.chat_menu-friendslist {
+    a{
+        display:inline-block;
+    }
+}
+
+.chat_menu-peoplelist {
+    a{
+        display:block;
     }
 }
 
 .chat_menu-peoplelist, .chat_menu-friendslist {
-    padding-top:20px;
-    a{
-        display:inline-block;
-        color:$font_lighter_color;
-        font-family:$header_font;
-        font-weight:600;
-        padding-bottom:10px;
-    }
-    a:hover{
-        text-decoration:none;
-        cursor:pointer;
-    }
+    @include chat_usersList();
 }
 
 

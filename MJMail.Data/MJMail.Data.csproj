@@ -146,6 +146,10 @@
     <Compile Include="Migrations\201611281218411_SixthCorrection.Designer.cs">
       <DependentUpon>201611281218411_SixthCorrection.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201612010828314_Seventh.cs" />
+    <Compile Include="Migrations\201612010828314_Seventh.Designer.cs">
+      <DependentUpon>201612010828314_Seventh.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountHelpers\LoginViewModel.cs" />
     <Compile Include="Models\AccountHelpers\RegisterViewModel.cs" />
@@ -181,6 +185,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611281218411_SixthCorrection.resx">
       <DependentUpon>201611281218411_SixthCorrection.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201612010828314_Seventh.resx">
+      <DependentUpon>201612010828314_Seventh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

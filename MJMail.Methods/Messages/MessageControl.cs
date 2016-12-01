@@ -17,6 +17,7 @@ namespace MJMail.Methods.Messages
             msg.MailDate = DateTime.Now;
             msg.MailFrom = appUser.Email;
             context.Messages.Add(msg);
+            context.SaveChanges();
         }
         public List<Message> ShowMessages(List<Message> messages, string searchString)
         {
@@ -37,6 +38,7 @@ namespace MJMail.Methods.Messages
                     var delRow = _context.Messages.First(c => c.ID == id);
                     _context.Messages.Remove(delRow);
                 }
+                _context.SaveChanges();
             }
         }
 
@@ -56,12 +58,12 @@ namespace MJMail.Methods.Messages
         #region Helpers
         public List<Message> GetAllReceivedMessages(MaildbContext _context, ApplicationUser appUser)
         {
-            return _context.Messages.Where(c => c.MailTo == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
+            return _context.Messages.Where(c => c.MailTo == appUser.Email).OrderByDescending(c => c.MailDate).ToList();
             //return rtnMsg();
         }
         public List<Message> GetAllSentMessages(MaildbContext _context, ApplicationUser appUser)
         {
-            return _context.Messages.Where(c => c.MailFrom == appUser.UserName).OrderByDescending(c => c.MailDate).ToList();
+            return _context.Messages.Where(c => c.MailFrom == appUser.Email).OrderByDescending(c => c.MailDate).ToList();
             //return rtnMsg();
         }
         public List<Message> GetAllMessages(MaildbContext _context, ApplicationUser appUser)
