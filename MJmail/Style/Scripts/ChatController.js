@@ -41,25 +41,17 @@ Chat.prototype.setScreen = function (isLogin) {
 
 Chat.prototype.registerEvents = function (chatHub, name) {
 
-    //$("#login").change(function () {
-    //    var name = $("#login").val();
-    //    if (name.length > 0) {
             chatHub.server.connect(name);
-        //}
-        //else {
-        //    alert("Please enter name");
-        //}
-    //});
+
             $('#addButton').click(function () {
                 var friendName = $('#friendName').val();
                 chatHub.server.addFriend(friendName);
-                $('.addFriend').hide();
-                $('.addFriendCourtain').hide();
+                $('.addFriendOuter').hide();
             });
 }
 
 Chat.prototype.registerClientMethods = function (chatHub) {
-    //chatHub.client.onConnected = function (id, userName, allUsers, messages) {
+
     chatHub.client.onConnected = function (id, userName, allUsers, friends) {
 
         chat.setScreen(true);
@@ -168,11 +160,19 @@ Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName, userEmail)
 Chat.prototype.AddListedFriend = function(chatHub,id,name){
     code = "";
     if (id != null) {
-        code = $('<div class="user"><div class="user-active"></div><a id="' + id + '">' + name + '</a></div>');
+        code = $('<div class="user"><div class="user-active"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
+        $(code).find('.delete-user').dblclick(function () {
+            var object = ($(this));
+            alert(object.id);
+        });
         chat.openChatEventCreate(chatHub, id, name, code);
     }
     else {
-        code = $('<div class="user"><div class="user-inactive"></div><a id="' + id + '">' + name + '</a></div>');
+        code = $('<div class="user"><div class="user-inactive"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
+        $(code).find('.delete-user').dblclick(function () {
+            var object = ($(this));
+            alert(object.id);
+        });
         chat.openChatEventCreate(chatHub, id, name, code);
     }   
     $(".chat_menu-friendslist").append(code);
@@ -181,14 +181,14 @@ Chat.prototype.AddListedFriend = function(chatHub,id,name){
 Chat.prototype.openChatEventCreate = function (chatHub, id, name, code) {
     $(code).off();
     if (id != null) {
-        $(code).dblclick(function () {
+        $(code.find('a')).dblclick(function () {
 
             var id = $(this).find('a').attr('id');
             chat.OpenPrivateChatWindow(chatHub, id, name);
         });
     }
     else {
-        $(code).dblclick(function () {
+        $(code.find('a')).dblclick(function () {
 
             alert("Użytkownik " + name + " nie jest zalogowany!");
         });
@@ -225,14 +225,13 @@ Chat.prototype.AddDivToContainer = function ($div) {
 }
 
 Chat.prototype.chatFriendHandling = function () {
-    $('.chat_menu-people i.fa-plus-square').click(function () {
-        $('.addFriend').show();
-        $('.addFriendCourtain').show();
+    $('#addFriendExpand').click(function () {
+        if ($('#friendName').value != 'add friend') $('#friendName').value = 'add friend';
+        $('.addFriendOuter').show();
     });
 
-    $('.chat_menu-people i.fa-times').click(function () {
-        $('.addFriend').hide();
-        $('.addFriendCourtain').hide();
+    $('.addFriendOuter i.fa-times').click(function () {
+        $('.addFriendOuter').hide();
     });
 }
 

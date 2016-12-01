@@ -41,45 +41,49 @@
         font-weight:bold;
         letter-spacing: -1px;
         display: inline;
-    } 
-    i{
-        font-size:15px;
-        padding-left: 8px;
-        cursor:pointer;
     }
-    i:hover{
-        color:grey;
+    .fa-stack{
+        position:relative;
+        left:40%;     
+        cursor: pointer;
+        color: #e0e0e0;
     }
-
+    .fa-stack:hover{
+        color: gray;
+    }
+    
     .addFriendOuter {
+        display: none;
+        width:13em;
         position: absolute;
         top: 50%;
         left:15%;
+        z-index:2;
         .addFriend{
-            display:none;
+            display:block;
             position: absolute;
             width: 175px;
             height: 50px;
             input#friendName{
                 margin-bottom: 8px;
-                border-radius: 3px;
                 border:none;
                 color: gray;
             }     
             i{
                 position: absolute;
+                cursor: pointer;
                 top: -25px;
-                right: 0;
+                right: -8%;
                 color: white;               
             }
             i:hover{
-                color: black;
+                color: #e0e0e0;
             }
             #addButton{
                 position: relative;
                 right: -113px;
                 border: none;
-                border-radius: 3px;
+                border-radius:2px;
                 font-family: $header_font;
                 color: gray;
             }
@@ -89,14 +93,13 @@
             }        
         }
         .addFriendCourtain{
-            display: none;
+            display: block;
             position:absolute;
             top:-30px;
-            left:-20px;
-            width: 200px;
+            left:-35px;
+            width: 16.5em;
             height: 100px;
-            background-color: rgba(150,150,150,0.2);
-            border-radius: 5px;
+            background-color: rgba(150,150,150,0.75);
         }
     }
 
@@ -106,6 +109,15 @@
 .chat_menu-friendslist {
     a{
         display:inline-block;
+    }
+    .delete-user{
+        display: inline-block;
+        margin-left: 5px;
+        color: #e0e0e0;
+        cursor: pointer;
+    }
+    .delete-user:hover{
+        color: grey;
     }
 }
 
@@ -124,6 +136,17 @@
     position:absolute;
     bottom:0;
     left:0;
+}
+
+.chat_menu-friendelete {
+    display:none;
+    position: fixed;
+    z-index: 10;
+    bottom:0;
+    right:0;
+    background-color: rgba(150,150,150,0.3);
+    padding:16px;
+    border-radius: 10px 0px 0px 0px;
 }
 
 .user-active {

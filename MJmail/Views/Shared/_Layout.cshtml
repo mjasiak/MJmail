@@ -77,19 +77,28 @@
                         <h3>CONNECTED</h3>
                         <div class="chat_menu-peoplelist"></div>
                         <h3>FRIENDS</h3>
-                        <i class="fa fa-plus-square" aria-hidden="true"></i>
                         <div class="addFriendOuter">
                             <div class="addFriendCourtain"></div>
                             <div class="addFriend">
-                                <input type="text" id="friendName" value="add friend" onfocus="if (this.value == 'add friend') { this.value = '' }"/>
+                                <input type="text" id="friendName" value="add friend" onfocus="if (this.value != '') { this.value = '' }"/>
                                 <input type="button" id="addButton" class="btn-default" value="Add" />
                                 <i class="fa fa fa-times" aria-hidden="true"></i>
                             </div>
                         </div>
-                        <div class="chat_menu-friendslist"></div>                    
+                        <div class="chat_menu-friendslist"></div>
+                        <hr />
+                        <span class="fa-stack" id="addFriendExpand">
+                            <i class="fa fa-circle-thin fa-stack-2x"></i>
+                            <i class="fa fa-plus fa-stack-1x"></i>
+                        </span>                   
                     </div>
                     <div class="chat_menu-talks"></div>  
-                </div>                               
+                </div>
+                <div class="chat_menu-friendelete">
+                    <h6></h6>
+                    <input type="button" value="Yes" class="btn-danger"/>
+                    <input type="button" value="No" class="btn-primary"/>
+                </div>                              
             </div>
         </div>
     </div>

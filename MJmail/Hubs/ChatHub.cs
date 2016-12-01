@@ -59,8 +59,17 @@ namespace MJmail.Hubs
                 _context.ChatFriends.Add(chtFr);
                 _context.SaveChanges();
                 Clients.Caller.friendsToList(CreateFriendsList(me, _context));
+            }           
+        }
+
+        public void DeleteFriend(string friendName)
+        {
+            using (var _context = new MaildbContext())
+            {
+                var friend = _context.ChatFriends.Single(c => c.Friend == friendName || c.FriendUserName == friendName);
+                _context.ChatFriends.Remove(friend);
+                _context.SaveChanges();
             }
-            
         }
 
         public override Task OnDisconnected(bool stopCalled)
