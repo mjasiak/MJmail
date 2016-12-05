@@ -16,7 +16,7 @@
         @include h3-font;
         color: white;      
         font-size: 15px;
-        font-weight:bold;
+        font-weight:600;
     }
 }
 
@@ -42,11 +42,15 @@
         letter-spacing: -1px;
         display: inline;
     }
+    hr {
+        margin: 5px 0px !important;
+    }
     .fa-stack{
         position:relative;
         left:40%;     
         cursor: pointer;
         color: #e0e0e0;
+        transition: color 1s;
     }
     .fa-stack:hover{
         color: gray;
@@ -68,6 +72,7 @@
                 margin-bottom: 8px;
                 border:none;
                 color: gray;
+                font-family: $header_font;
             }     
             i{
                 position: absolute;
@@ -113,8 +118,9 @@
     .delete-user{
         display: inline-block;
         margin-left: 5px;
-        color: #e0e0e0;
+        color: #eeeeee;
         cursor: pointer;
+        transition: color 1s;
     }
     .delete-user:hover{
         color: grey;
@@ -139,14 +145,31 @@
 }
 
 .chat_menu-friendelete {
-    display:none;
+    display: none;
+    text-align: center;
+    font-family: $header_font;
     position: fixed;
     z-index: 10;
     bottom:0;
     right:0;
-    background-color: rgba(150,150,150,0.3);
+    background-color: rgba(150,150,150,0.4);
     padding:16px;
     border-radius: 10px 0px 0px 0px;
+    h6{
+        color: $font_color;
+        margin-bottom: 25px !important;
+        margin-top: 5px !important;
+    }
+    input{
+        border-radius: 5px;
+        border: none;
+        margin-right: 10px;
+        padding: 3px 15px;
+    }
+}
+
+.user {
+    padding-bottom: 5px;
 }
 
 .user-active {

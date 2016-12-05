@@ -76,6 +76,9 @@
             </span>
         </div>
 @* Początek scrollbara *@
+        @{ 
+            ViewBag.Shows = new List<string> { "MailFrom", "MailTitle", "MailDate" };
+        }
         <div id="box">
             @Html.Partial("_Box")
         </div>                           

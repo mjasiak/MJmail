@@ -30,6 +30,7 @@
         padding-right: 50%;
         -webkit-text-stroke-width: 2px;
         -webkit-text-stroke-color: white;
+        transition: color 0.25s;
     }
     .fa:hover   {
         color:white;
@@ -70,10 +71,10 @@
     }
     .message-details-data{
         display:inline-block;
-        width:70%;
+        width:64%;
     }
     .message-details-date{
-        width:29%;
+        width:35%;
         display:inline-block;
         text-align:right;
     }

@@ -48,6 +48,12 @@ Chat.prototype.registerEvents = function (chatHub, name) {
                 chatHub.server.addFriend(friendName);
                 $('.addFriendOuter').hide();
             });
+
+            $('.chat_menu-friendelete').find('.btn-danger').click(function () {
+                var name = $('.chat_menu-friendelete').attr('id');
+                chatHub.server.deleteFriend(name);
+                $('.chat_menu-friendelete').fadeOut();
+            });
 }
 
 Chat.prototype.registerClientMethods = function (chatHub) {
@@ -137,7 +143,7 @@ Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName, userEmail)
     var codesFriends = $(".chat_menu-friendslist").find("div.user");
     for (i = 0; i < codesFriends.length; i++) {
         var codeFriends = $(codesFriends[i]).find('a');
-        var friendAccesibility = $(codesFriends[i]).find('div');
+        var friendAccesibility = $(codesFriends[i]).find('div.user-access');
         if(codeFriends.text() == userName || codeFriends.text() == userEmail)
         {
             if (friendAccesibility.hasClass("user-inactive")) {
@@ -160,39 +166,40 @@ Chat.prototype.ChangeFriendsStatus = function (chatHub, id, userName, userEmail)
 Chat.prototype.AddListedFriend = function(chatHub,id,name){
     code = "";
     if (id != null) {
-        code = $('<div class="user"><div class="user-active"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
-        $(code).find('.delete-user').dblclick(function () {
-            var object = ($(this));
-            alert(object.id);
-        });
+        code = $('<div class="user"><div class="user-active user-access"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
+        //$(code).find('.delete-user').dblclick(function () {
+        //    alert('Czy na pewno usunąć ' + this.id + '?');
+        //});
         chat.openChatEventCreate(chatHub, id, name, code);
     }
     else {
-        code = $('<div class="user"><div class="user-inactive"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
-        $(code).find('.delete-user').dblclick(function () {
-            var object = ($(this));
-            alert(object.id);
-        });
+        code = $('<div class="user"><div class="user-inactive user-access"></div><a id="' + id + '">' + name + '</a><div class="delete-user" id="' + name + '"><i class="fa fa fa-times" aria-hidden="true"></i></div></div>');
+        
         chat.openChatEventCreate(chatHub, id, name, code);
     }   
     $(".chat_menu-friendslist").append(code);
 }
 
 Chat.prototype.openChatEventCreate = function (chatHub, id, name, code) {
-    $(code).off();
+    $(code).children().off();
     if (id != null) {
-        $(code.find('a')).dblclick(function () {
-
+        $(code).find('a').dblclick(function () {
             var id = $(this).find('a').attr('id');
             chat.OpenPrivateChatWindow(chatHub, id, name);
-        });
+        });       
     }
     else {
-        $(code.find('a')).dblclick(function () {
+        $(code).find('a').dblclick(function () {
 
             alert("Użytkownik " + name + " nie jest zalogowany!");
         });
     }
+    $(code).find('.delete-user').dblclick(function () {
+        var chatFriend = $('.chat_menu-friendelete');
+        $(chatFriend).find('h6').text("Do you really want delete friend " + name + "?");
+        $(chatFriend).attr('id', name);
+        $(chatFriend).fadeIn();
+    });
 }
 
 Chat.prototype.OpenPrivateChatWindow = function (chatHub, id, name) {
@@ -227,11 +234,15 @@ Chat.prototype.AddDivToContainer = function ($div) {
 Chat.prototype.chatFriendHandling = function () {
     $('#addFriendExpand').click(function () {
         if ($('#friendName').value != 'add friend') $('#friendName').value = 'add friend';
-        $('.addFriendOuter').show();
-    });
+        $('.addFriendOuter').fadeIn();
+    });    
 
     $('.addFriendOuter i.fa-times').click(function () {
-        $('.addFriendOuter').hide();
+        $('.addFriendOuter').fadeOut();
+    });
+
+    $(".chat_menu-friendelete").find('.btn-default').click(function () {
+        $('.chat_menu-friendelete').fadeOut();
     });
 }
 

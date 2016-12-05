@@ -78,6 +78,9 @@
             </span>
         </div>
         @* Tutaj _Partial *@
+        @{
+            ViewBag.Shows = new List<string> { "MailTo", "MailTitle", "MailDate" };
+        }
         <div id="box">
             @Html.Partial("_Box")
         </div> 

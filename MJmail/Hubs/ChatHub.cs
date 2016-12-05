@@ -69,6 +69,7 @@ namespace MJmail.Hubs
                 var friend = _context.ChatFriends.Single(c => c.Friend == friendName || c.FriendUserName == friendName);
                 _context.ChatFriends.Remove(friend);
                 _context.SaveChanges();
+                Clients.Caller.friendsToList(CreateFriendsList(Context.User.Identity.Name, _context));
             }
         }
 
@@ -88,7 +89,7 @@ namespace MJmail.Hubs
             return base.OnDisconnected(stopCalled);
         }
 
-        private List<ChatFriend> CreateFriendsList(string userName, MaildbContext _context)
+        private IEnumerable<ChatFriend> CreateFriendsList(string userName, MaildbContext _context)
         {
                 List<ChatFriend> ChatFriends = new List<ChatFriend>();
                 ChatFriends = _context.ChatFriends.Include(c => c.ApplicationUser).Where(c => c.ApplicationUser.Email == userName || c.ApplicationUser.UserName == userName).ToList();
@@ -99,7 +100,7 @@ namespace MJmail.Hubs
                         if (user.UserName == friend.Friend) friend.ConnectionID = user.ConnectionId;
                     }
                 }
-                return ChatFriends;
+                return ChatFriends.OrderBy(c=>c.FriendUserName);
         }
     }
 }

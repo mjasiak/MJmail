@@ -78,6 +78,9 @@
             </span>
         </div>
         @* Tutaj _Partial *@
+        @{ //Wyświetlane kolumny.
+            ViewBag.Shows = new List<string> { "MailFrom", "MailTo" , "MailTitle", "MailDate" };
+        }
         <div id="box">
             @Html.Partial("_Box")
         </div>

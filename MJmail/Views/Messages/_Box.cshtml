@@ -1,4 +1,10 @@
 ﻿@using MJMail.Grid;
 @using MJmail.Models;
 
-@Html.Raw(Grid.Create<Message>(Model, new List<string> { "MailTo", "MailTitle", "MailDate" }, ViewBag.PagingInfo))
+@{ 
+    List<string> lista = new List<string>();
+    lista = ViewBag.Shows;
+}
+
+
+@Html.Raw(Grid.Create<Message>(Model, lista, ViewBag.PagingInfo))
